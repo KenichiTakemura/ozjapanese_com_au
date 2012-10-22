@@ -1,0 +1,82 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ja:
+  title: "ブリスベン在住の日本人による、ブリスベン在住日本人応援サイト"
+  project_name: "OzJapanese"
+  hello_world: ブリスベン情報サイトへようそこ
+  view_site_detail: "サイトに関してもっと詳しく"
+  about_site: "サイト情報"
+  contact_us: "ご意見、ご要望はこちらから"
+  close: "閉じる"
+  header_message: "ブリスベン情報サイト"
+  please_signin: "投稿していただくためには、ログインが必要です。"
+  
+  terms_of_service_agreement: "サービス利用規約"
+  terms_of_personal_agreement: "個人情報管理規約"
+  post:
+    category: "投稿分類"
+    subject: "題名"
+    write_something: "何か書いてください。"
+    create: "投稿する"
+    author: "投稿者"
+    content: "投稿内容"
+    please_use_other_browsers: "Internet Explorer 以外のブラウザをご使用いただくと、もっと簡単に投稿できます。"
+    valid_until: "有効期限"
+    why_valid_until: "現在の有効期限は%{days}日です。"
+    alert:
+      header: "投稿に当たっては以下の事項を守ってください。"
+      body1: "投稿分類に合った内容の記載をお願いします。管理者が投稿を移動する場合があります。"
+      body2: "投稿内容が不適切な内容と判断した場合は、管理者が投稿者に連絡をすることなく、即削除いたします。"
+      body3: "本サイトは返信機能を提供していないため、必要に応じて連絡先（Eメール、電話）などを記載してください。"
+      body4: "その他、投稿に関する事柄については、サービス利用規約を参照してください。"
+  ozj_h1:
+    title: "求人"
+    desc: "人材を求めている企業、個人の方はこちら。ジョブハンター達はここを見るべし！"
+  OzEmployment: :ozj_h1.title
+  ozj_h2:
+    title: "求職"
+    desc: "自分を売り込みたい方はこちら。技術より英語に自信がある方はここに登録すべし！"
+  ozj_h3:
+    title: "売ります"
+    desc: "よくある売りますと同じ"
+  ozj_h4:
+    title: "買います"
+    desc: "よくある買いますと同じ"
+  ozj_h5:
+    title: "シェア・レンタル"
+    desc: "不動産シェアメイト、レンタルを募集する人"
+  ozj_h6:
+    title: "シェア・レンタル"
+    desc: "不動産シェアメイト、レンタル物件を探している人"
+  ozj_h7:
+    title: "イベント情報"
+    desc: "様々なイベントを掲載。集客、広告に活用。"
+  ozj_h8:
+    title: "職人達"
+    desc: "知ってる人は知っている。ブリスベンで便りになるローカルなプロ達。仕事を頼むなら我々に。"
+  ozj_h9:
+    title: "釣りライフ"
+    desc: ""
+  ozj_h10:
+    title: "スポーツ"
+    desc: ""
+  ozj_h11:
+    title: "得得情報"
+    desc: "きっと得する得々情報"
+  ozj_h12:
+    title: "暮らしQ＆A"
+    desc: "なんでも相談。日常遭遇する様々な疑問や問題をみんなの力で解決しよう。"
+  ozj_h13:
+    title: "日本人ネットワーク"
+    desc: "ブリスベンの日本人ネットワーク"
+  view_details: "見る"
+  write_new: "投稿する"
+  signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
+  welcome: "こんにちわ。"
+  uzatt: "うざっ"
+  logo: "ここにロゴをアップロードできます。"
+  devise:
+    omniauth_callbacks:
+      flyer:
+        failure: "ログインに失敗しました。OzJapanese（本サイト）からのアクセスを許可を求められた場合は、許可が必要です。"

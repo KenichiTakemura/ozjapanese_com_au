@@ -1,0 +1,33 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<a class="brand" href="<%=root_path%>"><%= t(:project_name)%> <%=t(:header_message)%></a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li></li>
+				</ul>
+				<div class="span6 pull-right">
+					<div class="pull-right">
+						<%=t(:welcome)%>
+						<% if !current_flyer %>
+						<%= signin%>
+						<% else %>
+						<%= show_flyer %>
+						<% end %>
+					</div>
+				</div>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+</div>
+<div id="sns">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=254068608049050";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</div>

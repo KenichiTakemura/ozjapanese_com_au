@@ -1,0 +1,17 @@
+<a href="#about_the_site", role="button", class="btn btn-primary btn-large" data-toggle="modal" id="ozj_site_detail_modal"><i class="icon-info-sign icon-white"></i><%= t(:view_site_detail)%> &raquo;</a>
+<div class="modal hide fade" id="about_the_site" tabindex="-1" role="dialog" aria-labelledby="about_the_site_label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			×
+		</button>
+		<h3 id="about_the_site_label"><%= t(:project_name)%></h3>
+	</div>
+	<div class="modal-body" id="about_the_site" style="font-size:12px">
+		<%= OzjapaneseStyle.about_site%>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">
+			<%= t(:close)%>
+		</button>
+	</div>
+</div>

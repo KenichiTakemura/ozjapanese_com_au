@@ -1,0 +1,58 @@
+<% browser = Browser.browser_detection(request) %>
+
+<div class="row-fluid" id="write_new">
+	<div class="span9 offset2">
+		<div class="post-alert">
+			<div class="alert alert-block alert-info fade in">
+				<button type="button" class="close" data-dismiss="alert">
+					×
+				</button>
+				<h4 class="alert-heading"><%= t("post.alert.header")%></h4>
+				<hr>
+				<p>
+					<i class="icon-check"></i>&nbsp;<%= t("post.alert.body1")%>
+				</p>
+				<p>
+					<i class="icon-check"></i>&nbsp;<%= t("post.alert.body2")%>
+				</p>
+				<p>
+					<i class="icon-check"></i>&nbsp;<%= t("post.alert.body3")%>
+				</p>
+				<p>
+					<i class="icon-check"></i>&nbsp;<%= t("post.alert.body4")%>
+				</p>
+				<p>
+					<a class="btn" href="#"><%= t("terms_of_service_agreement")%></a>&nbsp;<a class="btn" href="#"><%= t("terms_of_personal_agreement")%></a>
+				</p>
+			</div>
+		</div>
+		<p class="text-success">
+			<strong> <%= t("post.category") %> : <%= t(@post.class) %></strong>
+		</p>
+		<%= form_error_messages!(@post) %>
+		<% if browser == Browser::MSIE %>
+		<p class="text-info">
+			<strong> <%= t("post.please_use_other_browsers") %> </strong>
+		</p>
+		<% end %>
+
+		<%= form_for(@post, :html => { :multipart => true }) do |f| %>
+		<div class="pull-right">
+			<span class="label label-info"><%= t("post.author") %></span>&nbsp;<i class="icon-user"></i><%= show_flyer_name %>
+		</div>
+		<%= f.hidden_field :write_at, :id => "write_at" %>
+		<%= f.label t("post.subject") %>
+		<%= f.text_field :subject, :class => "input-xxlarge", :placeholder => t("post.write_something") %>
+		<%= f.label t("post.valid_until") %>
+		<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
+		<span class="help-block"><%= t("post.why_valid_until", :days => PostDef::POST_EXPIRY) %></span>
+		<%= f.fields_for @post.content do |content_form| %>
+		<%= f.label :body, t("post.content") %>
+		<%= content_form.text_area :body, :style => "width:500px;height:200px" %>		
+		<% end %>
+		<br>
+		<%= f.submit t("post.create"), :class => "btn btn-primary" %>
+
+		<% end %>
+	</div>
+</div>
