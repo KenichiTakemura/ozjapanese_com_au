@@ -5,10 +5,10 @@ class OzmainsController < OzController
     @feed_cnt = Hash.new
     OzjapaneseStyle.headings.each do |heading|
       model_name = OzjapaneseStyle.heading_model_name(heading)
-      date_feed = Hash.new
+      date_feed = Array.new
       0.upto(1) { |d|
-        date_key = Common.date_format(Common.days_ago(d))
-        date_feed[date_key.to_sym] = TopFeedList.feed_for_date(model_name, Common.days_ago(d))
+        date_feed[d] = TopFeedList.feed_for_date(model_name, d).count
+        logger.debug("date_feed[#{d}]: #{date_feed[d]}")
       }
       @feed[heading.to_sym] = date_feed
       @feed_cnt[heading.to_sym] = TopFeedList.recent_feed(model_name).count
@@ -20,6 +20,10 @@ class OzmainsController < OzController
       @contact.user_name = current_flyer.flyer_name
       @contact.email = current_flyer.email
     end
+  end
+  
+  def uzatt
+    session[:uzatt] = true
   end
   
   def about

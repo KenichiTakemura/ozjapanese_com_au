@@ -11,6 +11,7 @@ class DeviseCreateFlyers < ActiveRecord::Migration
       t.string :flyer_name
       t.string :flyer_image
       t.string :flyer_url
+      t.boolean :agreed, :default => false
 
       ## Recoverable
       t.string   :reset_password_token

@@ -3,27 +3,20 @@ module Ozlink
     link = nil
     if action.present?
       link = %Q|/ozs/#{action}?v=| + base(controller)
+      if options.present?
+        options.each do |k,v|
+          link += "&#{k.to_s}=" + param_enc(v)
+        end
+      end
     else
       link = %Q|/ozs?v=| + base(controller)
     end
     link
   end
 
-  def self.heading_link(heading, action)
+  def self.heading_link(heading, action, options=nil)
     raise "Bad Request with [#{heading}]" if !OzjapaneseStyle.heading_controller(heading).present?
-    ozlink(OzjapaneseStyle.heading_controller(heading),action)
-  end
-
-  def self.dec(d)
-    begin
-      Common.decrypt_data(d)
-    rescue
-    false
-    end
-  end
-
-  def self.enc(d)
-    Common.encrypt_data(d.to_s)
+    ozlink(OzjapaneseStyle.heading_controller(heading),action, options)
   end
 
   def self.param_v(v)
@@ -45,6 +38,8 @@ module Ozlink
     d
   end
 
+  private
+
   def self.param_enc(e)
     enc(e).chop if e.present?
   end
@@ -54,7 +49,17 @@ module Ozlink
     enc("#{Common.current_time.to_i}#{SP}#{okpage}").chop
   end
   
-  private
+  def self.dec(d)
+    begin
+      Common.decrypt_data(d)
+    rescue
+    false
+    end
+  end
+
+  def self.enc(d)
+    Common.encrypt_data(d.to_s)
+  end
   
   SP = "+"
 

@@ -114,6 +114,11 @@ class OzPost < ActiveRecord::Base
     (self.created_at >= Common.days_ago(TopFeedList::RECENT_DAYS))
   end
   
+  def viewed
+    update_attribute(:views, views + 1)
+  end
+
+  
   ##
   # SCOPE
   ##

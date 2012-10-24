@@ -31,7 +31,7 @@ class TopFeedList < ActiveRecord::Base
   scope :feed_nomatter_image_except, lambda { |cate,ids,limit| category_feed(cate).except_ids(ids).feed_order.limit(limit) }
   scope :feed_nomatter_image, lambda { |cate,limit| category_feed(cate).feed_order.limit(limit) }
   
-  scope :feed_for_date, lambda { |cate,date| category_feed(cate).date_feed(date).feed_order }
+  scope :feed_for_date, lambda { |cate,day| category_feed(cate).duration_feed(day,day+1).feed_order }
   scope :recent_feed, lambda { |cate| category_feed(cate).duration_feed(0,RECENT_DAYS).feed_order }
   
   after_save :clean_oldest_feed

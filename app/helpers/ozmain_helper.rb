@@ -34,24 +34,27 @@ module OzmainHelper
     %Q|<script type="text/javascript" charset="utf-8">#{script}</script>|.html_safe
   end
   
-  def signin
-    html = %Q|#{t(:signin_with)}#{link_to(image_tag("f_logo.png", :class => "image-resize30_30"),flyer_omniauth_authorize_path(:facebook))} #{link_to(image_tag("google_logo_3D_online_small.png", :class => ""),flyer_omniauth_authorize_path(:google_oauth2))}|
+  def signin(text)
+    html = %Q|#{t(text)}#{link_to(image_tag("f_logo.png", :class => "image-resize30_30"),flyer_omniauth_authorize_path(:facebook))} #{link_to(image_tag("google_logo_3D_online_small.png", :class => ""),flyer_omniauth_authorize_path(:google_oauth2))}|
     html.html_safe
   end
   
-  def show_flyer
-    return "" if !current_flyer
-    html = ""
-    if current_flyer.provider.eql?("google_oauth2")
-      html = link_to(current_flyer.flyer_name,current_flyer.flyer_url)
-    elsif current_flyer.provider.eql?("facebook")
-      html = link_to(current_flyer.flyer_name,current_flyer.flyer_url)
-      html += image_tag(current_flyer.flyer_image)
+  def show_flyer(flyer=nil)
+    return "" if flyer.nil? && !current_flyer
+    if flyer.nil?
+      flyer = current_flyer
     end
-    html
+    html = ""
+    if flyer.provider.eql?("google_oauth2")
+      html = link_to(flyer.flyer_name,flyer.flyer_url)
+    elsif flyer.provider.eql?("facebook")
+      html = "#{link_to(flyer.flyer_name,flyer.flyer_url)} #{image_tag(flyer.flyer_image, :alt => "")}"
+    end
+    html.html_safe
   end
   
   def show_flyer_name
     return current_flyer.flyer_name
   end
+  
 end

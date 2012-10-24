@@ -3,6 +3,7 @@ OzjapaneseComAu::Application.routes.draw do
   resources :ozmains, :only => ["index"] do
     collection do
       get :about
+      post :uzatt
     end
   end
   
@@ -15,6 +16,8 @@ OzjapaneseComAu::Application.routes.draw do
   resources :ozs, :only => ['index'] do
     collection do
       get :write
+      post :view
+      get :feed_view
     end
   end
   

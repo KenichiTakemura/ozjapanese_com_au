@@ -1,6 +1,5 @@
 class OzsController < OzController
   
-  
   before_filter :_before_, :except => []
 
   def _before_
@@ -8,7 +7,7 @@ class OzsController < OzController
     logger.debug("v: #{params[:v]} d: #{params[:d]}")
     @board = Ozlink.param_v(params[:v])
     redirect_to root_path and return if !@board.present?
-    @@board_id = params[:d].present? ? Okboard.param_to_i(params[:d]) : nil
+    @@board_id = params[:d].present? ? Ozlink.param_to_i(params[:d]) : nil
     logger.debug("@board: #{@board} board_id: #{@@board_id}")
     @heading = @board.to_sym
   end
@@ -32,6 +31,29 @@ class OzsController < OzController
     @post.build_content
     @post.valid_until = PostDef.post_expiry
     @post
+  end
+  
+  def view
+    @post = _model(@heading).find(@@board_id)
+    @post.viewed
+  end
+  
+  def feed_view
+    feed_type = params[:f].present? ? Ozlink.param_to_s(params[:f]) : nil
+    raise "Bad Feed View Request" if !feed_type.present?
+    model_name = OzjapaneseStyle.heading_model_name(@heading)
+    case feed_type
+     when "recent_week"
+       feed = TopFeedList.recent_feed(model_name)
+     when "today"
+       feed = TopFeedList.feed_for_date(model_name, 0)
+     when "yesterday"
+       feed = TopFeedList.feed_for_date(model_name, 1)
+     else
+       raise "Bad feed type #{feed_type}"
+     end
+    @posts = feed.collect{ |f| f.feeded_to }
+    logger.debug("feed_view: #{@posts.size}")
   end
 
 end

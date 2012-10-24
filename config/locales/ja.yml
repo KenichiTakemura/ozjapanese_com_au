@@ -220,6 +220,8 @@ ja:
   post:
     id: "番号"
     recent_post: "最近の投稿数"
+    today_post: "本日の投稿数"
+    yesterday_post: "昨日の投稿数"
     category: "投稿分類"
     subject: "題名"
     postedOn: "投稿日時"
@@ -288,9 +290,10 @@ ja:
   ozj_h10:
     title: "日本人ネットワーク"
     desc: "ブリスベンの日本人ネットワーク"
-  view_details: "見る"
+  view_details: "もっと見る"
   write_new: "投稿する"
   signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
+  signin_with_following: "以下のアカウントでログインできます。"
   welcome: "こんにちわ。"
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"

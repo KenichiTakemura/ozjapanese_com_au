@@ -52,7 +52,7 @@ module Common
   def self.uniqe_token
     rand(36**8).to_s(36)
   end
-
+  
   def self.random_index(a, b)
     return 0 if a.size >= b
     while true

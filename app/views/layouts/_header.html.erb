@@ -11,7 +11,7 @@
 					<div class="pull-right">
 						<%=t(:welcome)%>
 						<% if !current_flyer %>
-						<%= signin%>
+						<%= signin(:signin_with) %>
 						<% else %>
 						<%= show_flyer %>
 						<% end %>
