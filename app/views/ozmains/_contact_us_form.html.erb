@@ -1,0 +1,21 @@
+<div class="contact_form">
+	<%= form_for(@contact) do |f| %>
+	<%= form_error_messages!(@contact) %>
+	<%= f.label :user_name, t("contact.user_name"), :class => "" %>
+	<%= f.text_field :user_name, :class => "input-xlarge" %>
+	<%= f.label :email, t("contact.email"), :class => "" %>
+	<div class="input-prepend">
+		<span class="add-on">@</span><%= f.email_field :email, :class => "input-xlarge" %>
+	</div>
+	<%= f.label :phone, t("contact.phone"), :class => "" %>
+	<%= f.telephone_field :phone, :class => "input-medium" %>
+	<span class="help-block"><%=t("contact.phone_is_optional")%></span>
+	<%= f.label :contact_type, t("contact.subject"), :class => "" %>
+	<%= f.select :contact_type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.contact_type) %>
+	<%= f.label :body, t("contact.content"), :class => "" %>
+	<%= f.text_area :body, :rows => "10", :style => "width:400px" %>
+	<div class="left">
+		<%= f.submit t("contact.send"), :class => "btn btn-inverse", :data => { :confirm => t('confirm_submit') } %>
+	</div>
+	<% end %>
+</div>

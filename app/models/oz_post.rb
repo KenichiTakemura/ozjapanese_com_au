@@ -15,19 +15,19 @@ class OzPost < ActiveRecord::Base
   attr_accessible :has_attachment
   attr_accessible :requested_by
   attr_accessible :subject
-  
+
   # status
   # draft -> public -> hidden -> deleted
   attr_accessible :status
-  
+
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
   belongs_to :post_updated_by, :polymorphic => true
 
   # has_many
-  has_many :comment, :as => :commented, :dependent => :destroy
-  has_many :attachment, :as => :attached, :class_name => 'Attachment', :dependent => :destroy
-  has_many :image, :as  => :attached, :class_name => 'Image', :dependent => :destroy
+  has_many :comment, :as => :commented, :class_name => 'Comment', :dependent => :destroy
+  #has_many :attachment, :as => :attached, :class_name => 'Attachment', :dependent => :destroy
+  #has_many :image, :as  => :attached, :class_name => 'Image', :dependent => :destroy
 
   # has_one
   has_one :content, :as => :contented, :dependent => :destroy
@@ -39,10 +39,10 @@ class OzPost < ActiveRecord::Base
   alias_method :content=, :content_attributes=
 
   attr_accessible :attached
-  
-  accepts_nested_attributes_for :attachment
-  attr_accessible :attachment, :attachment_attributes
-  alias_method :attachment=, :attachment_attributes=
+
+  #accepts_nested_attributes_for :attachment
+  #attr_accessible :attachment, :attachment_attributes
+  #alias_method :attachment=, :attachment_attributes=
 
   # validator
   validates_presence_of :locale
@@ -50,14 +50,43 @@ class OzPost < ActiveRecord::Base
   validates_presence_of :valid_until
   validates_presence_of :status
   validates_presence_of :write_at
-
   #
   def to_s
     "id: #{id} category: #{category} locale: #{locale} subject: #{subject} valid_until: #{valid_until} status #{status}"
   end
- 
+
   after_initialize :set_default
- 
+  after_save :add_top_feed_list, :delete_top_feed_list
+
+  # public functions
+  def add_top_feed_list
+    logger.debug("add_top_feed_list topfeedable: #{self.topfeedable?}")
+    return unless topfeedable?
+    logger.debug("category: #{self}")
+    return if self.category == PostDef::ADMIN_POST_NOTICE
+    feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
+    logger.debug("Feed: #{feed}")
+    if feed
+      # Existing in feed
+      logger.debug("Feed exists #{feed}")
+      feed.destroy
+    end
+    top_feed = TopFeedList.new
+    top_feed.created_at = self.created_at
+    top_feed.update_attribute(:feeded_to, self)
+    logger.debug("Feeded_to: #{top_feed.id}")
+  end
+
+  # Delete post from top_feed when deleted
+  def delete_top_feed_list
+    return unless topfeedable?
+    if self.status != PostDef::POST_STATUS_PUBLIC
+      logger.debug("delete_from_top_feed_list #{self}")
+      feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
+    feed.destroy if feed
+    end
+  end
+
   def set_default
     self.locale ||= PostDef::DEFAULT_LOCALE
     self.category ||= PostDef::DEFAULT_CATEGORY
@@ -67,8 +96,42 @@ class OzPost < ActiveRecord::Base
     self.write_at ||= Common.current_time.to_i
   end
 
-  protected
+  def set_user(user)
+    update_attribute(:posted_by, user)
+  #user.mypage.add_post
+  end
+
+  def author_name
+    self.posted_by.flyer_name
+  end
+
+  def postedDate
+    Common.date_format_ymdhm(created_at)
+  end
   
+  def is_new?
+    logger.debug("is_new? #{self.created_at} #{Common.days_ago(TopFeedList::RECENT_DAYS)}")
+    (self.created_at >= Common.days_ago(TopFeedList::RECENT_DAYS))
+  end
+  
+  ##
+  # SCOPE
+  ##
+  scope :search_no_order, lambda { |limit| valid_post.limit(limit)}
+  scope :search, lambda { |limit| search_no_order(limit).desc }
+
+  protected
+
+  scope :asc, :order => 'id ASC'
+  scope :desc, :order => 'id DESC'
+  scope :raw_post, where("z_index = ?", 0)
+  scope :is_valid, where("status = ?", PostDef::POST_STATUS_PUBLIC)
+  scope :is_invalid, where("status = ? OR status = ?", PostDef::POST_STATUS_HIDDEN, PostDef::POST_STATUS_DRAFT)
+  scope :expired, where("status = ?", PostDef::POST_STATUS_EXPIRED)
+  scope :latest, is_valid.raw_post.desc
+  scope :valid_post, is_valid.raw_post
+  scope :priority_post, is_valid.where("z_index != ?", 0).desc
+
   def topfeedable?
     false
   end

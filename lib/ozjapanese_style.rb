@@ -3,19 +3,14 @@ module OzjapaneseStyle
 
   HEADINGS = Common.new_orderd_hash
   HEADINGS[:ozj_h1] = [true,OzEmployment]
-  HEADINGS[:ozj_h2] = [true,nil]
-  HEADINGS[:ozj_h3] = [true,nil]
-  HEADINGS[:ozj_h4] = [true,nil]
-  HEADINGS[:ozj_h5] = [true,nil]
-  HEADINGS[:ozj_h6] = [true,nil]
-  HEADINGS[:ozj_h7] = [true,nil]
-  HEADINGS[:ozj_h8] = [true,nil]
-  HEADINGS[:ozj_h9] = [true,nil]
-  HEADINGS[:ozj_h10] = [true,nil]
-  HEADINGS[:ozj_h11] = [true,nil]
-  HEADINGS[:ozj_h12] = [true,nil]
-  HEADINGS[:ozj_h13] = [true,nil]
-  HEADINGS[:ozj_h14] = [false,nil]
+  HEADINGS[:ozj_h2] = [false,OzEmployer]
+  HEADINGS[:ozj_h3] = [false,OzSellGood]
+  HEADINGS[:ozj_h4] = [false,OzBuyGood]
+  HEADINGS[:ozj_h5] = [false,OzEstateShareRent]
+  HEADINGS[:ozj_h6] = [false,OzInfoEvent]
+  HEADINGS[:ozj_h7] = [false,OzPeoplePro]
+  HEADINGS[:ozj_h8] = [false,OzInfoLivingSmart]
+  HEADINGS[:ozj_h9] = [false,OzInfoLivingQna]
 
   def self.headings
     h = Array.new
@@ -33,6 +28,10 @@ module OzjapaneseStyle
     HEADINGS[heading][1]
   end
 
+  def self.heading_model_name(heading)
+    HEADINGS[heading][1].to_s
+  end
+
   def self.hello_description
     html = <<-HTML
 <p>本サイトはオーストラリアに在住の日本人の情報交換サイトです。</p>
@@ -43,10 +42,17 @@ module OzjapaneseStyle
 
   def self.about_site
     html = <<-HTML
+<p class="text-success">OzJapaneseのご利用、誠にありがとうございます。</p>
 <p class="text-info">本サイトはオーストラリアに在住の日本人の情報交換サイトです。</p>
+<p>現時点は、ブリスベンを対象にサービスを提供しています。</p>
 <p>日本人の方々の生活をサポートを目的に、オーストラリア在住の日本人が運営しています。</p>
-<p>運営にあたっては一人でも多く方に利用していただけるよう、皆様の意見を日々反映し、よりよい情報交換の場として長く提供できるよう、努力します。</p>
-<p class="muted"><small>本サイトは無料でご利用いただけます。</small></p>
+<p>運営にあたっては
+<p>本サイトは、皆様からの投稿により成り立つサイトです。</p>
+<p>投稿する場合は、本サイトにログインを行う必要があります。本サイトでは、FacebookおよびGoogleのアカウントによりログインできます。アカウントをお持ちでない方は、アカウントを作成の上、本サイトのご利用をお願いします。</p>
+<p>運営にあたっては、利用者の観点から、現存する日本語情報共有サイト以上のサービスと機能を提供すること念頭に運営を行っています。</p>
+<p>一人でも多く方に利用していただけるよう、皆様の意見を日々反映し、よりよい情報交換の場として長く提供できるよう、努力します。</p>
+<p class="text-info">本サイトは無料でご利用いただけます。</p>
+<p>2012-10-31 管理者</p>
     HTML
     html.html_safe
   end

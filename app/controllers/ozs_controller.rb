@@ -16,14 +16,14 @@ class OzsController < OzController
   def index
     model = _model(@heading)
     raise "Bad Board Request" if model.nil?
-    @board_lists = model.all
+    @board_lists = model.search(PostDef::POST_DISPLAY_NUMBER)
     respond_to do |format|
       format.html # index.html.erb
     end
   end
   
   def write
-    if !current_flyer && !debug?
+    if !current_flyer
       session["flyer_return_to"] = request.original_url
       redirect_to root_path
     end

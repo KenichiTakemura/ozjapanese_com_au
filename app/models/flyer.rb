@@ -6,6 +6,30 @@ class Flyer < ActiveRecord::Base
   #       :recoverable, :rememberable, :trackable, :validatable
   devise :database_authenticatable, :registerable, :trackable, :omniauthable
   # Setup accessible (or protected) attributes for your model
+  
+  # Association
+  has_many :oz_employment, :as => :posted_by, :class_name => 'OzEmployment', :dependent => :destroy
+
+  has_many :role, :as => :rolable, :class_name => "Role", :dependent => :destroy
+  has_many :comment, :as => :commented_by, :dependent => :destroy
+  has_many :attachment, :as => :attached_by, :class_name => 'Attachment', :dependent => :destroy
+  has_many :image, :as  => :attached_by, :class_name => 'Image', :dependent => :destroy
+  has_many :contact_us, :as => :contacted_by
+
+  validates_presence_of :flyer_name
+  after_create :create_mypage, :init_role
+  
+  def init_role
+    OzjapaneseStyle.headings.each do |page|
+      role = Role.new(:role_name => page, :role_value => Role::R[:user_all])
+      role.assign(self)
+    end
+  end
+  
+  def create_mypage
+    #m = Mypage.create()
+    #m.update_attribute(:mypagable, self)
+  end
 
   # {
   # :provider => 'facebook',
@@ -98,7 +122,5 @@ class Flyer < ActiveRecord::Base
     user
   end
 
-  # Association
-  has_many :employment, :as => :posted_by, :class_name => 'Employment', :dependent => :destroy
 
 end

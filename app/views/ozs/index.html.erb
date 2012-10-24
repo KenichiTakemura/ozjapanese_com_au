@@ -1,3 +1,52 @@
 <div class="row">
+	<div class="row">
 	<%= show_notice%>
+	<div class="pull-right">
+	<div class="btn-toolbar">
+	<div class="btn-group">
+	<%= link_to_with_icon("#{t("post.back")}",root_path,"btn","","icon-home","")%>
+	</div>
+	<div class="btn-group">
+	<%= post_write_new(@heading)%>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="row">
+	<% if @board_lists.present? %>
+	<div id="listCarousel" class="carousel slide" data-pause="pause">
+		<div class="carousel-inner">
+
+	<ul class="thumbnails">
+	
+	<% @board_lists.each_with_index do |post,i| %>
+	<% if i == 0%>
+	<div class="item active">
+	<% else %>
+	<div class="item">
+	<% end %>
+    <li class="span8 offset2">
+    <div class="thumbnail">
+    	<% if post.is_new? %>
+    	<span class="badge badge-success"><%=post.id%></span>
+    	<% else %>
+    	<span class="badge"><%=post.id%></span>
+    	<% end %>
+    	<%= simple_format(post.content.body) %>
+    <h3><%= post.subject %></h3>
+    <p><%= t("post.postedOn")%> <%= post.postedDate%></p>
+    <p><%= t("post.author")%> <%= link_to(post.author_name,post.posted_by.flyer_url) %></p>
+    <p><%= t("post.viewed")%> <%= post.views %></p>
+    </div>
+    </li>
+    </div>
+    <% end %>
+    </ul>
+    <a class="carousel-control left" href="#listCarousel" data-slide="prev">&lsaquo;</a>
+	<a class="carousel-control right" href="#listCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+	</div>
+	<% end %>
+	</div>
+	<%= build_board_list%>
 </div>

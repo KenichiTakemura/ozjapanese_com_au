@@ -2,21 +2,232 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ja:
-  title: "ブリスベン在住の日本人による、ブリスベン在住日本人応援サイト"
+  date:
+    abbr_day_names:
+    - 日
+    - 月
+    - 火
+    - 水
+    - 木
+    - 金
+    - 土
+    abbr_month_names:
+    -
+    - 1月
+    - 2月
+    - 3月
+    - 4月
+    - 5月
+    - 6月
+    - 7月
+    - 8月
+    - 9月
+    - 10月
+    - 11月
+    - 12月
+    day_names:
+    - 日曜日
+    - 月曜日
+    - 火曜日
+    - 水曜日
+    - 木曜日
+    - 金曜日
+    - 土曜日
+    formats:
+      default: ! '%Y/%m/%d'
+      long: ! '%Y年%m月%d日(%a)'
+      short: ! '%m/%d'
+    month_names:
+    -
+    - 1月
+    - 2月
+    - 3月
+    - 4月
+    - 5月
+    - 6月
+    - 7月
+    - 8月
+    - 9月
+    - 10月
+    - 11月
+    - 12月
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 約1時間
+        other: 約%{count}時間
+      about_x_months:
+        one: 約1ヶ月
+        other: 約%{count}ヶ月
+      about_x_years:
+        one: 約1年
+        other: 約%{count}年
+      almost_x_years:
+        one: 1年弱
+        other: ! '%{count}年弱'
+      half_a_minute: 30秒前後
+      less_than_x_minutes:
+        one: 1分以内
+        other: ! '%{count}分以内'
+      less_than_x_seconds:
+        one: 1秒以内
+        other: ! '%{count}秒以内'
+      over_x_years:
+        one: 1年以上
+        other: ! '%{count}年以上'
+      x_days:
+        one: 1日
+        other: ! '%{count}日'
+      x_minutes:
+        one: 1分
+        other: ! '%{count}分'
+      x_months:
+        one: 1ヶ月
+        other: ! '%{count}ヶ月'
+      x_seconds:
+        one: 1秒
+        other: ! '%{count}秒'
+    prompts:
+      day: 日
+      hour: 時
+      minute: 分
+      month: 月
+      second: 秒
+      year: 年
+  errors: &errors
+    format: ! '%{attribute}%{message}'
+    messages:
+      accepted: を受諾してください。
+      blank: を入力してください。
+      confirmation: と確認の入力が一致しません。
+      empty: を入力してください。
+      equal_to: は%{count}にしてください。
+      even: は偶数にしてください。
+      exclusion: は予約されています。
+      greater_than: は%{count}より大きい値にしてください。
+      greater_than_or_equal_to: は%{count}以上の値にしてください。
+      inclusion: は一覧にありません。
+      invalid: は不正な値です。
+      less_than: は%{count}より小さい値にしてください。
+      less_than_or_equal_to: は%{count}以下の値にしてください。
+      not_a_number: は数値で入力してください。
+      not_an_integer: は整数で入力してください。
+      odd: は奇数にしてください。
+      record_invalid: バリデーションに失敗しました。 %{errors}
+      taken: はすでに存在します。
+      too_long: は%{count}文字以内で入力してください。
+      too_short: は%{count}文字以上で入力してください。
+      wrong_length: は%{count}文字で入力してください。
+    template:
+      body: 次の項目を確認してください。
+      header:
+        one: ! '%{model}にエラーが発生しました。'
+        other: ! '%{model}に%{count}つのエラーが発生しました。'
+  helpers:
+    select:
+      prompt: 選択してください。
+    submit:
+      create: 登録する
+      submit: 保存する
+      update: 更新する
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%n%u'
+        precision: 0
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: 円
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: 十億
+          million: 百万
+          quadrillion: 千兆
+          thousand: 千
+          trillion: 兆
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n%u'
+        units:
+          byte: バイト
+          gb: ギガバイト
+          kb: キロバイト
+          mb: メガバイト
+          tb: テラバイト
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: と
+      two_words_connector: と
+      words_connector: と
+  time:
+    am: 午前
+    formats:
+      default: ! '%Y/%m/%d %H:%M:%S'
+      long: ! '%Y年%m月%d日(%a) %H時%M分%S秒 %z'
+      short: ! '%y/%m/%d %H:%M'
+    pm: 午後
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors
+  
+  
+  title: "ブリスベン在住日本人応援サイト"
   project_name: "OzJapanese"
-  hello_world: ブリスベン情報サイトへようそこ
+  japanese: "日本人"
+  flyer: "OzJapaneseスタイル"
+  hello_world: ブリスベン情熱サイトへようそこ
   view_site_detail: "サイトに関してもっと詳しく"
   about_site: "サイト情報"
   contact_us: "ご意見、ご要望はこちらから"
   close: "閉じる"
   header_message: "ブリスベン情報サイト"
-  please_signin: "投稿していただくためには、ログインが必要です。"
+  please_signin: "投稿には、ログインが必要です。"
   
   terms_of_service_agreement: "サービス利用規約"
   terms_of_personal_agreement: "個人情報管理規約"
+  content: :post.content
+  subject: :post.subject
+  confirm_submit: "送信しますか？"
   post:
+    id: "番号"
+    recent_post: "最近の投稿数"
     category: "投稿分類"
     subject: "題名"
+    postedOn: "投稿日時"
+    viewed: "view"
+    comment: "コメント"
+    back: "一覧に戻る"
+    cancel: "やっぱりやめる"
+    no_information: "現在投稿はありません。:("
     write_something: "何か書いてください。"
     create: "投稿する"
     author: "投稿者"
@@ -26,10 +237,26 @@ ja:
     why_valid_until: "現在の有効期限は%{days}日です。"
     alert:
       header: "投稿に当たっては以下の事項を守ってください。"
-      body1: "投稿分類に合った内容の記載をお願いします。管理者が投稿を移動する場合があります。"
+      body1: "投稿分類に合った内容の記載をお願いします。"
       body2: "投稿内容が不適切な内容と判断した場合は、管理者が投稿者に連絡をすることなく、即削除いたします。"
-      body3: "本サイトは返信機能を提供していないため、必要に応じて連絡先（Eメール、電話）などを記載してください。"
+      body3: "本サイトは返信機能を提供していないため、必要に応じて連絡先（Eメールアドレス、連絡先）などを記載してください。"
       body4: "その他、投稿に関する事柄については、サービス利用規約を参照してください。"
+  contact:
+    user_name: "お名前"
+    email: "Eメールアドレス"
+    phone: "連絡先（モバイル）"
+    subject: "題名"
+    content: "内容"
+    send: "送信する"
+    label: "意見、感想には迅速に対応します。"
+    banner: "スポンサーに関する問い合せ"
+    general: "一般的な問い合せ"
+    feedback: "サイトに関する意見、感想"
+    request: "サイトに追加して欲しい機能、要望"
+    issue: "サイトの問題を報告"
+    exit: "退会依頼（データの削除など）"
+    recomment_pro: "職人を推薦する"
+    phone_is_optional: "連絡先は任意入力です。スポンサーに関する問い合せの場合は、必ず入力してください。"
   ozj_h1:
     title: "求人"
     desc: "人材を求めている企業、個人の方はこちら。ジョブハンター達はここを見るべし！"
@@ -45,29 +272,20 @@ ja:
     desc: "よくある買いますと同じ"
   ozj_h5:
     title: "シェア・レンタル"
-    desc: "不動産シェアメイト、レンタルを募集する人"
+    desc: "不動産シェアメイト、レンタルを募集する人、レンタル物件を探している人"
   ozj_h6:
-    title: "シェア・レンタル"
-    desc: "不動産シェアメイト、レンタル物件を探している人"
-  ozj_h7:
     title: "イベント情報"
     desc: "様々なイベントを掲載。集客、広告に活用。"
-  ozj_h8:
+  ozj_h7:
     title: "職人達"
     desc: "知ってる人は知っている。ブリスベンで便りになるローカルなプロ達。仕事を頼むなら我々に。"
-  ozj_h9:
-    title: "釣り"
-    desc: ""
-  ozj_h10:
-    title: "スポーツ"
-    desc: ""
-  ozj_h11:
+  ozj_h8:
     title: "得得情報"
     desc: "きっと得する得々情報"
-  ozj_h12:
+  ozj_h9:
     title: "暮らしQ＆A"
     desc: "なんでも相談。日常遭遇する様々な疑問や問題をみんなの力で解決しよう。"
-  ozj_h13:
+  ozj_h10:
     title: "日本人ネットワーク"
     desc: "ブリスベンの日本人ネットワーク"
   view_details: "見る"
@@ -76,6 +294,7 @@ ja:
   welcome: "こんにちわ。"
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
+  successfully_created: "投稿が追加されました。"
   devise:
     omniauth_callbacks:
       flyer:

@@ -1,3 +1,16 @@
 // Place all the styles related to the ozmain controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+div.shadow:hover {
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  font-size: 20px;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+div.shadow {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}

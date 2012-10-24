@@ -22,7 +22,7 @@
 					<i class="icon-check"></i>&nbsp;<%= t("post.alert.body4")%>
 				</p>
 				<p>
-					<a class="btn" href="#"><%= t("terms_of_service_agreement")%></a>&nbsp;<a class="btn" href="#"><%= t("terms_of_personal_agreement")%></a>
+					<a class="btn" href="<%=about_ozmains_path(:t => "service")%>"><%= t("terms_of_service_agreement")%></a>&nbsp;<a class="btn" href="<%=about_ozmains_path(:t => "personal")%>"><%= t("terms_of_personal_agreement")%></a>
 				</p>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 		<% end %>
 		<br>
 		<%= f.submit t("post.create"), :class => "btn btn-primary" %>
-
+		<%= link_to(t("post.cancel"), root_path, :class => "btn") %>
 		<% end %>
 	</div>
 </div>

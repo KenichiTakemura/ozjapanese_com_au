@@ -52,7 +52,6 @@ module OzmainHelper
   end
   
   def show_flyer_name
-    return "Test" if debug?
     return current_flyer.flyer_name
   end
 end

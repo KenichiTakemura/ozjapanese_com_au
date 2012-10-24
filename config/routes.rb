@@ -1,4 +1,11 @@
 OzjapaneseComAu::Application.routes.draw do
+  
+  resources :ozmains, :only => ["index"] do
+    collection do
+      get :about
+    end
+  end
+  
   devise_for :flyers, :controllers => { :omniauth_callbacks => "flyers/omniauth_callbacks" }
   #devise_scope :flyers do
   #  get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
@@ -12,6 +19,7 @@ OzjapaneseComAu::Application.routes.draw do
   end
   
   resources :oz_employments, :only => ["create"]
+  resources :contacts, :only => ["index","new","create"]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

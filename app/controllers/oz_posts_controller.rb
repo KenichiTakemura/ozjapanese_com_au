@@ -1,7 +1,7 @@
 class OzPostsController < OzController
 
   before_filter :filter
-  before_filter :authenticate_flyer!, :only => [:create_post]
+  before_filter :authenticate_flyer!
 
   def filter
     

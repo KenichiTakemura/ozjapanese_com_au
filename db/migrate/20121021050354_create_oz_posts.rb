@@ -5,7 +5,7 @@ class CreateOzPosts < ActiveRecord::Migration
       t.references :posted_by, :polymorphic => true
       t.references :post_updated_by, :polymorphic => true
       t.string :requested_by, :null => true
-      t.string :category, :null => false
+      t.integer :category, :null => false
       t.string :subject, :null => false
       t.datetime :valid_until, :null => false
       t.integer :views, :default => 0

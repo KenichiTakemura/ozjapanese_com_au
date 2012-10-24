@@ -10,6 +10,7 @@ module Ozlink
   end
 
   def self.heading_link(heading, action)
+    raise "Bad Request with [#{heading}]" if !OzjapaneseStyle.heading_controller(heading).present?
     ozlink(OzjapaneseStyle.heading_controller(heading),action)
   end
 

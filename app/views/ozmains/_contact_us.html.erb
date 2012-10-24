@@ -1,0 +1,17 @@
+<a href="#contact_us", role="button", class="btn btn-primary btn-large" data-toggle="modal" id="ozj_contact_us_modal"><i class="icon-info-sign icon-white"></i><%= t(:contact_us)%> &raquo;</a>
+<div class="modal hide fade" id="contact_us" tabindex="-1" role="dialog" aria-labelledby="contact_us_label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			×
+		</button>
+		<h3 id="contact_us_label"><%= t("contact.label")%></h3>
+	</div>
+	<div class="modal-body" id="contact_us" style="font-size:12px">
+		<%= render :partial => "ozmains/contact_us_form" %>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">
+			<%= t(:close)%>
+		</button>
+	</div>
+</div>
