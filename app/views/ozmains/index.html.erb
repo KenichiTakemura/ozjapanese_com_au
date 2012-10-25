@@ -26,7 +26,7 @@
 			</h2>
 			<p>
 			<% if @feed[heading][0] > 0 %>
-			<%= link_to(t("post.today_post"), Ozlink.heading_link(heading,"feed_view",{:f => "today"}), :remote => true, :method => :get) %>
+			<%= link_to(t("post.today_post"), Ozlink.heading_link(heading,"feed_view",{:f => "today"}), :onclick => '_scroll_top()', :remote => true, :method => :get) %>
 			<% else %>
 			<%= t("post.today_post") %>
 			<% end %>
@@ -34,7 +34,7 @@
 			</p>
 			<p>
 			<% if @feed[heading][1] > 0 %>
-			<%= link_to(t("post.yesterday_post"), Ozlink.heading_link(heading,"feed_view",{:f => "yesterday"}), :remote => true, :method => :get) %>
+			<%= link_to(t("post.yesterday_post"), Ozlink.heading_link(heading,"feed_view",{:f => "yesterday"}), :onclick => '_scroll_top()', :remote => true, :method => :get) %>
 			<% else %>
 			<%= t("post.yesterday_post") %>
 			<% end %>
@@ -42,7 +42,7 @@
 			</p>
 			<p>
 			<% if @feed_cnt[heading] > 0 %>
-			<%= link_to(t("post.recent_post"), Ozlink.heading_link(heading,"feed_view",{:f => "recent_week"}), :remote => true, :method => :get) %>
+			<%= link_to(t("post.recent_post"), Ozlink.heading_link(heading,"feed_view",{:f => "recent_week"}), :onclick => '_scroll_top()', :remote => true, :method => :get) %>
 			<% else %>
 			<%= t("post.recent_post") %>
 			<% end %>
@@ -69,8 +69,14 @@
 		<a class="carousel-control left" href="#headingCarousel" data-slide="prev">&lsaquo;</a>
 		<a class="carousel-control right" href="#headingCarousel" data-slide="next">&rsaquo;</a>
 	</div>
-	<%= _script_document_ready(%Q|$('\#heading_0').attr("class","item active");$('\#heading_recent_week').click(function(){
+	<%= _script_document_ready(%Q|$('\#heading_0').attr("class","item active");$('\#_scroll_top').click(function(){
 		$('\#open_view').html('#{image_tag("ajax-loader.gif")}');
 	});|) %>
+	<%= _script(%Q|
+		function _scroll_top() {
+  			$('html,body').animate({ scrollTop: 0 }, 'slow');
+  			$('\#open_view').html('#{image_tag("ajax-loader.gif")}');
+		}		
+	|)%>
 	</div>
 </div>

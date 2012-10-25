@@ -2,7 +2,7 @@ class TopFeedList < ActiveRecord::Base
 
   TOP_FEED_LIMIT = 100
   TOP_FEED_SAVED_LIMIT = 150
-  RECENT_DAYS = 7
+  RECENT_DAYS = 9
 
   belongs_to :feeded_to, :polymorphic => true
   
@@ -32,7 +32,7 @@ class TopFeedList < ActiveRecord::Base
   scope :feed_nomatter_image, lambda { |cate,limit| category_feed(cate).feed_order.limit(limit) }
   
   scope :feed_for_date, lambda { |cate,day| category_feed(cate).duration_feed(day,day+1).feed_order }
-  scope :recent_feed, lambda { |cate| category_feed(cate).duration_feed(0,RECENT_DAYS).feed_order }
+  scope :recent_feed, lambda { |cate,day| category_feed(cate).duration_feed(day,RECENT_DAYS).feed_order }
   
   after_save :clean_oldest_feed
   

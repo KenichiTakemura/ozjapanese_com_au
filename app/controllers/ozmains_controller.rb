@@ -11,7 +11,7 @@ class OzmainsController < OzController
         logger.debug("date_feed[#{d}]: #{date_feed[d]}")
       }
       @feed[heading.to_sym] = date_feed
-      @feed_cnt[heading.to_sym] = TopFeedList.recent_feed(model_name).count
+      @feed_cnt[heading.to_sym] = TopFeedList.recent_feed(model_name, 2).count
       logger.debug("@feed[#{heading}]: #{@feed[heading.to_sym]}")
       logger.debug("@feed_cnt[#{heading}]: #{@feed_cnt[heading.to_sym]}")
     end
@@ -20,6 +20,7 @@ class OzmainsController < OzController
       @contact.user_name = current_flyer.flyer_name
       @contact.email = current_flyer.email
     end
+    breadcrumb :root
   end
   
   def uzatt

@@ -8,8 +8,15 @@
 </head>
 <body>
 <%= render :partial => "layouts/header" %>
-
 <div class="container" style="margin-top:60px">
+<%= breadcrumb :pretext => "",
+               :posttext => "",
+               :separator => " &rsaquo; ",
+               :autoroot => true,
+               :show_root_alone => true,
+               :link_current => true,
+               :semantic => true
+               %>
 <%= yield %>
 <%= render :partial => "layouts/footer" %>
 </div>

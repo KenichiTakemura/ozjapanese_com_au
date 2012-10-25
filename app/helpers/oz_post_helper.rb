@@ -73,9 +73,13 @@ module OzPostHelper
         html += "</li></div>"
       end
       html += %Q|</ul><a class="carousel-control left" href="\#listCarousel_#{id_suffix}" data-slide="prev">&lsaquo;</a><a class="carousel-control right" href="\#listCarousel_#{id_suffix}" data-slide="next">&rsaquo;</a></div></div>|
-      html += _script_document_ready(%Q|$('\#post_view_item_#{id_suffix}_#{posts.first.id}').attr("class","item active")|)
+      html += _script(%Q|$('\#post_view_item_#{id_suffix}_#{posts.first.id}').attr("class","item active")|)
     end
     html.html_safe
+  end
+  
+  def render_a_post(post)
+    
   end
   
 end

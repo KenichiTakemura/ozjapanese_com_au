@@ -49,3 +49,4 @@ gem 'omniauth-google'
 gem 'omniauth-yahoo'
 gem 'omniauth-google-oauth2'
 gem "system_timer"
+gem 'gretel'

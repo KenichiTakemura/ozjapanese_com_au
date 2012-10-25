@@ -44,7 +44,7 @@ class OzsController < OzController
     model_name = OzjapaneseStyle.heading_model_name(@heading)
     case feed_type
      when "recent_week"
-       feed = TopFeedList.recent_feed(model_name)
+       feed = TopFeedList.recent_feed(model_name, 2)
      when "today"
        feed = TopFeedList.feed_for_date(model_name, 0)
      when "yesterday"
