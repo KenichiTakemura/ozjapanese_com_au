@@ -2,23 +2,16 @@
 module OzjapaneseStyle
 
   HEADINGS = Common.new_orderd_hash
-  HEADING_GROUPS = Array.new
   
-  HEADINGS[:ozj_h1] = [true,OzEmployment]
-  HEADINGS[:ozj_h2] = [true,OzEmployer]
-  HEADINGS[:ozj_h3] = [true,OzSellGood]
-  HEADINGS[:ozj_h4] = [true,OzBuyGood]
-  HEADINGS[:ozj_h5] = [true,OzEstateShareRent]
-  HEADINGS[:ozj_h6] = [true,OzInfoEvent]
-  HEADINGS[:ozj_h7] = [true,OzPeoplePro]
-  HEADINGS[:ozj_h8] = [true,OzInfoLivingSmart]
-  HEADINGS[:ozj_h9] = [true,OzInfoLivingQna]
-  
-  HEADING_GROUPS.push([:ozj_h1,:ozj_h2])
-  HEADING_GROUPS.push([:ozj_h3,:ozj_h4]) 
-  HEADING_GROUPS.push([:ozj_h5,:ozj_h6])
-  HEADING_GROUPS.push([:ozj_h7]) 
-  HEADING_GROUPS.push([:ozj_h8,:ozj_h9]) 
+  HEADINGS[:ozj_h1] = [true,OzEmployment,0]
+  HEADINGS[:ozj_h2] = [true,OzEmployer,0]
+  HEADINGS[:ozj_h3] = [true,OzSellGood,1]
+  HEADINGS[:ozj_h4] = [true,OzBuyGood,1]
+  HEADINGS[:ozj_h5] = [true,OzEstateShareRent,2]
+  HEADINGS[:ozj_h6] = [true,OzInfoEvent,2]
+  HEADINGS[:ozj_h7] = [true,OzPeoplePro,3]
+  HEADINGS[:ozj_h8] = [true,OzInfoLivingSmart,4]
+  HEADINGS[:ozj_h9] = [true,OzInfoLivingQna,4]
     
   def self.headings
     h = Array.new
@@ -29,7 +22,17 @@ module OzjapaneseStyle
   end
   
   def self.heading_groups
-    HEADING_GROUPS.dup
+    h = Array.new
+    headings.each do |k|
+      i = HEADINGS[k][2]
+      h[i] = Array.new if h[i].nil?
+      h[i].insert(-1,k)
+    end
+    h
+  end
+  
+  def self.group_id(heading)
+    HEADINGS[heading][2]
   end
 
   def self.heading_controller(heading)

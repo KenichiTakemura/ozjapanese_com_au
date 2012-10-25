@@ -14,11 +14,17 @@
 <% end %>
 </div>
 <div class="row-fluid" id="menu">
+	<ul class="pager">
+		<% OzjapaneseStyle.headings.each do |heading| %>
+			<% g = @feed[heading][0] + @feed[heading][1] + @feed_cnt[heading] %>
+			<li><%= link_to(t("#{heading}.title"),"#", :onclick => "_activate_heading(#{OzjapaneseStyle.group_id(heading)});return false;")%></li>
+		<% end %>
+	</ul>
 	<div class="span12">
-		<div id="headingCarousel" class="carousel slide" data-pause="pause">
+		<div id="headingCarousel" class="carousel slide" data-pause="hover" data-interval="60000">
 		<div class="carousel-inner">
 		<% OzjapaneseStyle.heading_groups.each_with_index do |group,i| %>
-		<div class="item" id="heading_<%=i%>">
+		<div class="item" data-slide="<%=i%>" id="heading_<%=i%>">
 			<% group.each do |heading| %>
 			<div class="span5" style="margin-left:90px">
 			<h2>
@@ -51,7 +57,7 @@
 			<p>
 			<%= t("#{heading}.desc")%>
 			</p>
-			<p>
+
 			<div class="btn-toolbar">
 			<div class="btn-group">
 			<%= link_to_with_icon("#{t(:view_details)} &raquo",Ozlink.heading_link(heading,""),"btn","","icon-zoom-in","#{heading}_view_details") %>
@@ -60,23 +66,26 @@
 			<%= post_write_new(heading, :signin_with_following)%>
 			</div>
 			</div>
-			</p>
+
 			</div>
 			<% end %>
 		</div>
 		<% end %>
-	</div>
+		</div>
 		<a class="carousel-control left" href="#headingCarousel" data-slide="prev">&lsaquo;</a>
 		<a class="carousel-control right" href="#headingCarousel" data-slide="next">&rsaquo;</a>
 	</div>
-	<%= _script_document_ready(%Q|$('\#heading_0').attr("class","item active");$('\#_scroll_top').click(function(){
-		$('\#open_view').html('#{image_tag("ajax-loader.gif")}');
-	});|) %>
+	<%= _script_document_ready(%Q|
+	$('\#headingCarousel').carousel('next');
+	|)%>
 	<%= _script(%Q|
 		function _scroll_top() {
   			$('html,body').animate({ scrollTop: 0 }, 'slow');
   			$('\#open_view').html('#{image_tag("ajax-loader.gif")}');
-		}		
+		};
+		function _activate_heading(group_id) {
+			$('\#headingCarousel').carousel(group_id);
+		}
 	|)%>
 	</div>
 </div>

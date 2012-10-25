@@ -1,6 +1,6 @@
 class OzsController < OzController
   
-  before_filter :_before_, :except => []
+  before_filter :_before_, :except => [:carousel_viewed]
 
   def _before_
     raise "Bad Request" if params[:v].nil?
@@ -36,6 +36,17 @@ class OzsController < OzController
   def view
     @post = _model(@heading).find(@@board_id)
     @post.viewed
+    @post
+  end
+  
+  def carousel_viewed
+    @heading = params[:p].split("-")[0].to_sym
+    @@board_id = params[:p].split("-")[1]
+    logger.debug("carousel_viewed #{@heading} with #{@@board_id}")
+    if !@heading.present? || !@@board_id.present?
+      raise "Bad Request for carousel_viewed"
+    end
+    view
   end
   
   def feed_view

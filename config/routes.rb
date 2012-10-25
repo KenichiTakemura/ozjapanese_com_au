@@ -17,6 +17,7 @@ OzjapaneseComAu::Application.routes.draw do
     collection do
       get :write
       post :view
+      post :carousel_viewed
       get :feed_view
     end
   end
