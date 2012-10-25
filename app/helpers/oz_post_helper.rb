@@ -65,7 +65,7 @@ module OzPostHelper
   def show_posts(posts, heading, id_suffix)
     html = ""
     if posts.present?
-      html = %Q|<div id="listCarousel_#{id_suffix}" class="carousel slide" data-pause="hover" data-interval="5000"><div class="carousel-inner"><ul class="thumbnails">|
+      html = %Q|<div id="listCarousel_#{id_suffix}" class="carousel slide" data-pause="hover" data-interval="30000"><div class="carousel-inner"><ul class="thumbnails">|
       posts.each_with_index do |post,i|
         html += %Q|<div class="item" id="#{heading}-#{post.id}">|
         html += %Q|<li class="span8 offset2">|
