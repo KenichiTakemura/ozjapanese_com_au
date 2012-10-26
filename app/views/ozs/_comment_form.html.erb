@@ -1,9 +1,23 @@
 <div class="comment_form">
 	<%= form_for(@comment) do |f| %>
-	<%= f.text_area :body, :style => "width:300px;height:50px" %>
+	<%= f.text_area :body, :style => "width:300px;height:50px", :id => "comment_area" %>
 	<div class="left">
-		<%= f.submit t("post.comment_new"), :class => "btn btn-info", :remote => true , :method => :post %>
-		<%= image_tag(current_flyer.flyer_image) %>
+		<p><%= link_to(t("post.comment_new"), "#", :class => "btn btn-info btn-small", :id => "submit_comment")%></p>
+		<p class="text-success">
+			<label class="checkbox">
+			<input type="checkbox" value="">
+			<%=t("post.comment_facebook_new")%>
+		</label>
+		</p>	
 	</div>
 	<% end %>
+	<%= _script(%Q|$('\#submit_comment').click(function(){
+		if($('\#comment_area').val() == ""){
+			return false;
+		}
+		$('\#post_comment_area').html('#{image_tag("ajax-loader.gif")}');| +
+		Ajax.post(post_comment_comments_path, %Q|authenticity_token: $("input[name='authenticity_token']").attr("value"), v: '#{Ozlink.base(@comment.commented_type)}', d: '#{Ozlink.param_enc(@comment.commented_id)}', m: $('\#comment_area').attr("value")|) +
+		%Q|return false;
+	})
+	|)%>
 </div>

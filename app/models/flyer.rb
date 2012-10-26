@@ -19,6 +19,10 @@ class Flyer < ActiveRecord::Base
   validates_presence_of :flyer_name
   after_create :create_mypage, :init_role
   
+  PROVIDERS = Hash.new
+  PROVIDERS[:facebook] = "facebook"
+  PROVIDERS[:google] = "google_oauth2"
+  
   def init_role
     OzjapaneseStyle.headings.each do |page|
       role = Role.new(:role_name => page, :role_value => Role::R[:user_all])
@@ -120,6 +124,14 @@ class Flyer < ActiveRecord::Base
     )
     end
     user
+  end
+  
+  def facebook_flyer?
+    self.provider.eql?(PROVIDERS[:facebook])
+  end
+  
+  def google_flyer?
+    self.provider.eql?(PROVIDERS[:google])
   end
 
 

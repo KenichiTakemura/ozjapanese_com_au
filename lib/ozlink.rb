@@ -1,9 +1,5 @@
 module Ozlink
   
-  def self.me
-    "http://www.ozjapanese.com.au"
-  end
-  
   def self.ozlink(controller, action, options=nil)
     link = nil
     if action.present?
@@ -42,18 +38,18 @@ module Ozlink
     d = _d.to_i
     d
   end
-
-  private
-
+  
   def self.param_enc(e)
     enc(e).chop if e.present?
   end
-
+  
   def self.base(okpage)
     raise "Bad Request okpage nil" if okpage.nil?
     enc("#{Common.current_time.to_i}#{SP}#{okpage}").chop
   end
-  
+
+  private
+
   def self.dec(d)
     begin
       Common.decrypt_data(d)

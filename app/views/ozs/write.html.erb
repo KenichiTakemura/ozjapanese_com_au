@@ -38,7 +38,7 @@
 
 		<%= form_for(@post, :html => { :multipart => true }) do |f| %>
 		<div class="pull-right">
-			<span class="label label-info"><%= t("post.author") %></span>&nbsp;<i class="icon-user"></i><%= show_flyer_name %>
+			<span class="label label-info"><%= t("post.author") %></span>&nbsp;<i class="icon-user"></i><%= current_flyer.flyer_name %>
 		</div>
 		<%= f.hidden_field :write_at, :id => "write_at" %>
 		<%= f.label t("post.subject") %>

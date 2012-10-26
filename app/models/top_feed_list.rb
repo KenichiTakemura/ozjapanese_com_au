@@ -5,12 +5,6 @@ class TopFeedList < ActiveRecord::Base
   RECENT_DAYS = 9
 
   belongs_to :feeded_to, :polymorphic => true
-  
-  M2T = Common.new_orderd_hash
-  M2T[:p_estate] = "estates"
-  M2T[:p_business] = "businesses"
-  M2T[:p_motor_vehicle] = "motor_vehicles"
-  M2T[:p_accommodation] = "accommodations"
      
   # public scope
   scope :find_a_feed, lambda { |cate,id| where('feeded_to_type = ? AND feeded_to_id = ?', cate, id)}

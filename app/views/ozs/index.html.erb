@@ -23,8 +23,13 @@
 				<%= post_write_new(@heading, :signin_with_following)%>
 			</div>
 		</div>
-		<div id="side_post_area">
-		<%= show_a_post(@board_lists.first, @heading)%>
+		<div class="row-fluid">
+			<div class="span8" id="side_post_area">
+			<%= show_a_post(@board_lists.first, @heading)%>
+			</div>
+			<div class="span4" id="side_comment_thread">
+			<%= show_comment_thread(@board_lists.first, @heading)%>
+			</div>
 		</div>
 	</div>
 	<style>

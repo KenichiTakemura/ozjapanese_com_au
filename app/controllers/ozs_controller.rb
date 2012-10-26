@@ -18,6 +18,8 @@ class OzsController < OzController
     @board_lists = model.search_older_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
     breadcrumb :heading, @heading
     @comment = Comment.new
+    @comment.commented_id = @board_lists.first.id
+    @comment.commented_type = @heading
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -39,6 +41,8 @@ class OzsController < OzController
     @post = _model(@heading).find(@@board_id)
     @post.viewed
     @comment = Comment.new
+    @comment.commented_id = @post.id
+    @comment.commented_type = @heading
     @post
   end
   
@@ -65,9 +69,15 @@ class OzsController < OzController
        feed = TopFeedList.feed_for_date(model_name, 1)
      else
        raise "Bad feed type #{feed_type}"
-     end
+    end
+    @comment = Comment.new
     @posts = feed.collect{ |f| f.feeded_to }
     logger.debug("feed_view: #{@posts.size}")
+    @comment.commented_id = @posts.first.id
+    @comment.commented_type = @heading
+
   end
+  
+  
 
 end

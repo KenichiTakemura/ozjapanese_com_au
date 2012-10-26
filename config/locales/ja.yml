@@ -245,7 +245,8 @@ ja:
     why_valid_until: "現在の有効期限は%{days}日です。"
     post_fb_feed: "Facebookでみんなに知らせる"
     write_new: "投稿する"
-    comment_new: "OzJapaneseでコメントを投稿する"
+    comment_new: "OzJapaneseにコメントを投稿する"
+    comment_facebook_new: "Facebookにもコメントを投稿する"
     check_input: "入力情報を確認してください"
     alert:
       header: "投稿に当たっては以下の事項を守ってください。"

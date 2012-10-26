@@ -1,7 +1,7 @@
 module OzmainHelper
  
   def signin(text)
-    html = %Q|#{t(text)}#{link_to(facebook,flyer_omniauth_authorize_path(:facebook))} #{link_to(google,flyer_omniauth_authorize_path(:google_oauth2))}|
+    html = %Q|#{t(text)}#{link_to(facebook,flyer_omniauth_authorize_path(:facebook),:class => "")} #{link_to(google,flyer_omniauth_authorize_path(:google_oauth2),:class => "")}|
     html.html_safe
   end
   
@@ -11,9 +11,9 @@ module OzmainHelper
       flyer = current_flyer
     end
     html = ""
-    if flyer.provider.eql?("google_oauth2")
+    if flyer.google_flyer?
       html = link_to(flyer.flyer_name,flyer.flyer_url)
-    elsif flyer.provider.eql?("facebook")
+    elsif flyer.facebook_flyer?
       html = "#{link_to(flyer.flyer_name,flyer.flyer_url)} #{image_tag(flyer.flyer_image, :alt => "")}"
     end
     html.html_safe

@@ -18,7 +18,7 @@ module OzPostHelper
     if current_flyer
       html += render :partial => "ozs/comment_form"
     else
-      html += %Q|<div class="btn-group"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
+      html += %Q|<div class="btn-group dropup"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
       html += %Q|<i class="icon-comment icon-large"></i>#{t("post.comment_new")}&nbsp;<span class="caret"></span></a>|
       html += %Q|<ul class="dropdown-menu">|
       html += %Q|<li><div class="alert alert-info" style="z-index:10">#{t("please_signin")}<br>#{signin(text)}</div></li></ul></div>|
@@ -74,7 +74,7 @@ module OzPostHelper
    html += "<p>#{t("post.author")} #{show_flyer(post.posted_by)}</p>"
    html += post_fb_feed(heading, post)
    html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p></div>|
-   html += %Q|<div class="span8">#{post_comment_new(heading,:signin_with_following)}<div class="row" id="post_comment_area"></div></div>|
+   html += %Q|<div class="span8">#{post_comment_new(heading,:signin_with_following)}<div id="post_comment_area"></div></div>|
    html += "</div></div>"
    html.html_safe
   end
@@ -102,7 +102,7 @@ module OzPostHelper
   
   def post_fb_feed(heading, post)
     html = ""
-    if current_flyer
+    if current_flyer && current_flyer.facebook_flyer? 
       html = %Q|<p>#{facebook}&nbsp;<a href="\#" onclick='postToFeed(); return false;'>#{t("post.post_fb_feed")}</a></p>|
       html += %Q|<p id='msg'></p>|
       #http://developers.facebook.com/docs/reference/dialogs/feed/
