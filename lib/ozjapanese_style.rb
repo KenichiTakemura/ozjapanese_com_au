@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 module OzjapaneseStyle
-
+  
   HEADINGS = Common.new_orderd_hash
   
   HEADINGS[:ozj_h1] = [true,OzEmployment,0]
@@ -45,6 +45,10 @@ module OzjapaneseStyle
 
   def self.heading_model_name(heading)
     HEADINGS[heading][1].to_s
+  end
+  
+  def self.heading_name(heading)
+    I18n.t("#{heading}.title")
   end
 
   def self.hello_description

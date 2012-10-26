@@ -124,6 +124,7 @@ class OzPost < ActiveRecord::Base
   ##
   scope :search_no_order, lambda { |limit| valid_post.limit(limit)}
   scope :search, lambda { |limit| search_no_order(limit).desc }
+  scope :search_older_than, lambda { |limit,day| post_search_by_time(day,-1).search_no_order(limit).desc }
 
   protected
 
@@ -136,6 +137,17 @@ class OzPost < ActiveRecord::Base
   scope :latest, is_valid.raw_post.desc
   scope :valid_post, is_valid.raw_post
   scope :priority_post, is_valid.where("z_index != ?", 0).desc
+
+  scope :post_search_by_time, lambda { |x,y| 
+    if x.to_i < 0
+      where("created_at > ?", (Common.days_ago(y)))
+    elsif y.to_i > 0
+      where("created_at <=? and created_at > ?", (Common.days_ago(x)), (Common.days_ago(y)))
+    elsif x.to_i > 0
+      where("created_at <=?", (Common.days_ago(x)))
+    end
+  }
+  
 
   def topfeedable?
     false

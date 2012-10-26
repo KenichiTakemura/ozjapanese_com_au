@@ -1,4 +1,9 @@
 module Ozlink
+  
+  def self.me
+    "http://www.ozjapanese.com.au"
+  end
+  
   def self.ozlink(controller, action, options=nil)
     link = nil
     if action.present?

@@ -1,2 +1,0 @@
-class ContactController < OzController
-end

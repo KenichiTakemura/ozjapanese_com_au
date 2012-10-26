@@ -15,7 +15,9 @@ class OzsController < OzController
   def index
     model = _model(@heading)
     raise "Bad Board Request" if model.nil?
-    @board_lists = model.search(PostDef::POST_DISPLAY_NUMBER)
+    @board_lists = model.search_older_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
+    breadcrumb :heading, @heading
+    @comment = Comment.new
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -33,9 +35,10 @@ class OzsController < OzController
     @post
   end
   
-  def view
+  def viewed
     @post = _model(@heading).find(@@board_id)
     @post.viewed
+    @comment = Comment.new
     @post
   end
   
@@ -46,7 +49,7 @@ class OzsController < OzController
     if !@heading.present? || !@@board_id.present?
       raise "Bad Request for carousel_viewed"
     end
-    view
+    viewed
   end
   
   def feed_view

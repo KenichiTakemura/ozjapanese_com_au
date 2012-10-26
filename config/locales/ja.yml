@@ -209,9 +209,15 @@ ja:
   about_site: "サイト情報"
   contact_us: "ご意見、ご要望はこちらから"
   close: "閉じる"
-  header_message: "ブリスベン情熱サイト"
+  header_message: "ブリスベン情報"
+  passion: "情熱"
+  site: "サイト"
   please_signin: "投稿には、ログインが必要です。"
   
+  phone: :contact.phone
+  email: :contact.email
+  user_name: :contact.user_name
+  name: :user_name
   terms_of_service_agreement: "サービス利用規約"
   terms_of_personal_agreement: "個人情報管理規約"
   content: :post.content
@@ -219,15 +225,15 @@ ja:
   confirm_submit: "送信しますか？"
   post:
     id: "番号"
-    recent_post: "最近の投稿数"
-    today_post: "本日の投稿数"
-    yesterday_post: "昨日の投稿数"
+    recent_post: "最近の投稿"
+    today_post: "本日の投稿"
+    yesterday_post: "昨日の投稿"
     category: "投稿分類"
     subject: "題名"
     postedOn: "投稿日時"
     viewed: "view"
     comment: "コメント"
-    back: "一覧に戻る"
+    back: "戻る"
     cancel: "やっぱりやめる"
     no_information: "現在投稿はありません。:("
     write_something: "何か書いてください。"
@@ -237,11 +243,15 @@ ja:
     please_use_other_browsers: "Internet Explorer 以外のブラウザをご使用いただくと、もっと簡単に投稿できます。"
     valid_until: "有効期限"
     why_valid_until: "現在の有効期限は%{days}日です。"
+    post_fb_feed: "Facebookでみんなに知らせる"
+    write_new: "投稿する"
+    comment_new: "OzJapaneseでコメントを投稿する"
+    check_input: "入力情報を確認してください"
     alert:
       header: "投稿に当たっては以下の事項を守ってください。"
       body1: "投稿分類に合った内容の記載をお願いします。"
       body2: "投稿内容が不適切な内容と判断した場合は、管理者が投稿者に連絡をすることなく、即削除いたします。"
-      body3: "本サイトは返信機能を提供していないため、必要に応じて連絡先（Eメールアドレス、連絡先）などを記載してください。"
+      body3: "返信機能を提供していないため、必要に応じて連絡先（Eメールアドレス、連絡先）などを記載してください。"
       body4: "その他、投稿に関する事柄については、サービス利用規約を参照してください。"
   contact:
     user_name: "お名前"
@@ -259,6 +269,16 @@ ja:
     exit: "退会依頼（データの削除など）"
     recomment_pro: "職人を推薦する"
     phone_is_optional: "連絡先は任意入力です。スポンサーに関する問い合せの場合は、必ず入力してください。"
+    received_contact_message: "%{from}様よりコンタクトがありました。"
+    thank_you: "この度は、お問い合わせ誠にありがとうございます。数営業日内に、内容を確認しメールにて返信します。"
+    mail_from: "OzJapanese.com.au"
+    mail_admin_subject: "[OzJapanese]"
+    mail_flyer_subject: "[OzJapanese - ブリスベン情報情熱サイト]"
+    confirmation_email: "お問い合せ確認Eメール"
+    confirmation_email_no_reply: "本メールは、OzJapaneseからの自動返信Eメールです。本Eメールアドレスへの返信は行わないでください。"
+    confirmation_email_content1: "平素より、OzJapaneseのご利用、誠にありがとうございます。"
+    confirmation_email_content2: "この度は、お問い合わせ誠にありがとうございます。"
+    confirmation_email_content3: "お問い合わせ内容は以下の通りです。数営業日内に、内容を確認しメールにて返信します。"
   ozj_h1:
     title: "求人"
     desc: "人材を求めている企業、個人の方はこちら。ジョブハンター達はここを見るべし！"
@@ -290,8 +310,7 @@ ja:
   ozj_h10:
     title: "日本人ネットワーク"
     desc: "ブリスベンの日本人ネットワーク"
-  view_details: "もっと見る"
-  write_new: "投稿する"
+  view_details: "以前の投稿を見る"
   signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
   signin_with_following: "以下のアカウントでログインできます。"
   welcome: "こんにちわ。"

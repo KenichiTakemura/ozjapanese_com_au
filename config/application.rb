@@ -58,5 +58,20 @@ module OzjapaneseComAu
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # http://stackoverflow.com/questions/5267998/rails-3-field-with-errors-wrapper-changes-the-page-appearance-how-to-avoid-t
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      Rails.logger.info("field_error_proc html_tag: #{html_tag}")
+      Rails.logger.info("field_error_proc instance: #{instance}")
+      html = ""
+      if html_tag.to_s =~ /<label/
+        html += %Q|<div class="control-group error">|
+        html += html_tag.to_s.sub("class=\".\"","class=\"control-label\"")
+      elsif html_tag.to_s =~ /<input/ || html_tag.to_s =~ /<textarea/
+        html += html_tag.to_s
+        html += %Q|</div>|
+      end
+      html.html_safe
+    }
   end
 end

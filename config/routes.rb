@@ -16,7 +16,7 @@ OzjapaneseComAu::Application.routes.draw do
   resources :ozs, :only => ['index'] do
     collection do
       get :write
-      post :view
+      post :viewed
       post :carousel_viewed
       get :feed_view
     end
@@ -24,6 +24,7 @@ OzjapaneseComAu::Application.routes.draw do
   
   resources :oz_employments, :only => ["create"]
   resources :contacts, :only => ["index","new","create"]
+  resources :comments, :only => ['index',"create"]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

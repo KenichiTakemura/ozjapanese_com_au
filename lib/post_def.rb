@@ -1,4 +1,6 @@
 module PostDef
+  
+  POST_OLDER = 10
 
   POST_EXPIRY = 60
   
@@ -40,14 +42,6 @@ module PostDef
   POST_STATUS_COMPLETED = 4
   
   EMAIL_REGEXP = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
-  
-  CONTACT_BANNER = 1
-  CONTACT_GENERAL = 2
-  CONTACT_FEEDBACK = 3
-  CONTACT_ISSUE = 4
-  CONTACT_EXIT = 5
-  CONTACT_REQUEST = 6
-  CONTACT_RECOMMEND_PRO = 7
 
   def self.post_expiry
     Common.current_time + POST_EXPIRY.days

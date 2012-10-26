@@ -21,10 +21,14 @@
 		<% end %>
 	</ul>
 	<div class="span12">
-		<div id="headingCarousel" class="carousel slide">
-		<div class="carousel-inner">
+		<ul class="nav nav-tabs" id="heading_tab">
 		<% OzjapaneseStyle.heading_groups.each_with_index do |group,i| %>
-		<div class="item" data-slide="<%=i%>" id="heading_<%=i%>">
+		<li style="display:none"><a href="#heading_<%=i%>"></a></li>
+		<% end %>
+		</ul>
+		<div class="tab-content">
+		<% OzjapaneseStyle.heading_groups.each_with_index do |group,i| %>
+			<div class="tab-pane fade in" id="heading_<%=i%>">
 			<% group.each do |heading| %>
 			<div class="span5" style="margin-left:90px">
 			<h2>
@@ -68,16 +72,12 @@
 			</div>
 			</p>
 			</div>
-			<% end %>
+			<% end %>			
+			</div>
+		<% end%>
 		</div>
-		<% end %>
-		</div>
-		<a class="carousel-control left" href="#headingCarousel" data-slide="prev">&lsaquo;</a>
-		<a class="carousel-control right" href="#headingCarousel" data-slide="next">&rsaquo;</a>
-	</div>
 	<%= _script_document_ready(%Q|
-	$('\#headingCarousel').carousel({pause:"hover", interval:"60000"});
-	$('\#headingCarousel').carousel('next');
+	$('#heading_tab a:first').tab('show');
 	|)%>
 	<%= _script(%Q|
 		function _scroll_top() {
@@ -85,7 +85,7 @@
   			$('\#open_view').html('#{image_tag("ajax-loader.gif")}');
 		};
 		function _activate_heading(group_id) {
-			$('\#headingCarousel').carousel(group_id);
+			$('#heading_tab a[href="#heading_' + group_id + '"]').tab('show');
 		}
 	|)%>
 	</div>

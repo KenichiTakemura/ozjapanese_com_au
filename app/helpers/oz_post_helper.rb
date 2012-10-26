@@ -3,17 +3,30 @@ module OzPostHelper
   def post_write_new(heading, text)
     html = ""
     if current_flyer
-      html += link_to_with_icon("#{t(:write_new)}",Ozlink.heading_link(heading,"write"),"btn","","icon-pencil","#{heading}_write_new")
+      html += link_to_with_icon("#{t("post.write_new")}",Ozlink.heading_link(heading,"write"),"btn","","icon-pencil","#{heading}_write_new")
     else
       html += %Q|<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
-      html += %Q|<i class="icon-pencil icon-large"></i>#{t(:write_new)}&nbsp;<span class="caret"></span></a>|
+      html += %Q|<i class="icon-pencil icon-large"></i>#{t("post.write_new")}&nbsp;<span class="caret"></span></a>|
       html += %Q|<ul class="dropdown-menu">|
-      html += %Q|<li><div class="alert alert-info" style="z-index:10">#{t(:please_signin)}<br>#{signin(text)}</div></li></ul>|
+      html += %Q|<li><div class="alert alert-info" style="z-index:10">#{t("please_signin")}<br>#{signin(text)}</div></li></ul>|
     end
     html.html_safe
   end
   
-  def build_board_list
+  def post_comment_new(heading, text)
+    html = ""
+    if current_flyer
+      html += render :partial => "ozs/comment_form"
+    else
+      html += %Q|<div class="btn-group"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
+      html += %Q|<i class="icon-comment icon-large"></i>#{t("post.comment_new")}&nbsp;<span class="caret"></span></a>|
+      html += %Q|<ul class="dropdown-menu">|
+      html += %Q|<li><div class="alert alert-info" style="z-index:10">#{t("please_signin")}<br>#{signin(text)}</div></li></ul></div>|
+    end
+    html.html_safe
+  end 
+  
+  def build_board_list(token)
     html = %Q|<table id="okboard_table" class="table table-striped table-hover">
         <thead class=""><tr><th style="width:0px;display:none"></th><th>#{t("post.id")}</th><th>|
     html += %Q|#{t("post.subject")}</th><th>#{t("post.postedOn")}</th><th>#{t("post.viewed")}</th><th>#{t("post.comment")}</th>
@@ -23,23 +36,25 @@ module OzPostHelper
       html += %Q|<tr><td colspan="7">| + t("post.no_information")
       html += "</td><tr>"
     else
-      html += build_body_list_body
+      html += build_body_list_body(token)
     end
     html += "</tbody></table>"
+    html += %Q|<div class="btn-toolbar"><div class="btn-group">|
+    html += %Q|#{link_to_with_icon(t("post.more"),"\#","btn","","icon-shopping-cart","")}</div></div>|    
     html.html_safe
   end
 
-  def build_body_list_body
+  def build_body_list_body(token)
     html = ""
     @board_lists.each do |post|
-      html += %Q|<tr class="#{cycle("odd", "even")}">|
+      html += %Q|<tr class="#{cycle("odd", "even")} select">|
       html += %Q|<td style="width:0px;display:none">#{post.id}</td>|
       if post.is_new?
         html += %Q|<td><span class="badge badge-success"><i class="icon-star icon-white"></i>#{post.id}</span></td>|
       else
         html += %Q|<td><span class="badge badge">#{post.id}</span></td>|
       end
-      html += %Q|<td>#{link_to(post.subject,Ozlink.heading_link(@heading,"view",{:d => post.id}), :method => :post, :remote => true)}</td><td>#{post.postedDate}</td><td>#{post.views}</td><td>|
+      html += %Q|<td>#{link_to(post.subject,Ozlink.heading_link(@heading,"viewed",{:d => post.id}), :method => :post, :remote => true, :onclick => "view_post_#{token}()")}</td><td>#{post.postedDate}</td><td>#{post.views}</td><td>|
       html += %Q|<i class="icon-comment"></i>#{post.comment.size}</td>|
       html += %Q|<td>| + link_to(post.author_name,post.posted_by.flyer_url) + %Q|</td>|
     end
@@ -54,18 +69,20 @@ module OzPostHelper
    html += %Q|<span class="badge">#{post.id}</span>|
    end
    html += simple_format(post.content.body)
-   html += %Q|<h3>#{post.subject}</h3>|
+   html += %Q|<h3>#{post.subject}</h3><div class="row-fluid"><div class="span4">|
    html += "<p>#{t("post.postedOn")} #{post.postedDate}</p>"
    html += "<p>#{t("post.author")} #{show_flyer(post.posted_by)}</p>"
-   html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p>|
-   html += "</div>"
+   html += post_fb_feed(heading, post)
+   html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p></div>|
+   html += %Q|<div class="span8">#{post_comment_new(heading,:signin_with_following)}<div class="row" id="post_comment_area"></div></div>|
+   html += "</div></div>"
    html.html_safe
   end
   
   def show_posts(posts, heading, id_suffix)
     html = ""
     if posts.present?
-      html = %Q|<div id="listCarousel_#{id_suffix}" class="carousel slide" data-pause="hover" data-interval="30000"><div class="carousel-inner"><ul class="thumbnails">|
+      html = %Q|<div id="listCarousel_#{id_suffix}" class="carousel slide"><div class="carousel-inner"><ul class="thumbnails">|
       posts.each_with_index do |post,i|
         html += %Q|<div class="item" id="#{heading}-#{post.id}">|
         html += %Q|<li class="span8 offset2">|
@@ -73,7 +90,9 @@ module OzPostHelper
         html += "</li></div>"
       end
       html += %Q|</ul><a class="carousel-control left" href="\#listCarousel_#{id_suffix}" data-slide="prev">&lsaquo;</a><a class="carousel-control right" href="\#listCarousel_#{id_suffix}" data-slide="next">&rsaquo;</a></div></div>|
-      html += _script(%Q|$('\#listCarousel_#{id_suffix}').carousel('next');
+      html += _script(%Q|
+      $('\#listCarousel_#{id_suffix}').carousel({pause:"hover",interval:30000});
+      $('\#listCarousel_#{id_suffix}').carousel('next');
       $('\#listCarousel_#{id_suffix}').bind('slid', function() {
         $.post('ozs/carousel_viewed',{p : $("\#listCarousel_#{id_suffix} .active").attr('id')});
       });|)
@@ -81,8 +100,32 @@ module OzPostHelper
     html.html_safe
   end
   
-  def render_a_post(post)
-    
-  end
+  def post_fb_feed(heading, post)
+    html = ""
+    if current_flyer
+      html = %Q|<p>#{facebook}&nbsp;<a href="\#" onclick='postToFeed(); return false;'>#{t("post.post_fb_feed")}</a></p>|
+      html += %Q|<p id='msg'></p>|
+      #http://developers.facebook.com/docs/reference/dialogs/feed/
+      html += _script(%Q|
+        function postToFeed() {
+          // calling the API ...
+          var obj = {
+            method: 'feed',
+            link: '#{root_url} + #{Ozlink.heading_link(heading,"view", {:d => post.id})}',
+            source: '#{root_url}',
+            name: '#{post.subject}',
+            caption: 'Reference Documentation',
+            description: 'Using Dialogs to interact with users.'
+          };
   
+          function callback(response) {
+            document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+          }
+  
+          FB.ui(obj, callback);
+        }
+      |)
+    end
+    html.html_safe
+  end  
 end

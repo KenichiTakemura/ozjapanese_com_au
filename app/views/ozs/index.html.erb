@@ -1,19 +1,38 @@
-<div class="row">
-	<div class="row">
-		<%= show_notice%>
-		<div class="pull-right">
-			<div class="btn-toolbar">
-				<div class="btn-group">
-					<%= link_to_with_icon("#{t("post.back")}",root_path,"btn","","icon-home","")%>
-				</div>
-				<div class="btn-group">
-					<%= post_write_new(@heading, :signin_with_following)%>
-				</div>
+<div class="container-fluid">
+<%= show_notice%>
+<div class="row-fluid">
+	<div class="span6">
+	<% token = Common.uniqe_token %>
+	<%= build_board_list(token) %>
+	<%= _script(%Q|
+	function view_post_#{token}() {
+		$('\#side_post_area').html('#{image_tag("ajax-loader.gif")}');
+	}
+	function comment_post_#{token}() {
+		$('\#post_comment_area').html('#{image_tag("ajax-loader.gif")}');
+	}
+	|)%>
+	</div>
+	<div class="span6">
+		<div id="side_post_bar">
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<%= link_to_with_icon("#{t("post.back")}",root_path,"btn","","icon-home","")%>
+			</div>
+			<div class="btn-group">
+				<%= post_write_new(@heading, :signin_with_following)%>
 			</div>
 		</div>
+		<div id="side_post_area">
+		<%= show_a_post(@board_lists.first, @heading)%>
+		</div>
 	</div>
-	<div class="row">
-		<%= show_posts(@board_lists, Common.uniqe_token)%>
+	<style>
+		#side_post_bar {
+			position: fixed;
+			top: 50px;
+		}
+		
+	</style>
 	</div>
-	<%= build_board_list%>
 </div>

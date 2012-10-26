@@ -15,7 +15,7 @@
 	<%= f.label :body, t("contact.content"), :class => "" %>
 	<%= f.text_area :body, :rows => "10", :style => "width:400px" %>
 	<div class="left">
-		<%= f.submit t("contact.send"), :class => "btn btn-inverse", :data => { :confirm => t('confirm_submit') } %>
+		<%= f.submit t("contact.send"), :class => "btn btn-inverse", :remote => true , :method => :post, :data => { :confirm => t('confirm_submit') } %>
 	</div>
 	<% end %>
 </div>
