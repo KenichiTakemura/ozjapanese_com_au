@@ -1,16 +1,9 @@
 class Contact < ActiveRecord::Base
   
-  CONTACT_BANNER = 1
-  CONTACT_GENERAL = 2
-  CONTACT_FEEDBACK = 3
-  CONTACT_ISSUE = 4
-  CONTACT_EXIT = 5
-  CONTACT_REQUEST = 6
-  CONTACT_RECOMMEND_PRO = 7
+  #ADMIN_EMAIL = "ktakemur@redhat.com"
+  ADMIN_EMAIL = "kenichi_takemura1976@yahoo.com"
   
-  ADMIN_EMAIL = "ktakemur@redhat.com"
-  
-  def admin_email
+  def self.admin_email
     ADMIN_EMAIL
   end
 
@@ -21,7 +14,8 @@ class Contact < ActiveRecord::Base
     "contact.request",
     "contact.issue",
     "contact.exit",
-    "contact.recomment_pro"
+    "contact.recomment_pro",
+    "contact.never_agree"
     ]
 
   # belongs_to
@@ -42,6 +36,10 @@ class Contact < ActiveRecord::Base
       list.push([I18n.t(c), i])
     end
     list
+  end
+  
+  def self.type?(letter)
+    CONTACT_lIST.index letter
   end
   
   def title(type)

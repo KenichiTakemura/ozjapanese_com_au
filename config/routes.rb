@@ -22,6 +22,8 @@ OzjapaneseComAu::Application.routes.draw do
     end
   end
   
+  resources :terms, :only => ["index","create"]
+  
   resources :oz_employments, :only => ["create"]
   resources :contacts, :only => ["index","new","create"]
   resources :comments, :only => ['index'] do

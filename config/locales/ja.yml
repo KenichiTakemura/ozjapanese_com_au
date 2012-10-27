@@ -223,6 +223,8 @@ ja:
   content: :post.content
   subject: :post.subject
   confirm_submit: "送信しますか？"
+  agree: "同意する"
+  never_agree: "同意できない"
   post:
     id: "番号"
     recent_post: "最近の投稿"
@@ -269,6 +271,7 @@ ja:
     issue: "サイトの問題を報告"
     exit: "退会依頼（データの削除など）"
     recomment_pro: "職人を推薦する"
+    never_agree: "規約に同意できない"
     phone_is_optional: "連絡先は任意入力です。スポンサーに関する問い合せの場合は、必ず入力してください。"
     received_contact_message: "%{from}様よりコンタクトがありました。"
     thank_you: "この度は、お問い合わせ誠にありがとうございます。数営業日内に、内容を確認しメールにて返信します。"
@@ -280,6 +283,9 @@ ja:
     confirmation_email_content1: "平素より、OzJapaneseのご利用、誠にありがとうございます。"
     confirmation_email_content2: "この度は、お問い合わせ誠にありがとうございます。"
     confirmation_email_content3: "お問い合わせ内容は以下の通りです。数営業日内に、内容を確認しメールにて返信します。"
+    new_flyer_joined: "%{from}様が加入しました。"
+    provider: "プロバイダー"
+    date_joined: "加入日"
   ozj_h1:
     title: "求人"
     desc: "人材を求めている企業、個人の方はこちら。ジョブハンター達はここを見るべし！"
@@ -320,5 +326,8 @@ ja:
   successfully_created: "投稿が追加されました。"
   devise:
     omniauth_callbacks:
+      success:
+        signed_in: "ログインに成功しました。"
+        please_agree: "ログインに成功しましたが、本サイトの利用にあたり、サービス利用規約と個人情報管理規約への同意をお願いします。既に同意済みの場合でも、異なるアカウントでログインする場合は、再度同意が必要です。"
       flyer:
         failure: "ログインに失敗しました。OzJapanese（本サイト）からのアクセスを許可を求められた場合は、許可が必要です。"

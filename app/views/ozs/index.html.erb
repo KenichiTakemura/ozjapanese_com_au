@@ -25,12 +25,14 @@
 			</div>
 		</div>
 		<div class="row-fluid">
-			<div class="span8" id="side_post_area">
-			<%= show_a_post(@board_lists.first, @heading)%>
-			</div>
-			<div class="span4" id="side_comment_thread">
-			<%= show_comment_thread(@board_lists.first, @heading)%>
-			</div>
+			<% if @board_lists.present? %>
+				<div class="span8" id="side_post_area">
+				<%= show_a_post(@board_lists.first, @heading)%>
+				</div>
+				<div class="span4" id="side_comment_thread">
+				<%= show_comment_thread(@board_lists.first, @heading)%>
+				</div>
+			<% end %>
 		</div>
 	</div>
 	<style>

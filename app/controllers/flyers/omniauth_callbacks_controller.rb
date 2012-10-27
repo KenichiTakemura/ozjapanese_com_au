@@ -4,8 +4,16 @@ class Flyers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = Flyer.find_for_facebook_oauth(request.env["omniauth.auth"], current_flyer)
 
     if @user.present? && @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      if @user.agreed_on
+        sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      else
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success.please_agree", :kind => "Facebook"
+        token = Devise.friendly_token
+        session["ozjapanese.terms.token"] = token
+        @user.update_attribute(:agree_token, token)
+        redirect_to terms_path(:token => token)
+      end
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       #redirect_to new_flyer_registration_url

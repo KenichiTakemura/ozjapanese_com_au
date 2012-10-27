@@ -32,7 +32,7 @@ class Comment < ActiveRecord::Base
   end
 
   def postedDate
-    Common.date_format_md(created_at)
+    Common.date_format_ymdhm(created_at)
   end
   
   scope :desc, :order => 'id DESC'

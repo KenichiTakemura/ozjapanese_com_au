@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024020350) do
+ActiveRecord::Schema.define(:version => 20121027114228) do
 
   create_table "comments", :force => true do |t|
     t.string   "status",                           :null => false
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(:version => 20121024020350) do
     t.string   "flyer_name"
     t.string   "flyer_image"
     t.string   "flyer_url"
+    t.datetime "agreed_on"
+    t.string   "agree_token"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -285,6 +287,11 @@ ActiveRecord::Schema.define(:version => 20121024020350) do
     t.string   "rolable_type"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "terms", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "top_feed_lists", :force => true do |t|

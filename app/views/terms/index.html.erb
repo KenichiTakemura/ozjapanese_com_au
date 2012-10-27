@@ -1,0 +1,22 @@
+<div class="container-fluid">
+<%= show_notice%>
+<div class="row-fluid">
+	<div class="span6">
+		<label><%=t("terms_of_service_agreement")%></label>
+		<textarea style="width:100%;height:300px" readonly><%= Terms.terms_of_service %></textarea>
+	</div>
+	<div class="span6">
+		<label><%=t("terms_of_personal_agreement")%></label>
+		<textarea style="width:100%;height:300px" readonly><%= Terms.terms_of_personal_info %></textarea>
+	</div>
+	<div class="row-fluid">
+
+	<%= form_for(@term) do |f| %>
+	<%= hidden_field_tag :token, @token %> 
+	<div class="left">
+		<%= f.submit t("agree"), :class => "btn btn-inverse"%>
+		<%= link_to t("never_agree"), about_ozmains_path(:t => "contact", :contact_type => Contact.type?("contact.never_agree")), :class => "btn btn" %>
+	</div>
+	<% end %>
+	</div>
+</div>

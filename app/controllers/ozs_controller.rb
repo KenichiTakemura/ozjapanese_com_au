@@ -17,10 +17,12 @@ class OzsController < OzController
     raise "Bad Board Request" if model.nil?
     @board_lists = model.search_older_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
     breadcrumb :heading, @heading
-    @comment = Comment.new
-    @comment.commented_id = @board_lists.first.id
-    @comment.commented_type = @heading
-    @comments = Comment.comment_for(@board_lists.first.id).limit(PostDef::NUMBER_OF_COMMENT)
+    if @board_lists.present?
+      @comment = Comment.new
+      @comment.commented_id = @board_lists.first.id
+      @comment.commented_type = @heading
+      @comments = Comment.comment_for(@board_lists.first.id).limit(PostDef::NUMBER_OF_COMMENT)
+    end
     respond_to do |format|
       format.html # index.html.erb
     end

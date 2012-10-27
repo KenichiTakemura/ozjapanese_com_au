@@ -134,5 +134,16 @@ class Flyer < ActiveRecord::Base
     self.provider.eql?(PROVIDERS[:google])
   end
 
+  def agreed?
+    self.agreed_on > Terms.terms_date
+  end
+  
+  def agree
+    self.update_attribute(:agreed_on, Common.current_time)
+  end
+  
+  def joinedOn
+    Common.date_format_ymdhm(agreed_on)
+  end
 
 end

@@ -74,5 +74,5 @@ module OzjapaneseStyle
     HTML
     html.html_safe
   end
-
+  
 end
