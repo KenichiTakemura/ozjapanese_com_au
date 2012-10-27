@@ -1,2 +1,3 @@
 $('#post_comment_area').html('');
 $('#comment_area').val('');
+$('#side_comment_thread').html("<%= escape_javascript(show_comment_thread(@post, @heading)) %>")

@@ -20,6 +20,7 @@ class OzsController < OzController
     @comment = Comment.new
     @comment.commented_id = @board_lists.first.id
     @comment.commented_type = @heading
+    @comments = Comment.comment_for(@board_lists.first.id).limit(PostDef::NUMBER_OF_COMMENT)
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -43,6 +44,7 @@ class OzsController < OzController
     @comment = Comment.new
     @comment.commented_id = @post.id
     @comment.commented_type = @heading
+    @comments = Comment.comment_for(@post.id).limit(PostDef::NUMBER_OF_COMMENT)
     @post
   end
   

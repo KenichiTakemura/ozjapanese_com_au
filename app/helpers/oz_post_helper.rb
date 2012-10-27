@@ -16,7 +16,7 @@ module OzPostHelper
   def post_comment_new(heading, text)
     html = ""
     if current_flyer
-      html += render :partial => "ozs/comment_form"
+      html += render :partial => "comments/comment_form"
     else
       html += %Q|<div class="btn-group dropup"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
       html += %Q|<i class="icon-comment icon-large"></i>#{t("post.comment_new")}&nbsp;<span class="caret"></span></a>|

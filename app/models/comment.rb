@@ -35,6 +35,13 @@ class Comment < ActiveRecord::Base
     Common.date_format_md(created_at)
   end
   
+  scope :desc, :order => 'id DESC'
+  scope :search_by_post, lambda { |post| where("commented_id = ?", post)}
+  
+  scope :comment_for, lambda { |post| search_by_post(post).desc }
+  
+  # ---
+  
   def like
     update_attribute(:likes, likes + 1)
   end

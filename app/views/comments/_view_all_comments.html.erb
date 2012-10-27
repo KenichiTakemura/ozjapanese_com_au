@@ -1,0 +1,25 @@
+<% id = Common.uniqe_token %>
+<div class="btn-toolbar">
+	<div class="btn-group">
+	<a href="#view_comments_for_<%=id%>", role="button", class="btn btn-small" data-toggle="modal" id="view_comments_modal_<%= id%>"><i class="icon-info-sign"></i><%= t("post.view_all_comment")%> &raquo;</a>
+	</div>
+</div>
+<div class="modal hide fade" id="view_comments_for_<%=id%>" tabindex="-1" role="dialog" aria-labelledby="view_comments_for_<%=id%>_label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			×
+		</button>
+		<h3 id="view_comments_for_<%=id%>_label"><%= post.subject %></h3>
+	</div>
+	<div class="modal-body" id="view_comments_for_post_<%=post.id%>">
+		<%= image_tag("ajax-loader.gif")%>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">
+			<%= t(:close)%>
+		</button>
+	</div>
+	<%= _script(%Q|$('\#view_comments_modal_#{id}').click(function(){| +
+		Ajax.post(view_all_comments_path,
+		%Q|v: '#{Ozlink.base(heading)}', d: '#{Ozlink.param_enc(post.id)}'|) + %Q|})|) %>
+</div>

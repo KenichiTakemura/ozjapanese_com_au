@@ -7,6 +7,7 @@
 	<%= _script(%Q|
 	function view_post_#{token}() {
 		$('\#side_post_area').html('#{image_tag("ajax-loader.gif")}');
+		$('\#side_comment_thread').html('');
 	}
 	function comment_post_#{token}() {
 		$('\#post_comment_area').html('#{image_tag("ajax-loader.gif")}');
@@ -34,7 +35,7 @@
 	</div>
 	<style>
 		#side_post_bar {
-			position: fixed;
+			position: relative;
 			top: 50px;
 		}
 		

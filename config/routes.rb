@@ -27,6 +27,7 @@ OzjapaneseComAu::Application.routes.draw do
   resources :comments, :only => ['index'] do
   collection do
       post :post_comment
+      post :view_all
     end
   end
 
