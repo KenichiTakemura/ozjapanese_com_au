@@ -40,7 +40,10 @@ module OzPostHelper
     end
     html += "</tbody></table>"
     html += %Q|<div class="btn-toolbar"><div class="btn-group">|
-    html += %Q|#{link_to_with_icon(t("post.more"),"\#","btn","","icon-shopping-cart","")}</div></div>|    
+    if @board_lists.present?
+      html += %Q|#{link_to_with_icon(t("post.more"),"\#","btn","","icon-shopping-cart","")}|    
+    end
+    html += "</div></div>"
     html.html_safe
   end
 
@@ -69,13 +72,13 @@ module OzPostHelper
    html += %Q|<span class="badge">#{post.id}</span>|
    end
    html += simple_format(post.content.body)
-   html += %Q|<h3>#{post.subject}</h3><div class="row-fluid"><div class="span4">|
+   html += %Q|<h3>#{post.subject}</h3><div class="row-fluid">|
    html += "<p>#{t("post.postedOn")} #{post.postedDate}</p>"
    html += "<p>#{t("post.author")} #{show_flyer(post.posted_by)}</p>"
    html += post_fb_feed(heading, post)
-   html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p></div>|
-   html += %Q|<div class="span8">#{post_comment_new(heading,:signin_with_following)}<div id="post_comment_area"></div></div>|
-   html += "</div></div>"
+   html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p>|
+   html += %Q|<div class="row-fluid">#{post_comment_new(heading,:signin_with_following)}<div id="post_comment_area"></div></div>|
+   html += "</div>"
    html.html_safe
   end
   

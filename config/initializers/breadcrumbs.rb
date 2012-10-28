@@ -9,8 +9,23 @@ Gretel::Crumbs.layout do
   end
   
   crumb :heading do |heading|
-     link "#{OzjapaneseStyle.heading_name(heading)}", root_path
+     link I18n.t("#{heading}.title"), Ozlink.heading_link(heading,"newer")
      parent :root
+  end
+  
+  crumb :older do |heading|
+     link I18n.t("post.older"), Ozlink.heading_link(heading,"older")
+     parent :heading, heading
+  end
+
+  crumb :newer do |heading|
+     link I18n.t("post.newer"), Ozlink.heading_link(heading,"newer")
+     parent :heading, heading
+  end
+
+  crumb :write do |heading|
+    link I18n.t("post.write_new"), Ozlink.heading_link(heading,"write")
+    parent :heading, heading
   end
   
   # crumb :project_issues do |project|

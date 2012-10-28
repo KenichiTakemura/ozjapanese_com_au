@@ -1,6 +1,7 @@
 class OzsController < OzController
   
   before_filter :_before_, :except => [:carousel_viewed]
+  before_filter :authenticate_flyer!, :only => [:write]
 
   def _before_
     raise "Bad Request" if params[:v].nil?
@@ -12,11 +13,11 @@ class OzsController < OzController
     @heading = @board.to_sym
   end
   
-  def index
+  def older
     model = _model(@heading)
     raise "Bad Board Request" if model.nil?
     @board_lists = model.search_older_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
-    breadcrumb :heading, @heading
+    breadcrumb :older, @heading
     if @board_lists.present?
       @comment = Comment.new
       @comment.commented_id = @board_lists.first.id
@@ -28,18 +29,43 @@ class OzsController < OzController
     end
   end
   
-  def write
-    if !current_flyer
-      session["flyer_return_to"] = request.original_url
-      redirect_to root_path
+  def index
+    newer
+  end
+  
+  def newer
+    model = _model(@heading)
+    raise "Bad Board Request" if model.nil?
+    @board_lists = model.search_newer_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
+    breadcrumb :heading, @heading
+    if @board_lists.present?
+      @comment = Comment.new
+      @comment.commented_id = @board_lists.first.id
+      @comment.commented_type = @heading
+      @comments = Comment.comment_for(@board_lists.first.id).limit(PostDef::NUMBER_OF_COMMENT)
     end
+    breadcrumb :newer, @heading
+    respond_to do |format|
+      format.html # index.html.erb
+    end 
+  end
+  
+  def write
     @post = _model(@heading).new
     @post.write_at = Common.current_time.to_i
     @post.build_content
     @post.valid_until = PostDef.post_expiry
+    breadcrumb :write, @heading
     @post
   end
   
+  # non-Ajax Request
+  def link_viewed
+    viewed
+    
+  end
+  
+  # Ajax
   def viewed
     @post = _model(@heading).find(@@board_id)
     @post.viewed
@@ -62,6 +88,7 @@ class OzsController < OzController
   
   def feed_view
     feed_type = params[:f].present? ? Ozlink.param_to_s(params[:f]) : nil
+    logger.debug("feed_view feed_type: #{feed_type}")
     raise "Bad Feed View Request" if !feed_type.present?
     model_name = OzjapaneseStyle.heading_model_name(@heading)
     case feed_type
@@ -74,12 +101,13 @@ class OzsController < OzController
      else
        raise "Bad feed type #{feed_type}"
     end
-    @comment = Comment.new
-    @posts = feed.collect{ |f| f.feeded_to }
-    logger.debug("feed_view: #{@posts.size}")
-    @comment.commented_id = @posts.first.id
-    @comment.commented_type = @heading
-
+    if feed.present?
+      @comment = Comment.new
+      @posts = feed.collect{ |f| f.feeded_to }
+      logger.debug("feed_view: #{@posts.size}")
+      @comment.commented_id = @posts.first.id
+      @comment.commented_type = @heading
+    end
   end
   
   

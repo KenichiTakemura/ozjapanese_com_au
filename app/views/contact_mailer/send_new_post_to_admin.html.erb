@@ -1,0 +1,14 @@
+<%= content_tag(:p, t("post.category")) %>
+<%= I18n.t("#{@heading}.title") %>
+<%= content_tag(:p, t("post.id")) %>
+<%= @post.id %>
+<%= content_tag(:p, t("contact.subject")) %>
+<%= raw(@post.subject) %>
+<%= content_tag(:p, t("contact.content")) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<%= raw(@post.content.body) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<%= content_tag(:p, t("contact.name")) %> 
+<%= content_tag(:p, @post.posted_by.flyer_name) %>
+<%= content_tag(:p, t("contact.email")) %>
+<%= content_tag(:p, @post.posted_by.email) %>

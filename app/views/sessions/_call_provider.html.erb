@@ -1,0 +1,12 @@
+<% case @provider
+ when Flyer::PROVIDERS[:facebook] %>
+<script type="text/javascript">
+    window.location.href="<%=flyer_omniauth_authorize_path(:facebook)%>"
+</script>
+<% when Flyer::PROVIDERS[:google] %>
+<script type="text/javascript">
+    window.location.href="<%=flyer_omniauth_authorize_path(:google_oauth2)%>"
+</script>
+<% else %>
+<% raise "Bad Provider"%>
+<% end %>

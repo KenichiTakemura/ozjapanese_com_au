@@ -5,8 +5,13 @@ class Flyers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.present? && @user.persisted?
       if @user.agreed_on
+        logger.info("facebook already agreed remember_me: #{session[:remember_me]}")
+        if session[:remember_me]
+          @user.remember_me = true
+        end
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Facebook"
         sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+        #set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       else
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success.please_agree", :kind => "Facebook"
         token = Devise.friendly_token
@@ -26,8 +31,16 @@ class Flyers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user = Flyer.find_for_google_oauth2(request.env["omniauth.auth"], current_flyer)
 
       if @user.present? && @user.persisted?
-        flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
-        sign_in_and_redirect @user, :event => :authentication
+        if @user.agreed_on
+          flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Google"
+          sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+        else
+          flash[:notice] = I18n.t "devise.omniauth_callbacks.success.please_agree", :kind => "Google"
+          token = Devise.friendly_token
+          session["ozjapanese.terms.token"] = token
+          @user.update_attribute(:agree_token, token)
+          redirect_to terms_path(:token => token)
+        end   
       else
         session["devise.google_data"] = request.env["omniauth.auth"]
         #redirect_to new_flyer_registration_url

@@ -12,6 +12,10 @@ OzEmployment.destroy_all
 # Sample Data
 # Not for Production
 flyer = Flyer.first
+if !flyer.present?
+  flyer = Flyer.create(:email => "ktakemur@localhost.com", :password => 'kenichi123',
+ :password_confirmation => 'kenichi123', :flyer_name => "Kenichi Takemura", :provider => Flyer::PROVIDERS[:ozjapanese])
+end
 
 expiry = Common.current_time + 60.days
 subject = "法相・滝氏、午後に認証式＝拉致相は官房長官兼務"

@@ -7,6 +7,12 @@ OzjapaneseComAu::Application.routes.draw do
     end
   end
   
+  resources :sessions, :only => [] do
+    collection do
+      post :signin
+    end
+  end
+  
   devise_for :flyers, :controllers => { :omniauth_callbacks => "flyers/omniauth_callbacks" }
   #devise_scope :flyers do
   #  get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
@@ -15,6 +21,8 @@ OzjapaneseComAu::Application.routes.draw do
   
   resources :ozs, :only => ['index'] do
     collection do
+      get :older
+      get :newer
       get :write
       post :viewed
       post :carousel_viewed
@@ -25,6 +33,15 @@ OzjapaneseComAu::Application.routes.draw do
   resources :terms, :only => ["index","create"]
   
   resources :oz_employments, :only => ["create"]
+  resources :oz_employers, :only => ["create"]
+  resources :oz_sell_goods, :only => ["create"]
+  resources :oz_buy_goods, :only => ["create"]
+  resources :oz_estate_share_rents, :only => ["create"]
+  resources :oz_info_events, :only => ["create"]
+  resources :oz_people_pros, :only => ["create"]
+  resources :oz_info_living_smarts, :only => ["create"]
+  resources :oz_info_living_qnas, :only => ["create"]
+  
   resources :contacts, :only => ["index","new","create"]
   resources :comments, :only => ['index'] do
   collection do
@@ -32,6 +49,8 @@ OzjapaneseComAu::Application.routes.draw do
       post :view_all
     end
   end
+  
+  match 'counters/batch', :via => :get
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

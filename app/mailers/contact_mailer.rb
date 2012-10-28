@@ -1,6 +1,16 @@
 class ContactMailer < ActionMailer::Base
   default :from => "#{I18n.t("contact.mail_from")} <do_not_reply@ozjapanese.com.au>"
   
+  def send_new_post_to_admin(heading, post)
+    to = Contact.admin_email
+    subject = "#{I18n.t("contact.mail_admin_subject")}" + " [#{I18n.t("contact.new_post")}] " + I18n.t("#{heading}.title") + " ID: " + post.id.to_s
+    logger.info("email is besing sent to #{to}")
+    @post = post
+    @heading = heading
+    mail(:to => to,
+         :subject => subject)
+  end
+  
   def send_contact_to_admin(contact)
     to = Contact.admin_email
     subject = "#{I18n.t("contact.mail_admin_subject")}"
@@ -29,11 +39,24 @@ class ContactMailer < ActionMailer::Base
       to = Contact.admin_email
     end
     logger.info("email is besing sent to #{to}")
-    subject = "#{I18n.t("contact.mail_flyer_subject")}"
+    subject = "#{I18n.t("contact.mail_flyer_subject")} "
     @subject = "[#{contact.title(contact.contact_type)}]"
     subject += @subject
     subject += t("contact.confirmation_email")
     @contact = contact
+    mail(:to => to,
+         :subject => subject)
+  end
+  
+  def send_signup_to_flyer(flyer)
+    to = flyer.email
+    if OzjapaneseComAu::Application.config.is_debug
+      to = Contact.admin_email
+    end
+    logger.info("email is besing sent to #{to}")
+    subject = "#{I18n.t("contact.mail_flyer_subject")} "
+    subject += t("contact.signup_confirmation_email")
+    @flyer = flyer
     mail(:to => to,
          :subject => subject)
   end

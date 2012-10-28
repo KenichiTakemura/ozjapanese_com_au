@@ -9,11 +9,13 @@
 	</div>
 	<%= f.label :phone, t("contact.phone"), :class => "" %>
 	<%= f.telephone_field :phone, :class => "input-medium" %>
-	<span class="help-block"><%=t("contact.phone_is_optional")%></span>
+	<span class="help-inline"><p class="text-success"><%=t("contact.phone_is_optional")%></p></span>
 	<%= f.label :contact_type, t("contact.subject"), :class => "" %>
 	<%= f.select :contact_type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.contact_type) %>
+	<span class="help-inline"><p class="text-success"><%=t("contact.select_contact_type")%></p></span>
 	<%= f.label :body, t("contact.content"), :class => "" %>
 	<%= f.text_area :body, :rows => "10", :style => "width:400px" %>
+		<span class="help-inline"><p class="text-success"><%=t("contact.describe_detail")%></p></span>
 	<div class="left">
 		<%= f.submit t("contact.send"), :class => "btn btn-inverse", :remote => true , :method => :post, :data => { :confirm => t('confirm_submit') } %>
 	</div>

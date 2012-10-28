@@ -1,0 +1,53 @@
+<div class="container-fluid">
+<%= show_notice%>
+<div class="row-fluid">
+	<div class="span6">
+	<% token = Common.uniqe_token %>
+	<%= build_board_list(token) %>
+	<%= _script(%Q|
+	function view_post_#{token}() {
+		$('\#side_post_area').html('#{image_tag("ajax-loader.gif")}');
+		$('\#side_comment_thread').html('');
+	}
+	function comment_post_#{token}() {
+		$('\#post_comment_area').html('#{image_tag("ajax-loader.gif")}');
+	}
+	|)%>
+	</div>
+	<div class="span6">
+		<div id="side_post_bar">
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<%= link_to_with_icon("#{t("post.newer")}",Ozlink.heading_link(@heading,"newer"),"btn","","icon-plus","")%>
+			</div>
+			<div class="btn-group">
+				<%= link_to_with_icon("#{t("post.older")}",Ozlink.heading_link(@heading,"older"),"btn","","icon-tag","")%>
+			</div>
+			<div class="btn-group">
+				<%= link_to_with_icon("#{t("post.back")}",root_path,"btn","","icon-home","")%>
+			</div>
+			<div class="btn-group">
+				<%= post_write_new(@heading, :signin_with_following)%>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<% if @board_lists.present? %>
+				<div class="span8" id="side_post_area">
+				<%= show_a_post(@board_lists.first, @heading)%>
+				</div>
+				<div class="span4" id="side_comment_thread">
+				<%= show_comment_thread(@board_lists.first, @heading)%>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<style>
+		#side_post_bar {
+			position: fix;
+			top: 50px;
+		}
+		
+	</style>
+	</div>
+</div>
+</div>

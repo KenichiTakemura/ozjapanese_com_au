@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027114228) do
+ActiveRecord::Schema.define(:version => 20121028032450) do
 
   create_table "comments", :force => true do |t|
     t.string   "status",                           :null => false
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(:version => 20121027114228) do
     t.string   "contented_type"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+  end
+
+  create_table "daily_hits", :force => true do |t|
+    t.datetime "day",                       :null => false
+    t.integer  "hit",        :default => 0, :null => false
+    t.integer  "user_hit",   :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "flyers", :force => true do |t|

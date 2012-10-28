@@ -1,0 +1,48 @@
+<div class="modal hide fade" id="ozj_signin_modal" tabindex="-1" role="dialog" aria-labelledby="ozj_signin_modal_label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			×
+		</button>
+		<h3 id="ozj_signin_modal_label"><%= t("signin_with")%></h3>
+	</div>
+	<div class="modal-body">
+		<ul class="thumbnails">
+			<li class="span5">
+				<div class="thumbnail">	
+					<h6><%= facebook %> <%=t("signin_with_facebook")%></h6>
+					<p><%=t("signin_with_how", :provider => "Facebook")%></p>
+					<p>
+					<label class="checkbox">
+					<input type="checkbox" value="" id="remember_me">
+					<%=t("signin_remember_me")%>
+					</label>
+					</p>
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="facebook_signin"><%=t("process_signin")%></button>
+					<div class="facebook_signin_progress"></div>
+					<%= _script(%Q|$('\#facebook_signin').click(function() {
+						$('.facebook_signin_progress').html('#{image_tag("ajax-loader.gif")}');| +
+						Ajax.post(signin_sessions_path,%Q|remember_me:$('\#remember_me').attr("checked"),provider:'#{Flyer::PROVIDERS[:facebook]}'|) +
+						%Q|})|)%>
+				</div>
+			</li>
+			<li class="span5">
+				<div class="thumbnail">			
+					<h6><%= google %> <%=t("signin_with_google")%></h6>
+					<p><%=t("signin_with_how", :provider => "Google")%></p>
+					<p>
+					<label class="checkbox">
+					<input type="checkbox" value="">
+					<%=t("signin_remember_me")%>
+					</label>
+					</p>
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>"><%=t("process_signin")%></button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">
+			<%= t(:close)%>
+		</button>
+	</div>
+</div>

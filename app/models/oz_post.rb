@@ -125,7 +125,7 @@ class OzPost < ActiveRecord::Base
   scope :search_no_order, lambda { |limit| valid_post.limit(limit)}
   scope :search, lambda { |limit| search_no_order(limit).desc }
   scope :search_older_than, lambda { |limit,day| post_search_by_time(day,-1).search_no_order(limit).desc }
-
+  scope :search_newer_than, lambda { |limit,day| post_search_by_time(-1,day).search_no_order(limit).desc }
   protected
 
   scope :asc, :order => 'id ASC'

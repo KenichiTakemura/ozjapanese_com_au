@@ -4,7 +4,7 @@ class Flyer < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   #devise :database_authenticatable, :registerable,
   #       :recoverable, :rememberable, :trackable, :validatable
-  devise :database_authenticatable, :registerable, :trackable, :omniauthable
+  devise :database_authenticatable, :rememberable, :registerable, :trackable, :omniauthable
   # Setup accessible (or protected) attributes for your model
   
   # Association
@@ -22,6 +22,7 @@ class Flyer < ActiveRecord::Base
   PROVIDERS = Hash.new
   PROVIDERS[:facebook] = "facebook"
   PROVIDERS[:google] = "google_oauth2"
+  PROVIDERS[:ozjapanese] = "ozjapanese"
   
   def init_role
     OzjapaneseStyle.headings.each do |page|

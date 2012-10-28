@@ -248,8 +248,12 @@ ja:
     post_fb_feed: "Facebookでみんなに知らせる"
     write_new: "投稿する"
     comment_new: "OzJapaneseにコメントを投稿する"
-    comment_facebook_new: "Facebookにもコメントを投稿する"
+    comment_facebook_new: "Facebookにも同時にコメントを投稿する;)"
     view_all_comment: "コメントを全て表示"
+    more: "さらに表示"
+    older: "以前の投稿"
+    newer: "最近の投稿"
+    hot: "最新の投稿"
     alert:
       header: "投稿に当たっては以下の事項を守ってください。"
       body1: "投稿分類に合った内容の記載をお願いします。"
@@ -258,6 +262,7 @@ ja:
       body4: "その他、投稿に関する事柄については、サービス利用規約を参照してください。"
   contact:
     user_name: "お名前"
+    name: :user_name
     email: "Eメールアドレス"
     phone: "連絡先（モバイル）"
     subject: "題名"
@@ -273,17 +278,27 @@ ja:
     recomment_pro: "職人を推薦する"
     never_agree: "規約に同意できない"
     phone_is_optional: "連絡先は任意入力です。スポンサーに関する問い合せの場合は、必ず入力してください。"
+    select_contact_type: "お問い合せ内容に合った、題名を選択してください。"
+    describe_detail: "お手数ですが、できる限り、詳細に記載してください。"
     received_contact_message: "%{from}様よりコンタクトがありました。"
     thank_you: "この度は、お問い合わせ誠にありがとうございます。数営業日内に、内容を確認しメールにて返信します。"
     mail_from: "OzJapanese.com.au"
     mail_admin_subject: "[OzJapanese]"
     mail_flyer_subject: "[OzJapanese - ブリスベン情報情熱サイト]"
     confirmation_email: "お問い合せ確認Eメール"
+    signup_confirmation_email: "加入完了Eメール"
     confirmation_email_no_reply: "本メールは、OzJapaneseからの自動返信Eメールです。本Eメールアドレスへの返信は行わないでください。"
     confirmation_email_content1: "平素より、OzJapaneseのご利用、誠にありがとうございます。"
     confirmation_email_content2: "この度は、お問い合わせ誠にありがとうございます。"
     confirmation_email_content3: "お問い合わせ内容は以下の通りです。数営業日内に、内容を確認しメールにて返信します。"
+    signup_confirmation_email_content1: "この度は、OzJapaneseのご利用、誠にありがとうございます。"
+    signup_confirmation_email_content2: "OzJapaneseへの加入が完了しました。"
+    signup_confirmation_email_content3: "サイトへのお問い合わせは、以下のリンクからお願いします。"
+    confirmation_email_content3: "お問い合わせ内容は以下の通りです。数営業日内に、内容を確認しメールにて返信します。"   
     new_flyer_joined: "%{from}様が加入しました。"
+    welcome: "%{from} 様"
+    new_post: "新規投稿"
+    welcome_new_flyer_joined: "OzJapaneseの加入が完了しました。"
     provider: "プロバイダー"
     date_joined: "加入日"
   ozj_h1:
@@ -293,33 +308,46 @@ ja:
   ozj_h2:
     title: "求職"
     desc: "自分を売り込みたい方はこちら。技術より英語に自信がある方はここに登録すべし！"
+  OzEmployer: :ozj_h2.title
   ozj_h3:
     title: "売ります"
     desc: "よくある売りますと同じ"
+  OzSellGood: :ozj_h3.title
   ozj_h4:
     title: "買います"
     desc: "よくある買いますと同じ"
+  OzBuyGood: :ozj_h4.title
   ozj_h5:
     title: "シェア・レンタル"
     desc: "不動産シェアメイト、レンタルを募集する人、レンタル物件を探している人"
+  OzEstateShareRent: :ozj_h5.title
   ozj_h6:
     title: "イベント情報"
     desc: "様々なイベントを掲載。集客、広告に活用。"
+  OzInfoEvent: :ozj_h6.title
   ozj_h7:
     title: "職人達"
     desc: "知ってる人は知っている。ブリスベンで便りになるローカルなプロ達。仕事を頼むなら我々に。"
+  OzPeoplePro: :ozj_h7.title
   ozj_h8:
     title: "得得情報"
     desc: "きっと得する得々情報"
+  OzInfoLivingSmart: :ozj_h8.title
   ozj_h9:
     title: "暮らしQ＆A"
     desc: "なんでも相談。日常遭遇する様々な疑問や問題をみんなの力で解決しよう。"
+  OzInfoLivingQna: :ozj_h9.title
   ozj_h10:
     title: "日本人ネットワーク"
     desc: "ブリスベンの日本人ネットワーク"
-  view_details: "以前の投稿を見る"
+  lets_signin: "ログイン"
   signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
-  signin_with_following: "以下のアカウントでログインできます。"
+  signin_with_facebook: "Facebookでログイン"
+  signin_with_google: "Googleでログイン"
+  signin_remember_me: "ログイン情報を記憶する"
+  process_signin: "ログインする"
+  signin_inprogress: "ログイン処理中・・・"
+  signin_with_how: "ログイン後に、%{provider}のページが表示された場合は、%{provider}にてログインを行ってください（ログインは、%{provider}上で実施されます）。OzJapaneseでログインが完了するまで多少の時間がかかる場合があります。"
   welcome: "こんにちわ。"
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
@@ -327,7 +355,7 @@ ja:
   devise:
     omniauth_callbacks:
       success:
-        signed_in: "ログインに成功しました。"
+        signed_in: "ログインに成功しました。:D"
         please_agree: "ログインに成功しましたが、本サイトの利用にあたり、サービス利用規約と個人情報管理規約への同意をお願いします。既に同意済みの場合でも、異なるアカウントでログインする場合は、再度同意が必要です。"
       flyer:
-        failure: "ログインに失敗しました。OzJapanese（本サイト）からのアクセスを許可を求められた場合は、許可が必要です。"
+        failure: "ログインに失敗しました。:(　OzJapanese（本サイト）からのアクセスを許可を求められた場合は、許可が必要です。:-/  "

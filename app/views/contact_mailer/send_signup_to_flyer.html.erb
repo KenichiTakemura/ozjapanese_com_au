@@ -1,0 +1,6 @@
+<%= content_tag(:p, t("contact.welcome", :from => @flyer.flyer_name))%>
+<%= content_tag(:p, t("contact.signup_confirmation_email_content1"))%>
+<%= content_tag(:p, t("contact.signup_confirmation_email_content2"))%>
+<%= content_tag(:p, t("contact.confirmation_email_no_reply"))%>
+<%= content_tag(:p, t("contact.signup_confirmation_email_content3"))%>
+<%= content_tag(:p, link_to(t("contact_us"),about_ozmains_url(:t => "contact")))%>

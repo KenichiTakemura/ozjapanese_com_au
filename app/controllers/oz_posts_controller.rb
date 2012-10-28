@@ -15,6 +15,7 @@ class OzPostsController < OzController
     ActiveRecord::Base.transaction do
       if @post.save
         @post.set_user(current_flyer)
+        ContactMailer.send_new_post_to_admin(@heading, @post).deliver
         flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
           format.html { redirect_to "#{Ozlink.heading_link(@heading, nil)}" }

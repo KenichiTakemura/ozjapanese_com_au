@@ -1,5 +1,5 @@
 <%= show_alert %>
-<%= render :partial => "layouts/sns" %>
+<%= render :partial => "layouts/sns" %>	
 <div class="row-fluid" id="open_view">
 <% if !session[:uzatt]%>
 <div class="hero-unit">
@@ -13,14 +13,36 @@
 </div>
 <% end %>
 </div>
+
+<div class="container-fluid">
+<% if @recent_top_feed.present? %>
+<div class="row-fluid">
+<div class="span2" style="margin-left: 0px">
+	<p class="lead"><span class="label label-inverse"><%=t("post.hot")%></span></p>
+    <ul class="thumbnails">
+    	<% @recent_top_feed.each do |feed|%>
+    <li class="" style="margin-left: 0px">
+    <div class="thumbnail">
+	<p><%= I18n.t(feed.feeded_to_type)%></p>
+    <p><%= show_flyer(feed.feeded_to.posted_by)%></p>
+    <p><%= link_to(feed.feeded_to.subject,Ozlink.heading_link(OzjapaneseStyle.heading_by_model(feed.feeded_to_type),"link_viewed",{:d => feed.feeded_to_id}))%></p>
+    <p><%= feed.feeded_to.postedDate %></p>
+    </div>
+    </li>
+    <% end %>
+    </ul>
+</div>
+
+<div class="span10">
+<% end %>
 <div class="row-fluid" id="menu">
 	<ul class="pager">
 		<% OzjapaneseStyle.headings.each do |heading| %>
 			<% g = @feed[heading][0] + @feed[heading][1] + @feed_cnt[heading] %>
-			<li><%= link_to(t("#{heading}.title"),"#", :onclick => "_activate_heading(#{OzjapaneseStyle.group_id(heading)});return false;")%></li>
+			<li><%= link_to(t("#{heading}.title"),"#", :class => "shadow", :onclick => "_activate_heading(#{OzjapaneseStyle.group_id(heading)});return false;")%></li>
 		<% end %>
 	</ul>
-	<div class="span12">
+	<div class="row-fluid">
 		<ul class="nav nav-tabs" id="heading_tab">
 		<% OzjapaneseStyle.heading_groups.each_with_index do |group,i| %>
 		<li style="display:none"><a href="#heading_<%=i%>"></a></li>
@@ -30,7 +52,7 @@
 		<% OzjapaneseStyle.heading_groups.each_with_index do |group,i| %>
 			<div class="tab-pane fade in" id="heading_<%=i%>">
 			<% group.each do |heading| %>
-			<div class="span5" style="margin-left:90px">
+			<div class="span6">
 			<h2>
 				<%= t("#{heading}.title")%>
 			</h2>
@@ -64,7 +86,10 @@
 			<p style="margin-top: 40px">
 			<div class="btn-toolbar">
 			<div class="btn-group">
-			<%= link_to_with_icon("#{t(:view_details)} &raquo",Ozlink.heading_link(heading,""),"btn","z-index:10","icon-zoom-in","#{heading}_view_details") %>
+			<%= link_to_with_icon("#{t("post.newer")} &raquo",Ozlink.heading_link(heading,"newer"),"btn","","icon-zoom-in","#{heading}_view_details") %>
+			</div>
+			<div class="btn-group">
+			<%= link_to_with_icon("#{t("post.older")} &raquo",Ozlink.heading_link(heading,"older"),"btn","","icon-zoom-in","#{heading}_view_details") %>
 			</div>
 			<div class="btn-group dropup">
 			<%= post_write_new(heading, :signin_with_following)%>
@@ -76,8 +101,9 @@
 			</div>
 		<% end%>
 		</div>
+	<% gid = rand(OzjapaneseStyle.heading_groups.size)%>
 	<%= _script_document_ready(%Q|
-	$('#heading_tab a:first').tab('show');
+		$('#heading_tab a[href="#heading_#{gid}"]').tab('show');
 	|)%>
 	<%= _script(%Q|
 		function _scroll_top() {
@@ -89,4 +115,10 @@
 		}
 	|)%>
 	</div>
+</div>
+
+<% if @recent_top_feed.present? %>
+</div>
+</div>
+<% end %>
 </div>

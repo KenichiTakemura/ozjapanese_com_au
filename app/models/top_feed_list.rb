@@ -28,6 +28,8 @@ class TopFeedList < ActiveRecord::Base
   scope :feed_for_date, lambda { |cate,day| category_feed(cate).duration_feed(day,day+1).feed_order }
   scope :recent_feed, lambda { |cate,day| category_feed(cate).duration_feed(day,RECENT_DAYS).feed_order }
   
+  scope :recent_top_feed, lambda { |limit| feed_order.limit(limit) }
+  
   after_save :clean_oldest_feed
   
   def clean_oldest_feed

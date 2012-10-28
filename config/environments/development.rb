@@ -36,7 +36,7 @@ OzjapaneseComAu::Application.configure do
   config.assets.debug = false
 
   # Mail
-  config.action_mailer.default_url_options = { :host => "okbrisbane-devel.com" }
+  config.action_mailer.default_url_options = { :host => "www.ozjapanese.com.au" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "localhost",
@@ -46,4 +46,6 @@ OzjapaneseComAu::Application.configure do
   config.assets.logger = false
   
   config.is_debug = true
+  
+  config.my_host = "127.0.0.1"
 end
