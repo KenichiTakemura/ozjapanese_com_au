@@ -72,11 +72,12 @@ module OzPostHelper
    html += %Q|<span class="badge">#{post.id}</span>|
    end
    html += simple_format(post.content.body)
-   html += %Q|<h3>#{post.subject}</h3><div class="row-fluid">|
+   html += %Q|<h3>#{post.subject}</h3>|
    html += "<p>#{t("post.postedOn")} #{post.postedDate}</p>"
    html += "<p>#{t("post.author")} #{show_flyer(post.posted_by)}</p>"
    html += post_fb_feed(heading, post)
    html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p>|
+   html += %Q|<p>#{t("post.comment")} #{post.comment.size}</p>|
    html += %Q|<div class="row-fluid">#{post_comment_new(heading,:signin_with_following)}<div id="post_comment_area"></div></div>|
    html += "</div>"
    html.html_safe
@@ -108,7 +109,6 @@ module OzPostHelper
     if current_flyer && current_flyer.facebook_flyer? 
       html = %Q|<p>#{facebook}&nbsp;<a href="\#" onclick='postToFeed(); return false;'>#{t("post.post_fb_feed")}</a></p>|
       html += %Q|<p id='msg'></p>|
-      #http://developers.facebook.com/docs/reference/dialogs/feed/
       html += _script(%Q|
         function postToFeed() {
           // calling the API ...
@@ -117,8 +117,6 @@ module OzPostHelper
             link: '#{root_url} + #{Ozlink.heading_link(heading,"view", {:d => post.id})}',
             source: '#{root_url}',
             name: '#{post.subject}',
-            caption: 'Reference Documentation',
-            description: 'Using Dialogs to interact with users.'
           };
   
           function callback(response) {

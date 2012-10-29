@@ -27,6 +27,12 @@ Gretel::Crumbs.layout do
     link I18n.t("post.write_new"), Ozlink.heading_link(heading,"write")
     parent :heading, heading
   end
+
+  crumb :link_view do |post|
+     link post.subject, Ozlink.heading_link(OzjapaneseStyle.heading_by_model(post.class.name),"link_view",{:d => post.id})
+     parent :heading, OzjapaneseStyle.heading_by_model(post.class.name)
+  end
+
   
   # crumb :project_issues do |project|
   #   link "Issues", project_issues_path(project)

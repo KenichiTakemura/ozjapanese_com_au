@@ -35,4 +35,31 @@ module OzmainHelper
     image_tag("google_logo_3D_online_small.png", :class => "")
   end
   
+  def fb_shout
+    html = ""
+    token = Common.uniqe_token
+    if current_flyer && current_flyer.facebook_flyer? 
+      html = %Q|<p>#{facebook}&nbsp;<a href="\#" onclick='facebook_shout_#{token}(); return false;'>#{t("fb_shout")}</a></p>|
+      html += %Q|<p id='msg_#{token}'></p>|
+      html += _script(%Q|
+        function facebook_shout_#{token}() {
+          // calling the API ...
+          var obj = {
+            method: 'feed',
+            link: '#{root_url}',
+            source: '#{root_url}',
+            name: '#{t("wall_from_ozjapanese")}',
+          };
+  
+          function callback(response) {
+            document.getElementById('msg_#{token}').innerHTML = "Post ID: " + response['post_id'];
+          }
+  
+          FB.ui(obj, callback);
+        }
+      |)
+    end
+    html.html_safe
+  end  
+  
 end

@@ -245,7 +245,7 @@ ja:
     please_use_other_browsers: "Internet Explorer 以外のブラウザをご使用いただくと、もっと簡単に投稿できます。"
     valid_until: "有効期限"
     why_valid_until: "現在の有効期限は%{days}日です。"
-    post_fb_feed: "Facebookでみんなに知らせる"
+    post_fb_feed: "Facebookでみんなに知らせよう！"
     write_new: "投稿する"
     comment_new: "OzJapaneseにコメントを投稿する"
     comment_facebook_new: "Facebookにも同時にコメントを投稿する;)"
@@ -266,7 +266,7 @@ ja:
     email: "Eメールアドレス"
     phone: "連絡先（モバイル）"
     subject: "題名"
-    content: "内容"
+    content: "問い合せ内容"
     send: "送信する"
     label: "意見、感想には迅速に対応します。"
     banner: "スポンサーに関する問い合せ"
@@ -301,6 +301,8 @@ ja:
     welcome_new_flyer_joined: "OzJapaneseの加入が完了しました。"
     provider: "プロバイダー"
     date_joined: "加入日"
+  ozj_all:
+    title: "全て" 
   ozj_h1:
     title: "求人"
     desc: "人材を求めている企業、個人の方はこちら。ジョブハンター達はここを見るべし！"
@@ -347,10 +349,13 @@ ja:
   signin_remember_me: "ログイン情報を記憶する"
   process_signin: "ログインする"
   signin_inprogress: "ログイン処理中・・・"
-  signin_with_how: "ログイン後に、%{provider}のページが表示された場合は、%{provider}にてログインを行ってください（ログインは、%{provider}上で実施されます）。OzJapaneseでログインが完了するまで多少の時間がかかる場合があります。"
+  signin_with_how: "ログイン後に、%{provider}のページが表示された場合は、%{provider}にてログインを行ってください（ログインは、%{provider}上で実施されます）。"
+  signin_agreement_required: "規約への同意をお願いします"
   welcome: "こんにちわ。"
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
+  fb_shout: "この情熱Facebookに書き込む！"
+  wall_from_ozjapanese: "OzJapaneseからの投稿です！"
   successfully_created: "投稿が追加されました。"
   devise:
     omniauth_callbacks:

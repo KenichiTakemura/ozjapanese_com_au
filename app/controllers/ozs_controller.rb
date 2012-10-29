@@ -60,9 +60,12 @@ class OzsController < OzController
   end
   
   # non-Ajax Request
-  def link_viewed
+  def link_view
     viewed
-    
+    breadcrumb :link_view, @post
+    respond_to do |format|
+      format.html # link_view.html.erb
+    end 
   end
   
   # Ajax

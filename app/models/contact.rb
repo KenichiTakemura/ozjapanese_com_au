@@ -28,7 +28,12 @@ class Contact < ActiveRecord::Base
   validates_presence_of :contact_type
   validates_presence_of :body
   validates_format_of :email, :with => PostDef::EMAIL_REGEXP, :if => Proc.new { |email| email.present? }
-  validates_format_of :phone, :with => /\A[\+\d\-\(\)\sx]+\z/, :if => Proc.new { |phone| phone.present? }
+  validates_format_of :phone, :with => /\A[\+\d\-\(\)\sx]+\z/, :if => :validate_phone
+
+  def validate_phone
+    Rails.logger.debug("Phone Validation on #{phone}")
+    phone.present?
+  end
 
   def category_list()
     list = Array.new

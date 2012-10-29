@@ -41,13 +41,13 @@
 			<span class="label label-info"><%= t("post.author") %></span>&nbsp;<i class="icon-user"></i><%= current_flyer.flyer_name %>
 		</div>
 		<%= f.hidden_field :write_at, :id => "write_at" %>
-		<%= f.label t("post.subject") %>
+		<%= f.label :subject, t("post.subject") %>
 		<%= f.text_field :subject, :class => "input-xxlarge", :placeholder => t("post.write_something") %>
-		<%= f.label t("post.valid_until") %>
+		<%= label_tag t("post.valid_until") %>
 		<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
 		<span class="help-block"><%= t("post.why_valid_until", :days => PostDef::POST_EXPIRY) %></span>
 		<%= f.fields_for @post.content do |content_form| %>
-		<%= f.label :body, t("post.content") %>
+		<%= content_form.label :body, t("post.content") %>
 		<%= content_form.text_area :body, :style => "width:500px;height:200px" %>		
 		<% end %>
 		<br>

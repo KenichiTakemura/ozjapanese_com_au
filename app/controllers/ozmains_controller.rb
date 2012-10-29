@@ -15,7 +15,6 @@ class OzmainsController < OzController
       logger.debug("@feed[#{heading}]: #{@feed[heading.to_sym]}")
       logger.debug("@feed_cnt[#{heading}]: #{@feed_cnt[heading.to_sym]}")
     end
-    @recent_top_feed = TopFeedList.recent_top_feed(3)
     @contact = Contact.new
     if current_flyer
       @contact.user_name = current_flyer.flyer_name
@@ -39,7 +38,10 @@ class OzmainsController < OzController
       @contact.user_name = current_flyer.flyer_name
       @contact.email = current_flyer.email
     end
-    
   end
   
+  # Ajax
+  def recent_top_feed
+    @recent_top_feed = TopFeedList.recent_top_feed(5)
+  end
 end

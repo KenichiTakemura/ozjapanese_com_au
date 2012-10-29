@@ -62,7 +62,6 @@ module OzjapaneseComAu
     # http://stackoverflow.com/questions/5267998/rails-3-field-with-errors-wrapper-changes-the-page-appearance-how-to-avoid-t
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       Rails.logger.info("field_error_proc html_tag: #{html_tag}")
-      Rails.logger.info("field_error_proc instance: #{instance}")
       html = ""
       if html_tag.to_s =~ /<label/
         html += %Q|<div class="control-group error">|
@@ -70,6 +69,8 @@ module OzjapaneseComAu
       elsif html_tag.to_s =~ /<input/ || html_tag.to_s =~ /<textarea/
         html += html_tag.to_s
         html += %Q|</div>|
+      else
+        html += html_tag.to_s
       end
       html.html_safe
     }

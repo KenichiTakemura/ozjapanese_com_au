@@ -11,11 +11,15 @@
 				</ul>
 				<div class="span6 pull-right">
 					<div class="pull-right">
-						<%=t(:welcome)%>
-						<% if !current_flyer %>
-						<%= signin(:signin_with) %>
+						<% if controller.controller_name.eql?("terms")%>
+							<%=t("signin_agreement_required")%>
 						<% else %>
-						<%= show_flyer %>
+							<%=t(:welcome)%>
+							<% if !current_flyer %>
+								<%= signin(:signin_with) %>
+							<% else %>
+								<%= show_flyer %>
+							<% end %>
 						<% end %>
 					</div>
 				</div>

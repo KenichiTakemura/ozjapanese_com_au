@@ -32,6 +32,10 @@ class Flyers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       if @user.present? && @user.persisted?
         if @user.agreed_on
+          logger.info("google already agreed remember_me: #{session[:remember_me]}")
+          if session[:remember_me]
+            @user.remember_me = true
+          end
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Google"
           sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
         else

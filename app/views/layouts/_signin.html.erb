@@ -13,15 +13,16 @@
 					<p><%=t("signin_with_how", :provider => "Facebook")%></p>
 					<p>
 					<label class="checkbox">
-					<input type="checkbox" value="" id="remember_me">
+					<input type="checkbox" value="" id="facebook_remember_me">
 					<%=t("signin_remember_me")%>
 					</label>
 					</p>
 					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="facebook_signin"><%=t("process_signin")%></button>
 					<div class="facebook_signin_progress"></div>
-					<%= _script(%Q|$('\#facebook_signin').click(function() {
+					<%= _script_document_ready(%Q|$('\#facebook_signin').button();
+						$('\#facebook_signin').click(function() {
 						$('.facebook_signin_progress').html('#{image_tag("ajax-loader.gif")}');| +
-						Ajax.post(signin_sessions_path,%Q|remember_me:$('\#remember_me').attr("checked"),provider:'#{Flyer::PROVIDERS[:facebook]}'|) +
+						Ajax.post(signin_sessions_path,%Q|remember_me:$('\#facebook_remember_me').attr("checked"),provider:'#{Flyer::PROVIDERS[:facebook]}'|) +
 						%Q|})|)%>
 				</div>
 			</li>
@@ -31,11 +32,18 @@
 					<p><%=t("signin_with_how", :provider => "Google")%></p>
 					<p>
 					<label class="checkbox">
-					<input type="checkbox" value="">
+					<input type="checkbox" value="" id="google_remember_me">
 					<%=t("signin_remember_me")%>
 					</label>
 					</p>
-					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>"><%=t("process_signin")%></button>
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="google_signin"><%=t("process_signin")%></button>
+					<div class="google_signin_progress"></div>
+					<%= _script_document_ready(%Q|
+						$('\#google_signin').button();
+						$('\#google_signin').click(function() {
+						$('.google_signin_progress').html('#{image_tag("ajax-loader.gif")}');| +
+						Ajax.post(signin_sessions_path,%Q|remember_me:$('\#google_remember_me').attr("checked"),provider:'#{Flyer::PROVIDERS[:google]}'|) +
+						%Q|})|)%>
 				</div>
 			</li>
 		</ul>

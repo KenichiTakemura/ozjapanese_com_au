@@ -9,10 +9,11 @@ module OzjapaneseStyle
   HEADINGS[:ozj_h4] = [true,OzBuyGood,1]
   HEADINGS[:ozj_h5] = [true,OzEstateShareRent,2]
   HEADINGS[:ozj_h6] = [true,OzInfoEvent,2]
-  HEADINGS[:ozj_h7] = [true,OzPeoplePro,3]
-  HEADINGS[:ozj_h8] = [true,OzInfoLivingSmart,4]
-  HEADINGS[:ozj_h9] = [true,OzInfoLivingQna,4]
-    
+  HEADINGS[:ozj_h8] = [true,OzInfoLivingSmart,3]
+  HEADINGS[:ozj_h9] = [true,OzInfoLivingQna,3]
+  
+  HEADINGS[:ozj_h7] = [false,OzPeoplePro,4]
+  
   def self.headings
     h = Array.new
     HEADINGS.each do |k,v|

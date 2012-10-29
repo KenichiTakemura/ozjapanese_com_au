@@ -4,6 +4,7 @@ OzjapaneseComAu::Application.routes.draw do
     collection do
       get :about
       post :uzatt
+      post :recent_top_feed
     end
   end
   
@@ -25,6 +26,7 @@ OzjapaneseComAu::Application.routes.draw do
       get :newer
       get :write
       post :viewed
+      get :link_view
       post :carousel_viewed
       get :feed_view
     end
