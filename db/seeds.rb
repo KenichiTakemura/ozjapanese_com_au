@@ -37,7 +37,7 @@ HTML
   post.set_user(flyer)
   content.save
   1.upto(6) { |c|
-    comment = Comment.new(:body => "平均年収からへそくり金額まで、みんなのお財布事情を徹底リサーチ。比較すると見えてくるものがあるかも!?")  
+    comment = Comment.new(:body => "コメント #{post.id}-#{c}!?")  
     comment.save
     comment.subscribe_to(post, flyer)
   }

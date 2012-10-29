@@ -3,6 +3,7 @@ module OzjapaneseStyle
   
   HEADINGS = Common.new_orderd_hash
   
+  HEADINGS[:ozj_all] = [false,nil,nil]  
   HEADINGS[:ozj_h1] = [true,OzEmployment,0]
   HEADINGS[:ozj_h2] = [true,OzEmployer,0]
   HEADINGS[:ozj_h3] = [true,OzSellGood,1]
@@ -12,7 +13,12 @@ module OzjapaneseStyle
   HEADINGS[:ozj_h8] = [true,OzInfoLivingSmart,3]
   HEADINGS[:ozj_h9] = [true,OzInfoLivingQna,3]
   
-  HEADINGS[:ozj_h7] = [false,OzPeoplePro,4]
+  HEADINGS[:ozj_h7] = [false,OzPeoplePro,nil]
+  #HEADINGS[:ozj_h11] = [false,nil,nil]
+  
+  def self.all_headings
+    HEADINGS.collect { |k,v| k }
+  end
   
   def self.headings
     h = Array.new
@@ -77,6 +83,14 @@ module OzjapaneseStyle
 <p>運営にあたっては、利用者一人一人の声を聞き、利用者の観点から、現存するオーストラリア日本語情報サイト以上のサービスと機能を提供すること念頭に運営を行っています。</p>
 <p>一人でも多く方に利用していただけるよう、皆様の意見を日々反映し、よりよい情報交換の場として長く提供できるよう、努力します。</p>
 <p class="text-info">本サイトは無料でご利用いただけます。</p>
+<strong><p class="text-success">ミッションステートメント</p></strong>
+<ul>
+<li>技術力で他のサイトを凌駕し、ナンバーワンサイトを目指します。</li>
+<li>利用者全員の声を反映し、使い安さナンバーワンサイトを目指します。</li>
+<li>欲しかった情報が見つかるサイトを目指します。</li>
+<li>利用者が書き込みやすい、簡単に使えるサイトを目指します。</li>
+</ul>
+
 <p>2012-10-31 管理者</p>
     HTML
     html.html_safe

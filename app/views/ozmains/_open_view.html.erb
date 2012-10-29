@@ -1,1 +1,8 @@
-<%= show_posts(@posts, @heading, Common.uniqe_token)%>
+<div class="row-fluid">
+	<div class="span8" id="side_post_area">
+		<%= show_posts(@posts, @heading, Common.uniqe_token)%>
+	</div>
+	<div class="span4" id="side_comment_thread_<%= @posts.first.id%>">
+		<%= show_comment_thread(@posts.first, @heading)%>
+	</div>
+</div>

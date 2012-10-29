@@ -1,8 +1,8 @@
-<div class="comment_form">
+<div class="comment_form_#{@post_for_comment.id}">
 	<%= form_for(@comment) do |f| %>
-	<%= f.text_area :body, :style => "width:300px;height:50px", :id => "comment_area" %>
+	<%= f.text_area :body, :style => "width:300px;height:50px", :id => "comment_area_#{@post_for_comment.id}" %>
 	<div class="left">
-		<p><%= link_to(t("post.comment_new"), "#", :class => "btn btn-info btn-small", :id => "submit_comment")%></p>
+		<p><%= link_to(t("post.comment_new"), "#", :class => "btn btn-info btn-small", :id => "submit_comment_#{@post_for_comment.id}")%></p>
 		<% if current_flyer && current_flyer.facebook_flyer? %>
 		<p class="text-success">
 			<label class="checkbox">
@@ -13,12 +13,12 @@
 		</p>	
 	</div>
 	<% end %>
-	<%= _script(%Q|$('\#submit_comment').click(function(){
-		if($('\#comment_area').val() == ""){
+	<%= _script(%Q|$('\#submit_comment_#{@post_for_comment.id}').click(function(){
+		if($('\#comment_area_#{@post_for_comment.id}').val() == ""){
 			return false;
 		}
-		$('\#post_comment_area').html('#{image_tag("ajax-loader.gif")}');| +
-		Ajax.post(post_comment_comments_path, %Q|authenticity_token: $("input[name='authenticity_token']").attr("value"), v: '#{Ozlink.base(@comment.commented_type)}', d: '#{Ozlink.param_enc(@comment.commented_id)}', m: $('\#comment_area').attr("value")|) +
+		$('\#post_comment_area_#{@post_for_comment.id}').html('#{image_tag("ajax-loader.gif")}');| +
+		Ajax.post(post_comment_comments_path, %Q|authenticity_token: $("input[name='authenticity_token']").attr("value"), v: '#{Ozlink.base(@comment.commented_type)}', d: '#{Ozlink.param_enc(@comment.commented_id)}', m: $('\#comment_area_#{@post_for_comment.id}').attr("value")|) +
 		%Q|return false;
 	})
 	|)%>

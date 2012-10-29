@@ -4,8 +4,9 @@ class Comment < ActiveRecord::Base
   belongs_to :commented_by, :polymorphic => true
 
   belongs_to :commented, :polymorphic => true
-
+  scope :desc, :order => 'id DESC'
   scope :is_valid, where("status = ?", PostDef::POST_STATUS_PUBLIC)
+  scope :recent_feed, is_valid.desc.limit(PostDef::NUMBER_OF_TOP_COMMENT_FEED)
   
   def size
     is_valid.size

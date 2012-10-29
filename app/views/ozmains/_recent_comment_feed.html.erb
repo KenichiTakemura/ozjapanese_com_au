@@ -1,0 +1,21 @@
+<ul class="thumbnails">
+	<% @recent_comment_feed.each do |comment|%>
+	<li class="" style="margin-left: 0px">
+		<div class="thumbnail">
+			<p>
+				<%= link_to(I18n.t(comment.commented_type), Ozlink.heading_link(OzjapaneseStyle.heading_by_model(comment.commented_type),"newer"))%>
+				<span class="badge badge-success"><i class="icon-camera icon-white"></i><%=comment.commented_id%></span>
+			</p>
+			<p>
+				<%= show_flyer(comment.commented_by)%>
+			</p>
+			<p>
+				<%= link_to(comment.body,Ozlink.heading_link(OzjapaneseStyle.heading_by_model(comment.commented_type),"link_view",{:d => comment.commented_id}))%>
+			</p>
+			<p>
+				<%= comment.postedDate %>
+			</p>
+		</div>
+	</li>
+	<% end %>
+</ul>

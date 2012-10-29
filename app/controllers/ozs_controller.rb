@@ -13,37 +13,20 @@ class OzsController < OzController
     @heading = @board.to_sym
   end
   
+  def index
+    newer
+  end
+  
   def older
-    model = _model(@heading)
-    raise "Bad Board Request" if model.nil?
-    @board_lists = model.search_older_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
+    collect_posts :older
     breadcrumb :older, @heading
-    if @board_lists.present?
-      @comment = Comment.new
-      @comment.commented_id = @board_lists.first.id
-      @comment.commented_type = @heading
-      @comments = Comment.comment_for(@board_lists.first.id).limit(PostDef::NUMBER_OF_COMMENT)
-    end
     respond_to do |format|
       format.html # index.html.erb
     end
   end
   
-  def index
-    newer
-  end
-  
   def newer
-    model = _model(@heading)
-    raise "Bad Board Request" if model.nil?
-    @board_lists = model.search_newer_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
-    breadcrumb :heading, @heading
-    if @board_lists.present?
-      @comment = Comment.new
-      @comment.commented_id = @board_lists.first.id
-      @comment.commented_type = @heading
-      @comments = Comment.comment_for(@board_lists.first.id).limit(PostDef::NUMBER_OF_COMMENT)
-    end
+    collect_posts :newer
     breadcrumb :newer, @heading
     respond_to do |format|
       format.html # index.html.erb
@@ -110,9 +93,69 @@ class OzsController < OzController
       logger.debug("feed_view: #{@posts.size}")
       @comment.commented_id = @posts.first.id
       @comment.commented_type = @heading
+      @comments = Comment.comment_for(@posts.first.id).limit(PostDef::NUMBER_OF_COMMENT)
+    end
+    
+  end
+  
+  def select_heading
+    case @heading
+    when :ozj_all
+      @feed = Hash.new
+      @feed_cnt = Hash.new
+      OzjapaneseStyle.headings.each do |heading|
+        model_name = OzjapaneseStyle.heading_model_name(heading)
+        date_feed = Array.new
+        0.upto(1) { |d|
+          date_feed[d] = TopFeedList.feed_for_date(model_name, d).count
+          logger.debug("date_feed[#{d}]: #{date_feed[d]}")
+        }
+        @feed[heading.to_sym] = date_feed
+        @feed_cnt[heading.to_sym] = TopFeedList.recent_feed(model_name, 2).count
+        logger.debug("@feed[#{heading}]: #{@feed[heading.to_sym]}")
+        logger.debug("@feed_cnt[#{heading}]: #{@feed_cnt[heading.to_sym]}")
+      end
+    when :ozj_h1
+      collect_posts :newer
+    when :ozj_h2
+      collect_posts :newer
+    when :ozj_h3
+      collect_posts :newer
+    when :ozj_h4
+      collect_posts :newer
+    when :ozj_h5
+      collect_posts :newer
+    when :ozj_h6
+      collect_posts :newer
+    when :ozj_h8
+      collect_posts :newer
+    when :ozj_h9
+      collect_posts :newer
+    when :ozj_h7
+    when :ozj_h11
+    else
+      raise "Bad Request #{@heading}"
     end
   end
   
+  private
   
+  def collect_posts(newer_or_older)
+    model = _model(@heading)
+    raise "Bad Board Request" if model.nil?
+    if newer_or_older.eql? :newer
+      @posts = model.search_newer_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
+    elsif newer_or_older.eql? :older
+      @posts = model.search_older_than(PostDef::POST_DISPLAY_NUMBER, PostDef::POST_OLDER)
+    end
+    if @posts.present?
+      @comment = Comment.new
+      @comment.commented_id = @posts.first.id
+      @comment.commented_type = @heading
+      @comments = Comment.comment_for(@posts.first.id).limit(PostDef::NUMBER_OF_COMMENT)
+    end
+    logger.debug("@posts: #{@posts.size}")
+    @posts
+  end
 
 end

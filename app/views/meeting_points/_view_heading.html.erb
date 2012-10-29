@@ -1,0 +1,13 @@
+<div class="row-fluid">
+	<h2><%=OzjapaneseStyle.heading_name(@heading)%> <%=t("meetingpoints.desc1")%></h2>
+	<h5><%=t("meetingpoints.desc2")%></h5>	
+	<h5><%=t("meetingpoints.desc3")%></h5>
+	<% if @posts.present? %>
+	<%= show_posts(@posts, @heading, Common.uniqe_token)%>
+	<% end %>
+</div>
+<div class="span5 offset2">
+	<% if @posts.present? %>
+	<%= show_comment_thread(@posts.first, @heading)%>
+	<% end %>
+</div>

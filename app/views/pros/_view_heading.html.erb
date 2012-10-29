@@ -1,0 +1,14 @@
+<div class="row-fluid">
+	<h2><%=OzjapaneseStyle.heading_name(@heading)%> <%=t("pros.desc1")%></h2>
+	<h5><%=t("pros.desc2")%></h5>	
+	<h5><%=t("pros.desc3")%></h5>
+	<%= link_to(t("pros.recommend"), about_ozmains_path(:t => "contact", :contact_type => Contact.type?("contact.recomment_pro")))%>
+	<% if @posts.present? %>
+	<%= show_posts(@posts, @heading, Common.uniqe_token)%>
+	<% end %>
+</div>
+<div class="span5 offset2">
+	<% if @posts.present? %>
+	<%= show_comment_thread(@posts.first, @heading)%>
+	<% end %>
+</div>

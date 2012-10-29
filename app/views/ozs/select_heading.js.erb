@@ -1,0 +1,10 @@
+<% if @heading.eql? :ozj_all %>
+$('#heading_group_all').html("<%= escape_javascript(render 'ozmains/select_heading')%>");
+<% elsif @heading.eql? :ozj_h7 %>
+$('#heading_group_all').html("<%= escape_javascript(render 'pros/view_heading')%>");
+<% elsif @heading.eql? :ozj_h11 %>
+$('#heading_group_all').html("<%= escape_javascript(render 'meeting_points/view_heading')%>");
+<% else %>
+$('\#open_view').hide("slow");$('\#open_view').html("");
+$('#heading_group_all').html("<%= escape_javascript(render 'ozmains/view_heading')%>");
+<% end %>

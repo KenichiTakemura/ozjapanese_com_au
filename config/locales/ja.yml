@@ -200,7 +200,7 @@ ja:
       <<: *errors
   
   
-  title: "ブリスベン在住日本人応援サイト"
+  title: "オーストラリア　ブリスベン情報　日本人応援サイト"
   project_name: "OzJapanese"
   japanese: "日本人"
   flyer: "OzJapaneseスタイル"
@@ -253,7 +253,10 @@ ja:
     more: "さらに表示"
     older: "以前の投稿"
     newer: "最近の投稿"
-    hot: "最新の投稿"
+    be_the_first: "まだ投稿はありません。最初の投稿をしよう！"
+    hot:
+      post: "新着投稿"
+      comment: "新着コメント"
     alert:
       header: "投稿に当たっては以下の事項を守ってください。"
       body1: "投稿分類に合った内容の記載をお願いします。"
@@ -331,6 +334,11 @@ ja:
     title: "職人達"
     desc: "知ってる人は知っている。ブリスベンで便りになるローカルなプロ達。仕事を頼むなら我々に。"
   OzPeoplePro: :ozj_h7.title
+  pros:
+    desc1: "　～　日本人の底力"
+    desc2: "ブリスベンで頼りになるローカルなプロ達をご紹介。技術に秀でた日本人。"
+    desc3: "あなたの身近にいる職人を推薦してここで紹介できます。掲載は無料です。お気軽にお問い合わせください。"
+    recommend: "いますぐ紹介！"
   ozj_h8:
     title: "得得情報"
     desc: "きっと得する得々情報"
@@ -342,6 +350,13 @@ ja:
   ozj_h10:
     title: "日本人ネットワーク"
     desc: "ブリスベンの日本人ネットワーク"
+  ozj_h11:
+    title: "出会い"
+    desc: "オーストラリアで健全で真剣な出会いの場を提供します。"
+  meetingpoints:
+    desc1: "　～　広い大地で見つかる本当の人"
+    desc2: "オーストラリアで健全で真剣な出会いの場を提供します。"
+    desc3: "現在、検討中です。"
   lets_signin: "ログイン"
   signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
   signin_with_facebook: "Facebookでログイン"
@@ -354,7 +369,7 @@ ja:
   welcome: "こんにちわ。"
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
-  fb_shout: "この情熱Facebookに書き込む！"
+  fb_shout: "Facebookにシャウト！"
   wall_from_ozjapanese: "OzJapaneseからの投稿です！"
   successfully_created: "投稿が追加されました。"
   devise:

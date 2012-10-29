@@ -1,3 +1,2 @@
 $('#side_post_area').focus();
-$('#side_post_area').html("<%= escape_javascript(show_a_post(@post, @heading))%>");
-$('#side_comment_thread').html("<%= escape_javascript(show_comment_thread(@post, @heading))%>");
+$('#side_post_area').html("<%= escape_javascript(render 'ozs/viewed') %>");

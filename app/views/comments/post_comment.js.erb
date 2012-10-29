@@ -1,3 +1,3 @@
-$('#post_comment_area').html('');
-$('#comment_area').val('');
-$('#side_comment_thread').html("<%= escape_javascript(show_comment_thread(@post, @heading)) %>")
+$('#post_comment_area_<%=@post.id%>').html('');
+$('#comment_area_<%=@post.id%>').val('');
+$('#side_comment_thread_<%=@post.id%>').html("<%= escape_javascript(show_comment_thread(@post, @heading)) %>")

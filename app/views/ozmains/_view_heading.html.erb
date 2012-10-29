@@ -1,0 +1,28 @@
+<div class="row-fluid">
+	<h3><%=OzjapaneseStyle.heading_name(@heading)%></h3>
+	<div class="btn-toolbar">
+		<% if @posts.present? %>
+		<div class="btn-group">
+			<%= link_to_with_icon("#{t("post.newer")}",Ozlink.heading_link(@heading,"newer"),"btn btn-link","","icon-plus","")%>
+		</div>
+		<div class="btn-group">
+			<%= link_to_with_icon("#{t("post.older")}",Ozlink.heading_link(@heading,"older"),"btn btn-link","","icon-tag","")%>
+		</div>
+		<% end %>
+		<div class="btn-group">
+			<%= post_write_new(@heading, :signin_with_following)%>
+		</div>
+	</div>	
+	<% if @posts.present? %>
+	<%= show_posts(@posts, @heading, Common.uniqe_token)%>
+	<% else %>
+	<%= t("post.be_the_first")%>
+	<% end %>
+</div>
+<div class="span5 offset2">
+	<% if @posts.present? %>
+	<div class="" id="side_comment_thread_<%=@posts.first.id%>">
+	<%= show_comment_thread(@posts.first, @heading)%>
+	</div>
+	<% end %>
+</div>
