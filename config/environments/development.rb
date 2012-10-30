@@ -48,4 +48,8 @@ OzjapaneseComAu::Application.configure do
   config.is_debug = true
   
   config.my_host = "127.0.0.1"
+  
+  config.admin_email = "kenichi_takemura1976@yahoo.com"
+  config.admin_email_locale = "en"
+
 end

@@ -1,12 +1,10 @@
-<%= content_tag(:p, t("contact.received_contact_message", :from => @contact.user_name))%>
-<%= content_tag(:p, "#{t("contact.subject")} #{@subject}") %>
-<%= content_tag(:p, t("contact.content")) %>
+<%= content_tag(:p, t("mail.contact.received_contact_message", :from => @contact.user_name))%>
+<%= content_tag(:p, "#{t("mail.contact.name")} : #{@contact.user_name}") %> 
+<%= content_tag(:p, "#{t("mail.contact.email")} : #{@contact.email}") %>
+<%= content_tag(:p, "#{t("mail.contact.phone")} : #{@contact.phone}") %>
 <%= content_tag(:p, "-------------------------------------") %>
+<%= content_tag(:p, "#{t("mail.contact.subject")} : #{@subject}") %>
+<%= content_tag(:p, "-------------------------------------") %>
+<%= content_tag(:p, "#{t("mail.contact.content")} : ") %>
 <%= raw(@contact.body) %>
 <%= content_tag(:p, "-------------------------------------") %>
-<%= content_tag(:p, t("contact.name")) %> 
-<%= content_tag(:p, @contact.user_name) %>
-<%= content_tag(:p, t("contact.email")) %>
-<%= content_tag(:p, @contact.email) %>
-<%= content_tag(:p, t("contact.phone")) %>
-<%= content_tag(:p, @contact.phone) %>

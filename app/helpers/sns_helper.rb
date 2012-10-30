@@ -21,11 +21,12 @@ module SnsHelper
             link: '#{root_url}#{Ozlink.heading_link(heading,"link_view", {:d => post.id})}',
             source: '#{root_url}',
             name: '#{post.subject}',
+            caption: '#{t("facebook.caption")}'
           };
   
           function callback(response) {
             if(response['post_id'] != null) {
-              document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook_shouted"))}';
+              document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook.shouted"))}';
             }
 
           }
@@ -50,12 +51,12 @@ module SnsHelper
             link: '#{root_url}',
             source: '#{root_url}',
             name: '#{t("wall_from_ozjapanese")}',
+            caption: '#{t("facebook_caption")}'
           };
   
           function callback(response) {
-            //document.getElementById('msg_#{token}').innerHTML = "Post ID: " + response['post_id'];
             if(response['post_id'] != null) {
-              document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook_shouted"))}';
+              document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook.shouted"))}';
             }              
           }
   

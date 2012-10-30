@@ -3,3 +3,46 @@
 
 en:
   hello: "Hello world"
+  ozj_h1:
+    title: "Employment"
+  ozj_h2:
+    title: "Employer"
+  ozj_h3:
+    title: "Sell Goods"
+  ozj_h4:
+    title: "Buy Goods"
+  ozj_h5:
+    title: "Share Rent"
+  ozj_h6:
+    title: "Event"
+  ozj_h8:
+    title: "Smart Info"
+  ozj_h9:
+    title: "Living QnA"
+  mail:
+    admin:
+      subject: "[OzJapanese]"
+      new_post: "New Post"
+    post:
+      id: "id"
+      category: "Category"
+      subject: "Subject"
+      content: "Content"
+    contact:
+      name: "Name"
+      email: "Email"
+      subject: "Subject"
+      content: "Content"
+      phone: "Phone"
+      received_contact_message: "%{from} has sent a contact message"
+      new_flyer_joined: "%{from} has just joined from %{provider}"
+      date_joined: "Joined On"
+  contact:
+    banner: "Contact Sponsor"
+    general: "Contact General"
+    feedback: "Contact Feedback"
+    request: "Contact Request"
+    issue: "Contact Issue"
+    exit: "Contact Exit"
+    recomment_pro: "Contact Pro"
+    never_agree: "Contact Agreement"

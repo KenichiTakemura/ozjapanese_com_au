@@ -66,5 +66,30 @@ OzjapaneseComAu::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.is_debug = false
 
-  
+  config.my_host = "s3-singapore.accountservergroup.com"
+
+  #Paperclip.options[:command_path] = "/usr/bin/"
+
+  # Mail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => "www.ozjapanese.com.au" }
+  config.action_mailer.smtp_settings = {
+    :address => 's3-singapore.accountservergroup.com',
+    :enable_starttls_auto => false,
+    :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
+    :authentication => :plain,
+    :user_name => 'do_not_reply@ozjapanese.com.au',
+    :password => 'ozjapaneseisawesome2012!',
+  }
+
+ # Exception Handling
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[OzJapanese Exception] ",
+    :sender_address => %{"OzJapanese" <do_not_reply@ozjapanese.com.au>},
+    :exception_recipients => %w{kenichi_takemura1976@yahoo.com}
+
+ # Admin Email
+ config.admin_email = "kenichi_takemura1976@yahoo.com"
+ config.admin_email_locale = "en"
+
 end

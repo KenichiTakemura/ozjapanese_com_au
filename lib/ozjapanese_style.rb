@@ -60,8 +60,12 @@ module OzjapaneseStyle
     HEADINGS[heading][1].to_s
   end
   
-  def self.heading_name(heading)
-    I18n.t("#{heading}.title")
+  def self.heading_name(heading, locale=nil)
+    if locale.present?
+      return I18n.t("#{heading}.title", :locale => locale)
+    else
+      return I18n.t("#{heading}.title")
+    end
   end
 
   def self.hello_description
