@@ -20,9 +20,11 @@
 	<% end %>
 </div>
 <div class="span5 offset2">
+	<div id="side_comment_area">
 	<% if @posts.present? %>
 	<div class="" id="side_comment_thread_<%=@posts.first.id%>">
 	<%= show_comment_thread(@posts.first, @heading)%>
 	</div>
 	<% end %>
+	</div>
 </div>

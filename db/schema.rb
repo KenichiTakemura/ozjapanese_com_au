@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -121,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -144,6 +148,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -167,6 +173,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -190,6 +198,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -213,6 +223,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -236,6 +248,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -259,6 +273,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -282,6 +298,8 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.integer  "mode"
     t.boolean  "has_image",            :default => false
     t.boolean  "has_attachment",       :default => false
+    t.boolean  "sns_feeded",           :default => false
+    t.string   "sns_provider"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end

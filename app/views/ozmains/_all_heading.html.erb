@@ -6,26 +6,26 @@
 		<p>
 			<% if @feed[heading][0] > 0 %>
 			<%= link_to(t("post.today_post"), Ozlink.heading_link(heading,"feed_view",{:f => "today"}), :onclick => '_scroll_top()', :remote => true, :method => :get) %>
-			<% else %>
-			<%= t("post.today_post") %>
-			<% end %>
 			&nbsp;<span class="badge badge-info"><%= @feed[heading][0] %></span>
+			<% else %>
+			<%= t("post.today_post") %>&nbsp;<%= @feed[heading][0] %>
+			<% end %>
 		</p>
 		<p>
 			<% if @feed[heading][1] > 0 %>
 			<%= link_to(t("post.yesterday_post"), Ozlink.heading_link(heading,"feed_view",{:f => "yesterday"}), :onclick => '_scroll_top()', :remote => true, :method => :get) %>
-			<% else %>
-			<%= t("post.yesterday_post") %>
-			<% end %>
 			&nbsp;<span class="badge badge-info"><%= @feed[heading][1] %></span>
+			<% else %>
+			<%= t("post.yesterday_post") %>&nbsp;<%= @feed[heading][1] %>
+			<% end %>
 		</p>
 		<p>
 			<% if @feed_cnt[heading] > 0 %>
 			<%= link_to(t("post.recent_post"), Ozlink.heading_link(heading,"feed_view",{:f => "recent_week"}), :onclick => '_scroll_top()', :remote => true, :method => :get) %>
-			<% else %>
-			<%= t("post.recent_post") %>
-			<% end %>
 			&nbsp;<span class="badge badge-success"><%= @feed_cnt[heading]%></span>
+			<% else %>
+			<%= t("post.recent_post") %>&nbsp;<%= @feed_cnt[heading]%>
+			<% end %>
 		</p>
 		<p>
 			<%= t("#{heading}.desc")%>

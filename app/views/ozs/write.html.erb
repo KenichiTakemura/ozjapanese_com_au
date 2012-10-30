@@ -51,6 +51,14 @@
 		<%= content_form.text_area :body, :style => "width:500px;height:200px" %>		
 		<% end %>
 		<br>
+		<% if current_flyer && current_flyer.facebook_flyer? %>
+		<p class="muted">
+			<label class="checkbox">
+			<input type="checkbox" value="" id="post_to_facebook" disabled>
+			<%=t("post.post_facebook_new")%>
+		</label>
+		<% end %>
+		</p>
 		<%= f.submit t("post.create"), :class => "btn btn-primary" %>
 		<%= link_to(t("post.cancel"), root_path, :class => "btn") %>
 		<% end %>

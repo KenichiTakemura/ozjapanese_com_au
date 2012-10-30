@@ -249,11 +249,13 @@ ja:
     write_new: "投稿する"
     comment_new: "OzJapaneseにコメントを投稿する"
     comment_facebook_new: "Facebookにも同時にコメントを投稿する;)"
+    post_facebook_new: "Facebookにも投稿をシャウトする。"
     view_all_comment: "コメントを全て表示"
     more: "さらに表示"
     older: "以前の投稿"
     newer: "最近の投稿"
     be_the_first: "まだ投稿はありません。最初の投稿をしよう！"
+    put_new_lines: "長くならないように、適度に改行を入れてください。。"
     hot:
       post: "新着投稿"
       comment: "新着コメント"
@@ -370,7 +372,10 @@ ja:
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
   fb_shout: "Facebookにシャウト！"
+  facebook_shouted: "Facebookに投稿されました。"
+  facebook_failed: "Facebookへの投稿に失敗しました（本サイトからの投稿の許可設定が必要です）。"
   wall_from_ozjapanese: "OzJapaneseからの投稿です！"
+  comment_from_ozjapanese: "OzJapaneseでコメントを投稿しました。"
   successfully_created: "投稿が追加されました。"
   devise:
     omniauth_callbacks:

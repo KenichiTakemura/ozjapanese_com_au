@@ -14,8 +14,9 @@ module CommentHelper
     html = ""
     comments.each do |comment|
       html += %Q|<span class="badge">#{t("post.comment")}\##{comment.number}</span>|
-      html += %Q|<blockquote><p>#{simple_format(comment.body)}</p>|
-      html += %Q|<small>#{comment.postedDate} #{show_flyer(comment.commented_by)}</small></blockquote>|
+      html += %Q|<blockquote>#{simple_format(comment.body, :class => 'comment-text')}|
+      html += %Q|<small>#{comment.postedDate}</small>|
+      html += %Q|<small>#{show_flyer(comment.commented_by)}</small></blockquote>|
     end
     html.html_safe
   end

@@ -1,1 +1,2 @@
 $("#carousel_view_<%=@heading%>_<%=@post.id%>").html("<%= "#{t("post.viewed")} #{@post.views}" %>");
+$('#side_comment_area').html("<%= escape_javascript(render 'ozmains/carousel_comment')%>")

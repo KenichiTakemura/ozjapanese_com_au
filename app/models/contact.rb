@@ -1,7 +1,7 @@
 class Contact < ActiveRecord::Base
   
-  #ADMIN_EMAIL = "ktakemur@redhat.com"
-  ADMIN_EMAIL = "kenichi_takemura1976@yahoo.com"
+  ADMIN_EMAIL = "ktakemur@redhat.com"
+  #ADMIN_EMAIL = "kenichi_takemura1976@yahoo.com"
   
   def self.admin_email
     ADMIN_EMAIL

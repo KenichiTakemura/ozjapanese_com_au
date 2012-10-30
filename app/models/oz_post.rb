@@ -15,7 +15,9 @@ class OzPost < ActiveRecord::Base
   attr_accessible :has_attachment
   attr_accessible :requested_by
   attr_accessible :subject
-
+  attr_accessible :sns_feeded
+  attr_accessible :sns_provider
+  
   # status
   # draft -> public -> hidden -> deleted
   attr_accessible :status

@@ -1,5 +1,5 @@
 <% if @heading.eql? :ozj_all %>
-$('#heading_group_all').html("<%= escape_javascript(render 'ozmains/select_heading')%>");
+$('#heading_group_all').html("<%= escape_javascript(render 'ozmains/all_heading')%>");
 <% elsif @heading.eql? :ozj_h7 %>
 $('#heading_group_all').html("<%= escape_javascript(render 'pros/view_heading')%>");
 <% elsif @heading.eql? :ozj_h11 %>

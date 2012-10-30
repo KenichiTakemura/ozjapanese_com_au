@@ -94,7 +94,11 @@ module OzPostHelper
         html += show_a_post(post, heading)
         html += "</li></div>"
       end
-      html += %Q|</ul><a class="carousel-control left" href="\#listCarousel_#{id_suffix}" data-slide="prev">&lsaquo;</a><a class="carousel-control right" href="\#listCarousel_#{id_suffix}" data-slide="next">&rsaquo;</a></div></div>|
+      html += "</ul>"
+      if posts.size > 1
+        html += %Q|<a class="carousel-control left" href="\#listCarousel_#{id_suffix}" data-slide="prev">&lsaquo;</a><a class="carousel-control right" href="\#listCarousel_#{id_suffix}" data-slide="next">&rsaquo;</a>|
+      end
+      html += "</div></div>"
       html += _script(%Q|
       $('\#listCarousel_#{id_suffix}').carousel({pause:"hover",interval:30000});
       $('\#listCarousel_#{id_suffix}').carousel('next');
@@ -104,30 +108,5 @@ module OzPostHelper
     end
     html.html_safe
   end
-  
-  def post_fb_feed(heading, post)
-    html = ""
-    if current_flyer && current_flyer.facebook_flyer? 
-      html = %Q|<p>#{facebook}&nbsp;<a href="\#" onclick='postToFeed(); return false;'>#{t("post.post_fb_feed")}</a></p>|
-      html += %Q|<p id='msg'></p>|
-      html += _script(%Q|
-        function postToFeed() {
-          // calling the API ...
-          var obj = {
-            method: 'feed',
-            link: '#{root_url} + #{Ozlink.heading_link(heading,"view", {:d => post.id})}',
-            source: '#{root_url}',
-            name: '#{post.subject}',
-          };
-  
-          function callback(response) {
-            document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
-          }
-  
-          FB.ui(obj, callback);
-        }
-      |)
-    end
-    html.html_safe
-  end  
+
 end

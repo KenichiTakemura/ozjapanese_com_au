@@ -15,6 +15,8 @@ class CreateOzPosts < ActiveRecord::Migration
       t.integer :mode, :null => true
       t.boolean :has_image, :default => false
       t.boolean :has_attachment, :default => false
+      t.boolean :sns_feeded, :default => false
+      t.string :sns_provider, :null => true
       t.timestamps
     end
     add_index table, :z_index
