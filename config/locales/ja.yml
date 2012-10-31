@@ -204,7 +204,7 @@ ja:
   project_name: "OzJapanese"
   japanese: "日本人"
   flyer: "OzJapaneseスタイル"
-  hello_world: ブリスベン情熱サイトへようそこ
+  hello_world: "ブリスベン情報情熱サイト"
   view_site_detail: "サイトに関してもっと詳しく"
   about_site: "サイト情報"
   contact_us: "ご意見、ご要望はこちらから"
@@ -282,6 +282,9 @@ ja:
     exit: "退会依頼（データの削除など）"
     recomment_pro: "職人を推薦する"
     never_agree: "規約に同意できない"
+    career: "キャリア"
+    design: "デザインの応募"
+    buy: "サイトを購入したい"
     phone_is_optional: "連絡先は任意入力です。スポンサーに関する問い合せの場合は、必ず入力してください。"
     select_contact_type: "お問い合せ内容に合った、題名を選択してください。"
     describe_detail: "お手数ですが、できる限り、詳細に記載してください。"
@@ -318,8 +321,13 @@ ja:
       email: "Eメールアドレス"
     flyer:
   facebook:
+    shout: "Facebookにシャウト！"
+    name: "OzJapanese"
     caption: :title
     shouted: "Facebookに投稿されました。"
+    wall: "OzJapaneseより"
+    desc: "OzJapaneseからの投稿です！"
+    failed: "Facebookへの投稿に失敗しました（OzJapaneseへ投稿許可設定を行ってください。）"
   ozj_all:
     title: "全て" 
   ozj_h1:
@@ -373,8 +381,10 @@ ja:
     desc1: "　～　広い大地で見つかる本当の人"
     desc2: "オーストラリアで健全で真剣な出会いの場を提供します。"
     desc3: "現在、検討中です。"
-  lets_signin: "ログイン"
-  signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
+  auth:
+    signin: "ログイン"
+    signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
+    view_profile: "プロフィールを見る"
   signin_with_facebook: "Facebookでログイン"
   signin_with_google: "Googleでログイン"
   signin_remember_me: "ログイン情報を記憶する"
@@ -385,11 +395,9 @@ ja:
   welcome: "こんにちわ。"
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
-  fb_shout: "Facebookにシャウト！"
-  facebook_failed: "Facebookへの投稿に失敗しました（本サイトからの投稿の許可設定が必要です）。"
-  wall_from_ozjapanese: "OzJapaneseからの投稿です！"
   comment_from_ozjapanese: "OzJapaneseでコメントを投稿しました。"
   successfully_created: "投稿が追加されました。"
+  under_development: "現在、開発中です。"
   devise:
     omniauth_callbacks:
       success:

@@ -1,10 +1,8 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-			<a class="brand" href="<%=root_path%>"><%= t(:project_name)%> <%=t(:header_message)%></a>
-			<strong><a class="brand" style="color:red" href="<%=root_path%>"><i class="icon-fire icon-white"></i><%= t(:passion)%></a></strong>
-			<a class="brand" href="<%=root_path%>"><%= t(:site)%></a>
+			<a class="brand" href="<%=root_path%>"><i class="icon-fire icon-white"></i><%= t(:project_name)%> <%=t(:header_message)%><%= t(:passion)%><%= t(:site)%></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li></li>
@@ -14,11 +12,11 @@
 						<% if controller.controller_name.eql?("terms")%>
 							<%=t("signin_agreement_required")%>
 						<% else %>
-							<%=t(:welcome)%>
+							<strong style="font-size:16px"><%=t(:welcome)%></strong>
 							<% if !current_flyer %>
 								<%= signin(:signin_with) %>
 							<% else %>
-								<%= show_flyer %>
+								<%= show_flyer_header %>
 							<% end %>
 						<% end %>
 					</div>

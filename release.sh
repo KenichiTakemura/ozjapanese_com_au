@@ -16,10 +16,10 @@ tar jcvf ../release/ozjapanese_com_au_$DATE.tar.bz2\
  config/environment.rb\
  config/initializers\
  config/environments/production.rb\
- db\
+ db/migrate\
  lib\
  public/*html\
  public/assets\
  public/favicon.ico\
  public/robots.txt
-#rm -rf public/assets
+rm -rf public/assets

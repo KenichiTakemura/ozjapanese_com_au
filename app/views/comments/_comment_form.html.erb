@@ -23,15 +23,19 @@
 		}
 		$('\#post_comment_area_#{@post_for_comment.id}').html('#{image_tag("ajax-loader.gif")}');
 		if ($('\#post_comment_to_facebook').attr("checked") == "checked") {
+			document.getElementById('msg_#{token}').innerHTML = '#{image_tag("ajax-loader.gif")}';
 			var body = $('\#comment_area_#{@post_for_comment.id}').attr("value");
 			var link = '#{root_url}#{Ozlink.heading_link(@heading,"link_view", {:d => @post_for_comment.id})}"';
 			var name = '#{t("comment_from_ozjapanese")}';
-			FB.api('/me/feed', 'post', { message: body, link: link, name: name}, function(response) {
+			var caption = '#{t("facebook.caption")}';
+            var description = '#{t("facebook.desc")}';
+            var picture= '#{Ozlink.logo}';
+			FB.api('/me/feed', 'post', { message: body, picture: picture, link: link, name: name, caption: caption, description: description}, function(response) {
 				if (!response \|\| response.error) {
-    				document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook_failed"))}';
-    				console.log(response);
+					console.log(response)
+    				document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook.failed"))}';
   				} else {
-    				document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook_shouted"))}';
+    				document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook.shouted"))}';
   				}
 			});}| +
 		Ajax.post(post_comment_comments_path, %Q|authenticity_token: $("input[name='authenticity_token']").attr("value"), v: '#{Ozlink.base(@comment.commented_type)}', d: '#{Ozlink.param_enc(@comment.commented_id)}', post_facebook:$('\#post_comment_to_facebook').attr("checked"), m: $('\#comment_area_#{@post_for_comment.id}').attr("value")|) +

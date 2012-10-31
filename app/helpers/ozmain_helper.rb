@@ -2,34 +2,41 @@ module OzmainHelper
  
   def signin(text)
     #html = %Q|#{t(text)}#{link_to(facebook,flyer_omniauth_authorize_path(:facebook),:class => "")} #{link_to(google,flyer_omniauth_authorize_path(:google_oauth2),:class => "")}|
-    html = %Q|<a href="\#ozj_signin_modal", role="button", class="btn" data-toggle="modal"><i class="icon-signal"></i>#{t(:lets_signin)} #{facebook} #{google}</a>|
+    html = %Q|<a href="\#ozj_signin_modal", role="button", class="btn" data-toggle="modal"><i class="icon-signal"></i>#{t("auth.signin")} #{facebook} #{google}</a>|
     html.html_safe
   end
   
-  def show_flyer(flyer=nil)
+  def show_flyer_header(flyer=nil)
     return "" if flyer.nil? && !current_flyer
     if flyer.nil?
       flyer = current_flyer
     end
+    html = %Q|<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
+    html += flyer.flyer_name
+    html += %Q|<span class="caret"></span></a><ul class="dropdown-menu">|
+    if flyer.flyer_url.present?
+      html += %Q|<li><a href="#{flyer.flyer_url}">#{t("auth.view_profile")}</a>|
+    end
+    html += "</ul>&nbsp;"
+    if flyer.flyer_image.present?
+      html += image_tag(flyer.flyer_image, :alt => "")
+    end
+    html.html_safe
+  end
+
+  def show_flyer(flyer=nil)
     html = ""
-    if flyer.google_flyer?
-      if flyer.flyer_url.present?
-        html = link_to(flyer.flyer_name,flyer.flyer_url)
-      else
-        html = flyer.flyer_name
-      end
-    elsif flyer.facebook_flyer?
-      if flyer.flyer_url.present?
-        html = "#{link_to(flyer.flyer_name,flyer.flyer_url)}"
-      else
-        html = flyer.flyer_name
-      end
-      if flyer.flyer_image.present?
-        html += "#{image_tag(flyer.flyer_image, :alt => "")}"
-      end
+    return "" if flyer.nil? && !current_flyer
+    if flyer.nil?
+      flyer = current_flyer
+    end
+    if flyer.flyer_url.present?
+      html += %Q|<a href="#{flyer.flyer_url}">#{flyer.flyer_name}</a>|
     else
-      #local
-      html = flyer.flyer_name
+      html += flyer.flyer_name
+    end
+    if flyer.flyer_image.present?
+      html += image_tag(flyer.flyer_image, :alt => "")
     end
     html.html_safe
   end

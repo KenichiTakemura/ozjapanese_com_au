@@ -9,7 +9,7 @@ class Flyers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         if session[:remember_me]
           @user.remember_me = true
         end
-        flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Facebook"
+        #flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Facebook"
         sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
         #set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       else
@@ -36,7 +36,7 @@ class Flyers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           if session[:remember_me]
             @user.remember_me = true
           end
-          flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Google"
+          #flash[:notice] = I18n.t "devise.omniauth_callbacks.success.signed_in", :kind => "Google"
           sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
         else
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success.please_agree", :kind => "Google"

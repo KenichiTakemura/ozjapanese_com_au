@@ -8,7 +8,10 @@ class Contact < ActiveRecord::Base
     "contact.issue",
     "contact.exit",
     "contact.recomment_pro",
-    "contact.never_agree"
+    "contact.never_agree",
+    "contact.career",
+    "contact.design",
+    "contact.buy"
     ]
 
   # belongs_to
@@ -20,12 +23,15 @@ class Contact < ActiveRecord::Base
   validates_presence_of :user_name
   validates_presence_of :contact_type
   validates_presence_of :body
-  validates_format_of :email, :with => PostDef::EMAIL_REGEXP, :if => Proc.new { |email| email.present? }
+  validates_format_of :email, :with => PostDef::EMAIL_REGEXP, :if => :validate_email
   validates_format_of :phone, :with => /\A[\+\d\-\(\)\sx]+\z/, :if => :validate_phone
 
   def validate_phone
-    Rails.logger.debug("Phone Validation on #{phone}")
     phone.present?
+  end
+  
+  def validate_email
+    email.present?
   end
 
   def category_list()

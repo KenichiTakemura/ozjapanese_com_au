@@ -7,20 +7,18 @@ module UtilsHelper
   
   def show_notice(message=nil)
     html = ""
-    if notice.present?
-      html = %Q|<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{notice}</h4></div>|
-    elsif message.present?
-      html = %Q|<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{message}</h4></div>|
+    msg = message.presence || notice.presence || nil
+    if msg
+      html = %Q|<div class="alert alert-info alert-block fade in"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
     end
     html.html_safe
   end
   
   def show_alert(message=nil)
     html = ""
-    if alert.present?
-      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{alert}</h4></div>|
-    elsif message.present?
-      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{message}</h4></div>|
+    msg = message.presence || notice.presence || nil
+    if msg  
+      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
     end
     html.html_safe
   end

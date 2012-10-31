@@ -47,7 +47,11 @@ module Ozlink
     raise "Bad Request okpage nil" if okpage.nil?
     enc("#{Common.current_time.to_i}#{SP}#{okpage}").chop
   end
-
+  
+  def self.logo
+    'http://koolbz.com.au/ozj.png'
+  end
+  
   private
 
   def self.dec(d)
