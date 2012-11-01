@@ -3,7 +3,7 @@
 <div class="row-fluid" id="open_view">
 <% if !session[:uzatt]%>
 <div class="hero-unit">
-	<h1><%= t(:hello_world)%></h1>
+	<h1><%= raw(t(:hello_world)) %></h1>
 	<p>
 		<%= OzjapaneseStyle.hello_description%>
 	</p>

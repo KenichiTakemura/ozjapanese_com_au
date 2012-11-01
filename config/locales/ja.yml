@@ -200,18 +200,18 @@ ja:
       <<: *errors
   
   
-  title: "オーストラリア　ブリスベン情報　日本人応援サイト"
+  title: "オーストラリア　ブリスベン+ゴールドコースト情報　日本人応援サイト"
   project_name: "OzJapanese"
   japanese: "日本人"
   flyer: "OzJapaneseスタイル"
-  hello_world: "ブリスベン情報情熱サイト"
+  hello_world: "ブリスベン<small>+GC</small>情報情熱満載サイト"
   view_site_detail: "サイトに関してもっと詳しく"
   about_site: "サイト情報"
   contact_us: "ご意見、ご要望はこちらから"
   close: "閉じる"
-  header_message: "ブリスベン情報"
-  passion: "情熱"
-  site: "サイト"
+  brisbane: "ブリスベン"
+  goldcoast: "+GC"
+  header_message: "情報情熱満載サイト"
   please_signin: "投稿には、ログインが必要です。"
   
   phone: :contact.phone
@@ -236,6 +236,7 @@ ja:
     viewed: "view"
     comment: "コメント"
     back: "戻る"
+    list: "投稿一覧"
     cancel: "やっぱりやめる"
     no_information: "現在投稿はありません。:("
     write_something: "何か書いてください。"

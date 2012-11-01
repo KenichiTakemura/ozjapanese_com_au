@@ -65,6 +65,19 @@ module OzPostHelper
     html.html_safe
   end
   
+  def show_a_post_box(post)
+    model_name = post.class.name
+    html = %Q|<div class="thumbnail">|
+    html += %Q|<p>#{link_to(I18n.t(model_name), Ozlink.heading_link(OzjapaneseStyle.heading_by_model(model_name),"newer"))}|
+    html += %Q|<span class="badge badge-warning"><i class="icon-plane icon-white"></i>#{post.id}</span></p>|
+    html += content_tag(:p, show_flyer(post.posted_by))
+    html += %Q|<p><small>#{link_to(post.subject,Ozlink.heading_link(OzjapaneseStyle.heading_by_model(model_name),"link_view",{:d => post.id}))}</small>|
+    html += %Q|<i class="icon-comment"></i>#{post.comment.size}<i class="icon-search"></i>#{post.views}</p>|
+    html += content_tag(:p, post.postedDate)
+    html += "</div>"
+    html.html_safe
+  end
+  
   def show_a_post(post, heading)
    html = %Q|<div class="thumbnail">|
    if post.is_new?

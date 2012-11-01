@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :hit
+  before_filter :hit, :set_locale
   
   def debug?
     OzjapaneseComAu::Application.config.is_debug
+  end
+  
+  def set_locale
+    I18n.locale = params[:locale] || OzjapaneseComAu::Application.config.i18n.default_locale
   end
   
   def after_sign_in_path_for(resource)

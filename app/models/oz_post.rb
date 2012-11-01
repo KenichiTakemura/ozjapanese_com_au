@@ -128,6 +128,9 @@ class OzPost < ActiveRecord::Base
   scope :search, lambda { |limit| search_no_order(limit).desc }
   scope :search_older_than, lambda { |limit,day| post_search_by_time(day,-1).search_no_order(limit).desc }
   scope :search_newer_than, lambda { |limit,day| post_search_by_time(-1,day).search_no_order(limit).desc }
+  scope :search_before, lambda { |limit,post_id| post_before(post_id).search_no_order(limit).desc }
+  scope :search_after, lambda { |limit,post_id| post_after(post_id).search_no_order(limit).desc }
+
   protected
 
   scope :asc, :order => 'id ASC'
@@ -139,6 +142,19 @@ class OzPost < ActiveRecord::Base
   scope :latest, is_valid.raw_post.desc
   scope :valid_post, is_valid.raw_post
   scope :priority_post, is_valid.where("z_index != ?", 0).desc
+
+  scope :post_after, lambda { |post_id| 
+    if post_id.present? 
+      where('id > ?', post_id)
+    end
+  }
+  scope :post_before, lambda { |post_id| 
+    if post_id.present? 
+      where('id < ?', post_id)
+    end
+  }
+
+
 
   scope :post_search_by_time, lambda { |x,y| 
     if x.to_i < 0

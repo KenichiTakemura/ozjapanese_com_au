@@ -1,21 +1,7 @@
 <ul class="thumbnails">
 	<% @recent_top_feed.each do |feed|%>
 	<li class="" style="margin-left: 0px">
-		<div class="thumbnail">
-			<p>
-				<%= link_to(I18n.t(feed.feeded_to_type), Ozlink.heading_link(OzjapaneseStyle.heading_by_model(feed.feeded_to_type),"newer"))%>
-				<span class="badge badge-warning"><i class="icon-plane icon-white"></i><%=feed.feeded_to_id%></span>
-			</p>
-			<p>
-				<%= show_flyer(feed.feeded_to.posted_by)%>
-			</p>
-			<p>
-				<%= link_to(feed.feeded_to.subject,Ozlink.heading_link(OzjapaneseStyle.heading_by_model(feed.feeded_to_type),"link_view",{:d => feed.feeded_to_id}))%> <i class="icon-comment"></i><%= feed.feeded_to.comment.size%> <i class="icon-search"></i><%= feed.feeded_to.views%>
-			</p>
-			<p>
-				<%= feed.feeded_to.postedDate %>
-			</p>
-		</div>
+		<%= show_a_post_box(feed.feeded_to)%>
 	</li>
 	<% end %>
 </ul>

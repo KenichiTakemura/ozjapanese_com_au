@@ -2,7 +2,11 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  title: "Australia Brisbane Japanese　Site"
+  project_name: "OzJapanese"
+  japanese: "A Passionate Japanese"
+  header_message: "Brisbane Information"
+  hello: "Hello Brisbane"
   ozj_h1:
     title: "Employment"
   ozj_h2:
@@ -46,3 +50,5 @@ en:
     exit: "Contact Exit"
     recomment_pro: "Contact Pro"
     never_agree: "Contact Agreement"
+  auth:
+    signin: "Signin with"

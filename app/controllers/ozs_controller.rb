@@ -45,6 +45,9 @@ class OzsController < OzController
   # non-Ajax Request
   def link_view
     viewed
+    # Populate posts before and after
+    @older_posts = _model(@heading).search_before(3, @post.id)
+    @newer_posts = _model(@heading).search_after(3, @post.id)
     breadcrumb :link_view, @post
     respond_to do |format|
       format.html # link_view.html.erb
