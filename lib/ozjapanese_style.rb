@@ -67,6 +67,20 @@ module OzjapaneseStyle
       return I18n.t("#{heading}.title")
     end
   end
+  
+  def self.greeting
+    hour = Common.current_time.hour
+    case hour
+    when (0..4)
+        return I18n.t("greeting.night")
+    when (5..10)
+        return I18n.t("greeting.morning")
+    when (11..16)
+        return I18n.t("greeting.arvo")
+    when (17..23)
+        return I18n.t("greeting.evening")
+    end
+  end
 
   def self.hello_description
     html = <<-HTML

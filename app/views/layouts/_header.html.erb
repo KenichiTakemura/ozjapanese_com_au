@@ -7,12 +7,12 @@
 				<ul class="nav">
 					<li></li>
 				</ul>
-				<div class="span6 pull-right">
-					<div class="pull-right">
+				<div class="span4 pull-right">
+					<div class="navbar-text pull-right">
 						<% if controller.controller_name.eql?("terms")%>
 							<%=t("signin_agreement_required")%>
 						<% else %>
-							<strong style="font-size:16px"><%=t(:welcome)%></strong>
+							<strong style="font-size:20px"><%=OzjapaneseStyle.greeting%></strong>
 							<% if !current_flyer %>
 								<%= signin(:signin_with) %>
 							<% else %>

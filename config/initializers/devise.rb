@@ -210,7 +210,8 @@ Devise.setup do |config|
   config.omniauth :facebook, "254068608049050", "a5084cc119dd53403500431242f02a16", :strategy_class => OmniAuth::Strategies::Facebook
 
   require "omniauth-google-oauth2"
-  config.omniauth :google_oauth2, "137532331196.apps.googleusercontent.com", "BnvrAhUaqmtQb3XD8L3828Ea", { :access_type => "offline", :approval_prompt => "" }
+  #config.omniauth :google_oauth2, "137532331196.apps.googleusercontent.com", "BnvrAhUaqmtQb3XD8L3828Ea", :strategy_class => OmniAuth::Strategies::Google, { :access_type => "offline", :approval_prompt => "" }
+  config.omniauth :google_oauth2, "137532331196.apps.googleusercontent.com", "BnvrAhUaqmtQb3XD8L3828Ea", :strategy_class => OmniAuth::Strategies::Google
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

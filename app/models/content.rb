@@ -9,4 +9,9 @@ class Content < ActiveRecord::Base
   def to_s
     "id =>#{id}"
   end
+  
+  scope :desc, :order => 'id DESC'
+  scope :search_by_post, lambda { |post| where("contented_id = ?", post)}
+  
+  scope :content_for, lambda { |post| search_by_post(post).desc }
 end

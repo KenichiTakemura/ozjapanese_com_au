@@ -40,6 +40,12 @@ module Common
   def self.this_month
     current_time.strftime("%Y-%m")
   end
+  
+  def self.last_month(month=nil)
+    return (current_time - 1.month).strftime("%Y-%m") if !month.present?
+    month << "-01"
+    (Time.parse(month) - 1.month).strftime("%Y-%m")
+  end
 
   def self.days_ago(x)
     (current_time - x.days)
@@ -81,7 +87,6 @@ module Common
     false
   end
 
-# 2012.10.21
   def self.copy_right_year
     current_time.strftime("%Y")
   end

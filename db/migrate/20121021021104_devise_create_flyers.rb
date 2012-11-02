@@ -46,7 +46,8 @@ class DeviseCreateFlyers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :flyers, :email,                :unique => true
+    #add_index :flyers, :email,                :unique => true
+    add_index :flyers, [:provider, :uid]
     add_index :flyers, :reset_password_token, :unique => true
     # add_index :flyers, :confirmation_token,   :unique => true
     # add_index :flyers, :unlock_token,         :unique => true

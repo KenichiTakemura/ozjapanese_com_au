@@ -34,4 +34,7 @@ OzjapaneseComAu::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.admin_email = "kenichi_takemura1976@yahoo.com"
+  config.admin_email_locale = "en"
 end

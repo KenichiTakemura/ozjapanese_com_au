@@ -28,8 +28,8 @@ class OzPost < ActiveRecord::Base
 
   # has_many
   has_many :comment, :as => :commented, :class_name => 'Comment', :dependent => :destroy
-  #has_many :attachment, :as => :attached, :class_name => 'Attachment', :dependent => :destroy
-  #has_many :image, :as  => :attached, :class_name => 'Image', :dependent => :destroy
+  has_many :attachment, :as => :attached, :class_name => 'Attachment', :dependent => :destroy
+  has_many :image, :as  => :attached, :class_name => 'Image', :dependent => :destroy
 
   # has_one
   has_one :content, :as => :contented, :dependent => :destroy
@@ -103,6 +103,26 @@ class OzPost < ActiveRecord::Base
   #user.mypage.add_post
   end
 
+  def updated_by(user)
+    update_attribute(:post_updated_by, user)
+  end
+  
+  def set_has_image(yesno)
+    update_attribute(:has_image, yesno)
+  end
+
+  def set_has_attachment(yesno)
+    update_attribute(:has_attachment, yesno)
+  end
+    
+  def has_image?
+    has_image
+  end
+      
+  def has_attachment?
+    has_attachment
+  end
+  
   def author_name
     self.posted_by.flyer_name
   end
@@ -120,7 +140,6 @@ class OzPost < ActiveRecord::Base
     update_attribute(:views, views + 1)
   end
 
-  
   ##
   # SCOPE
   ##
@@ -154,8 +173,6 @@ class OzPost < ActiveRecord::Base
     end
   }
 
-
-
   scope :post_search_by_time, lambda { |x,y| 
     if x.to_i < 0
       where("created_at > ?", (Common.days_ago(y)))
@@ -166,7 +183,6 @@ class OzPost < ActiveRecord::Base
     end
   }
   
-
   def topfeedable?
     false
   end

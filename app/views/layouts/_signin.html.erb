@@ -36,12 +36,7 @@
 					<%=t("signin_remember_me")%>
 					</label>
 					</p>
-					<% if debug? %>
-					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="google_signin"><%=t("process_signin")%></button>
-					<% else %>
-					<button type="button" class="btn btn-primary disabled" data-loading-text="<%=t("signin_inprogress")%>" id="google_signin_disabled"><%=t("process_signin")%></button>
-					<span class="help-block"><%=t("under_development")%></span>
-					<% end %>					
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="google_signin"><%=t("process_signin")%></button>			
 					<div class="google_signin_progress"></div>
 					<%= _script_document_ready(%Q|
 						$('\#google_signin').button();

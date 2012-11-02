@@ -16,7 +16,7 @@ module UtilsHelper
   
   def show_alert(message=nil)
     html = ""
-    msg = message.presence || notice.presence || nil
+    msg = message.presence || alert.presence || nil
     if msg  
       html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
     end

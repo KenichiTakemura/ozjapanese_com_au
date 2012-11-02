@@ -10,7 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028032450) do
+ActiveRecord::Schema.define(:version => 20121102075343) do
+
+  create_table "attachments", :force => true do |t|
+    t.boolean  "is_deleted",          :default => false
+    t.datetime "avatar_updated_at"
+    t.string   "avatar_content_type"
+    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
+    t.string   "medium_size"
+    t.string   "thumb_size"
+    t.string   "original_size"
+    t.integer  "write_at"
+    t.integer  "attached_by_id"
+    t.string   "attached_by_type"
+    t.integer  "attached_id"
+    t.string   "attached_type"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "status",                           :null => false
@@ -78,8 +96,29 @@ ActiveRecord::Schema.define(:version => 20121028032450) do
     t.datetime "updated_at",                             :null => false
   end
 
-  add_index "flyers", ["email"], :name => "index_flyers_on_email", :unique => true
+  add_index "flyers", ["provider", "uid"], :name => "index_flyers_on_provider_and_uid"
   add_index "flyers", ["reset_password_token"], :name => "index_flyers_on_reset_password_token", :unique => true
+
+  create_table "images", :force => true do |t|
+    t.boolean  "is_deleted",                              :default => false
+    t.datetime "avatar_updated_at"
+    t.string   "avatar_content_type"
+    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
+    t.string   "medium_size"
+    t.string   "thumb_size"
+    t.string   "original_size"
+    t.integer  "write_at"
+    t.integer  "attached_by_id"
+    t.string   "attached_by_type"
+    t.integer  "attached_id"
+    t.string   "attached_type"
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+    t.text     "something",           :limit => 16777215
+    t.string   "source_url"
+    t.string   "link_to_url"
+  end
 
   create_table "oz_buy_goods", :force => true do |t|
     t.string   "locale",                                  :null => false

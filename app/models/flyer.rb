@@ -9,6 +9,14 @@ class Flyer < ActiveRecord::Base
   
   # Association
   has_many :oz_employment, :as => :posted_by, :class_name => 'OzEmployment', :dependent => :destroy
+  has_many :oz_employer, :as => :posted_by, :class_name => 'OzEmployer', :dependent => :destroy
+  has_many :oz_sell_good, :as => :posted_by, :class_name => 'OzSellGood', :dependent => :destroy
+  has_many :oz_buy_good, :as => :posted_by, :class_name => 'OzBuyGood', :dependent => :destroy
+  has_many :oz_estate_share_rent, :as => :posted_by, :class_name => 'OzEstateShareRent', :dependent => :destroy
+  has_many :oz_info_event, :as => :posted_by, :class_name => 'OzInfoEvent', :dependent => :destroy
+  has_many :oz_people_pro, :as => :posted_by, :class_name => 'OzPeoplePro', :dependent => :destroy
+  has_many :oz_info_living_smart, :as => :posted_by, :class_name => 'OzInfoLivingSmart', :dependent => :destroy
+  has_many :oz_info_living_qna_good, :as => :posted_by, :class_name => 'OzInfoLivingQna', :dependent => :destroy
 
   has_many :role, :as => :rolable, :class_name => "Role", :dependent => :destroy
   has_many :comment, :as => :commented_by, :dependent => :destroy
@@ -107,13 +115,15 @@ class Flyer < ActiveRecord::Base
   #access_token #<OmniAuth::AuthHash credentials=#<Hashie::Mash expires=true expires_at=1350894980 token="ya29.AHES6ZRIPUOUgRfWlo_4F3ZXQQ-MFopc9mYekj6jaJr6rmVTPxGH5g"> extra=#<Hashie::Mash raw_info=#<Hashie::Mash email="kenkenpa.kenichi@gmail.com" family_name="Takemura" gender="male" given_name="Kenichi" id="105992782623248923279" link="https://plus.google.com/105992782623248923279" locale="en-GB" name="Kenichi Takemura" verified_email=true>> info=#<OmniAuth::AuthHash::InfoHash email="kenkenpa.kenichi@gmail.com" first_name="Kenichi" last_name="Takemura" name="Kenichi Takemura"> provider="google_oauth2" uid="105992782623248923279">
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    logger.info("find_for_google_oauth2 access_token: #{access_token}")
     data = access_token.info
     provider = access_token.provider
     uid = access_token.uid
     link = access_token.extra.raw_info.link
     email = data["email"]
     logger.info("find_for_google_oauth2 #{provider} #{uid} #{link} #{email}")
-    user = Flyer.where(:email => email).first
+    # I should say adding provider check because one can signin Facebook with gmail account
+    user = Flyer.where(:provider => provider, :uid => uid).first
     if !user.present?
       logger.info("User is to be created. email: #{data["email"]}")
       user = Flyer.create(:flyer_name => data["name"],

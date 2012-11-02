@@ -11,13 +11,19 @@ module OzmainHelper
     if flyer.nil?
       flyer = current_flyer
     end
-    html = %Q|<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
-    html += flyer.flyer_name
-    html += %Q|<span class="caret"></span></a><ul class="dropdown-menu">|
     if flyer.flyer_url.present?
+      html = %Q|<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">|
+      if !flyer.flyer_image.present?
+        html += %Q|<i class="icon-user"></i>#{flyer.flyer_name}|
+      else
+        html += flyer.flyer_name
+      end
+      html += %Q|<span class="caret"></span></a><ul class="dropdown-menu">|
       html += %Q|<li><a href="#{flyer.flyer_url}">#{t("auth.view_profile")}</a>|
+      html += "</ul>&nbsp;"
+    else
+      html = "#{flyer.flyer_name}&nbsp;"
     end
-    html += "</ul>&nbsp;"
     if flyer.flyer_image.present?
       html += image_tag(flyer.flyer_image, :alt => "")
     end
