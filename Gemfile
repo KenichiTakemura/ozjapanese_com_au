@@ -51,3 +51,4 @@ gem 'omniauth-google-oauth2'
 gem "system_timer"
 gem 'gretel'
 gem 'paperclip', '~> 2.7'
+gem 'remotipart'

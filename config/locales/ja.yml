@@ -309,6 +309,18 @@ ja:
     welcome_new_flyer_joined: "OzJapaneseの加入が完了しました。"
     provider: "プロバイダー"
     date_joined: "加入日"
+  upload:
+    image: "イメージ"
+    upload: "アップロード"
+    image_upload: "イメージをアップロード"
+    image_upload_description1: "イメージを選択し、コメントを書いて追加してください。"
+    image_upload_description2: "イメージのアップロードは、投稿する前に行ってください。"
+    write_something: "何か書いてください。"
+    has_invalid_content_type: "アップロードできるファイルは、イメージファイルのみです。"
+    failed_to_upload: "アップロードに失敗しました。"
+    failed_to_upload_with: "アップロードに失敗しました。ファイルサイズを確認してください。"
+    max_size: "ファイルサイズは、%{size} までです。"
+    success: "アップロードしました。"
   mail:
     admin:
       subject: "[OzJapanese]"
@@ -386,13 +398,14 @@ ja:
   auth:
     signin: "ログイン"
     signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
+    remember_me: "ログイン情報を記憶する"
     view_profile: "プロフィールを見る"
-  signin_with_facebook: "Facebookでログイン"
-  signin_with_google: "Googleでログイン"
-  signin_remember_me: "ログイン情報を記憶する"
-  process_signin: "ログインする"
+    connecting_to_provider: "ログイン処理中です。"
+    with_facebook: "Facebookでログイン"
+    with_google: "Googleでログイン"
+    signin_with_how: "ログイン後に、%{provider}のページが表示された場合は、%{provider}にてログインを行ってください（ログインは、%{provider}上で実施されます）。"
+    process_signin: "ログインする"
   signin_inprogress: "ログイン処理中・・・"
-  signin_with_how: "ログイン後に、%{provider}のページが表示された場合は、%{provider}にてログインを行ってください（ログインは、%{provider}上で実施されます）。"
   signin_agreement_required: "規約への同意をお願いします"
   welcome: "ようそこ"
   greeting:

@@ -1,3 +1,4 @@
+<%=t("auth.connecting_to_provider", :provider => @provider)%>
 <% case @provider
  when Flyer::PROVIDERS[:facebook] %>
 <script type="text/javascript">
@@ -6,6 +7,10 @@
 <% when Flyer::PROVIDERS[:google] %>
 <script type="text/javascript">
     window.location.href="<%=flyer_omniauth_authorize_path(:google_oauth2)%>"
+</script>
+<% when Flyer::PROVIDERS[:ozjapanese] %>
+<script type="text/javascript">
+    window.location.href="<%=new_flyer_session_path%>"
 </script>
 <% else %>
 <% raise "Bad Provider"%>

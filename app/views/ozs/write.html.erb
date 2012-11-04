@@ -36,7 +36,7 @@
 		</p>
 		<% end %>
 
-		<%= form_for(@post, :html => { :multipart => true }) do |f| %>
+		<%= form_for(@post) do |f| %>
 		<div class="pull-right">
 			<span class="label label-info"><%= t("post.author") %></span>&nbsp;<i class="icon-user"></i><%= current_flyer.flyer_name %>
 		</div>
@@ -62,5 +62,7 @@
 		<%= f.submit t("post.create"), :class => "btn btn-primary" %>
 		<%= link_to(t("post.cancel"), root_path, :class => "btn") %>
 		<% end %>
+		<!-- image upload -->
+		<%= render :partial => "ozs/upload/image"%>
 	</div>
 </div>

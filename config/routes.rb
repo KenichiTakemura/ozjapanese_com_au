@@ -31,11 +31,13 @@ OzjapaneseComAu::Application.routes.draw do
       post :carousel_viewed
       get :feed_view
       post :select_heading
+      post :upload_image
     end
   end
   
-  resources :terms, :only => ["index","create"]
   
+  resources :terms, :only => ["index","create"]
+  resources :images, :only => ["create"]
   resources :oz_employments, :only => ["create"]
   resources :oz_employers, :only => ["create"]
   resources :oz_sell_goods, :only => ["create"]

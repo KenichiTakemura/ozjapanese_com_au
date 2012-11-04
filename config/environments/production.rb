@@ -66,9 +66,10 @@ OzjapaneseComAu::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.is_debug = false
 
-  config.my_host = "s3-singapore.accountservergroup.com"
+  #config.my_host = "s3-singapore.accountservergroup.com"
+  config.my_host = "108.174.147.28"
 
-  #Paperclip.options[:command_path] = "/usr/bin/"
+  Paperclip.options[:command_path] = "/usr/bin/"
 
   # Mail
   config.action_mailer.delivery_method = :smtp

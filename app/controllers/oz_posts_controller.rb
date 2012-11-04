@@ -15,6 +15,14 @@ class OzPostsController < OzController
     ActiveRecord::Base.transaction do
       if @post.save
         @post.set_user(current_flyer)
+        get_image(@post.write_at).each do |image|
+          image.attached_to_by(@post, current_flyer)
+        end
+        # Delete unsaved images if any
+        get_unsaved_image(@post.write_at).each do |image|
+          logger.info("Image to be deleted. #{image}")
+          image.destroy
+        end
         ContactMailer.send_new_post_to_admin(@heading, @post).deliver
         flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
@@ -37,5 +45,14 @@ class OzPostsController < OzController
 
   protected
 
+  private
+  
+  def get_image(write_at)
+    Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_flyer, write_at)
+  end
+  
+  def get_unsaved_image(write_at)
+    Image.where("attached_by_id = ? AND attached_id is NULL AND write_at != ?", current_flyer, write_at)
+  end
 
 end

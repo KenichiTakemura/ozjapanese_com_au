@@ -22,7 +22,7 @@ module OzmainHelper
       html += %Q|<li><a href="#{flyer.flyer_url}">#{t("auth.view_profile")}</a>|
       html += "</ul>&nbsp;"
     else
-      html = "#{flyer.flyer_name}&nbsp;"
+      html = %Q|<i class="icon-user icon-white"></i>#{flyer.flyer_name}&nbsp;|
     end
     if flyer.flyer_image.present?
       html += image_tag(flyer.flyer_image, :alt => "")

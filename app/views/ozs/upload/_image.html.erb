@@ -1,0 +1,21 @@
+<div class="image">
+<%= form_for(@image, :html => { :multipart => true }, :remote => true) do |f| %>
+	<%= f.hidden_field :write_at, :id => "write_at" %>
+	<%= f.label t("upload.image_upload") %>
+	<span class="help-block text-info"><%= t("upload.image_upload_description1") %></span>
+	<span class="help-block text-info"><%= t("upload.image_upload_description2") %></span>
+	<div id="upload_status" style="display:none">
+		<%= image_tag("ajax-loader.gif")%></div>
+	<%= f.file_field :image, :id => "upload_image" %>
+	<span class="help-inline"><%= t("upload.max_size", :size => number_to_human_size(Image::MAX_IMAGE_SIZE))%></span>
+	<br>
+	<%= f.text_area :something, :placeholder => t("upload.write_something"), :class => "text_area", :id => "upload_something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
+	<br>
+	<%= f.submit t("upload.upload"), :class => "btn btn-info", :id => "upload_submit" %>
+<% end %>
+<%= _script(%Q|$('\#upload_submit').click(function(){
+	$('\#upload_image_status').html('#{image_tag("ajax-loader.gif")}');
+})|)%>
+<div id="upload_image_status"></div>
+<div id="upload_image_area"></div>
+</div>

@@ -1,0 +1,14 @@
+<% if @images.present? %>
+<ul class="thumbnails">
+	<% @images.each do |image| %>
+	<li class="span3">
+		<div class="thumbnail">
+			<%= image_tag(image.medium_image)%>
+			<p><%= image.something%></p>
+			<p><%= image.filename%></p>
+			<p><%= image.filesize%>&nbsp;byte</p>
+		</div>
+	</li>
+	<% end %>
+</ul>
+<% end %>

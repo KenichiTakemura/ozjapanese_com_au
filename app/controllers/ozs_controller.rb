@@ -1,7 +1,7 @@
 class OzsController < OzController
   
   before_filter :_before_, :except => [:carousel_viewed]
-  before_filter :authenticate_flyer!, :only => [:write]
+  before_filter :authenticate_flyer!, :only => [:write, :upload_image]
 
   def _before_
     raise "Bad Request" if params[:v].nil?
@@ -38,7 +38,9 @@ class OzsController < OzController
     @post.write_at = Common.current_time.to_i
     @post.build_content
     @post.valid_until = PostDef.post_expiry
+    @image = Image.new(:write_at => @post.write_at)
     breadcrumb :write, @heading
+    logger.debug("write image #{@image}")
     @post
   end
   

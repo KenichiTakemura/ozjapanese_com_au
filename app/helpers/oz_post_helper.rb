@@ -51,14 +51,22 @@ module OzPostHelper
   def build_body_list_body(token)
     html = ""
     @posts.each do |post|
-      html += %Q|<tr class="#{cycle("odd", "even")} select">|
+      html += %Q|<tr class="#{cycle("odd", "even")}">|
       html += %Q|<td style="width:0px;display:none">#{post.id}</td>|
       if post.is_new?
         html += %Q|<td><span class="badge badge-success"><i class="icon-star icon-white"></i>#{post.id}</span></td>|
       else
         html += %Q|<td><span class="badge badge">#{post.id}</span></td>|
       end
-      html += %Q|<td>#{link_to(post.subject,Ozlink.heading_link(@heading,"viewed",{:d => post.id}), :method => :post, :remote => true, :onclick => "view_post_#{token}()")}</td><td>#{post.postedDate}</td><td>#{post.views}</td><td>|
+      html += %Q|<td>#{link_to(post.subject,Ozlink.heading_link(@heading,"viewed",{:d => post.id}), :method => :post, :remote => true, :onclick => "view_post_#{token}()")}|
+      if post.has_image?
+        html += %Q|<p><ul class="thumbnails">|
+        post.image.each do |image|
+          html += %Q|<li class="span4">#{image_tag(image.thumb_image, :class => "image-resize50_50")}</li>|
+        end
+        html += "</ul></p>" 
+      end
+      html += %Q|</td><td>#{post.postedDate}</td><td>#{post.views}</td><td>|
       html += %Q|<i class="icon-comment"></i>#{post.comment.size}</td>|
       html += %Q|<td>| + link_to(post.author_name,post.posted_by.flyer_url) + %Q|</td>|
     end
@@ -73,6 +81,9 @@ module OzPostHelper
     html += content_tag(:p, show_flyer(post.posted_by))
     html += %Q|<p><small>#{link_to(post.subject,Ozlink.heading_link(OzjapaneseStyle.heading_by_model(model_name),"link_view",{:d => post.id}))}</small>|
     html += %Q|<i class="icon-comment"></i>#{post.comment.size}<i class="icon-search"></i>#{post.views}</p>|
+    if post.has_image?
+      html += %Q|#{image_tag(post.image.first.thumb_image)}|
+    end
     html += content_tag(:p, post.postedDate)
     html += "</div>"
     html.html_safe
@@ -92,6 +103,13 @@ module OzPostHelper
    html += post_fb_feed(heading, post)
    html += %Q|<p id="carousel_view_#{heading}_#{post.id}">#{t("post.viewed")} #{post.views}</p>|
    html += %Q|<p><i class="icon-comment"></i> #{post.comment.size}</p>|
+   if post.has_image?
+    html += %Q|<p><ul class="thumbnails">|
+    post.image.each do |image|
+      html += %Q|<li class="span4">#{link_to(image_tag(image.medium_image), "#")}</li>|
+    end
+    html += "</ul></p>" 
+   end
    html += %Q|<div class="row-fluid">#{post_comment_new(heading,post,:signin_with_following)}<div id="post_comment_area_#{post.id}"></div></div>|
    html += "</div>"
    html.html_safe

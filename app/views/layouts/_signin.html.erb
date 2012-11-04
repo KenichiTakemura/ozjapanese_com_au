@@ -9,15 +9,15 @@
 		<ul class="thumbnails">
 			<li class="span5">
 				<div class="thumbnail">	
-					<h6><%= facebook %> <%=t("signin_with_facebook")%></h6>
-					<p><%=t("signin_with_how", :provider => "Facebook")%></p>
+					<h6><%= facebook %> <%=t("auth.with_facebook")%></h6>
+					<p><%=t("auth.signin_with_how", :provider => "Google")%></p>
 					<p>
 					<label class="checkbox">
 					<input type="checkbox" value="" id="facebook_remember_me">
-					<%=t("signin_remember_me")%>
+					<%=t("auth.remember_me")%>
 					</label>
 					</p>
-					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="facebook_signin"><%=t("process_signin")%></button>
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="facebook_signin"><%=t("auth.process_signin")%></button>
 					<div class="facebook_signin_progress"></div>
 					<%= _script_document_ready(%Q|$('\#facebook_signin').button();
 						$('\#facebook_signin').click(function() {
@@ -28,15 +28,15 @@
 			</li>
 			<li class="span5">
 				<div class="thumbnail">			
-					<h6><%= google %> <%=t("signin_with_google")%></h6>
-					<p><%=t("signin_with_how", :provider => "Google")%></p>
+					<h6><%= google %> <%=t("auth.with_google")%></h6>
+					<p><%=t("auth.signin_with_how", :provider => "Google")%></p>
 					<p>
 					<label class="checkbox">
 					<input type="checkbox" value="" id="google_remember_me">
-					<%=t("signin_remember_me")%>
+					<%=t("auth.remember_me")%>
 					</label>
 					</p>
-					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="google_signin"><%=t("process_signin")%></button>			
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="google_signin"><%=t("auth.process_signin")%></button>			
 					<div class="google_signin_progress"></div>
 					<%= _script_document_ready(%Q|
 						$('\#google_signin').button();
@@ -46,6 +46,22 @@
 						%Q|})|)%>
 				</div>
 			</li>
+			<% if debug? %>
+			<li class="span5">
+				<div class="thumbnail">			
+					<h6>OzJapanese Signin</h6>
+					<button type="button" class="btn btn-primary" data-loading-text="<%=t("signin_inprogress")%>" id="ozjapanese_signin"><%=t("auth.process_signin")%></button>
+					<div class="ozjapanese_signin_progress"></div>
+					<%= _script_document_ready(%Q|
+						$('\#ozjapanese_signin').button();
+						$('\#ozjapanese_signin').click(function() {
+						$('.ozjapanese_signin_progress').html('#{image_tag("ajax-loader.gif")}');| +
+						Ajax.post(signin_sessions_path,%Q|provider:'#{Flyer::PROVIDERS[:ozjapanese]}'|) +
+						%Q|})|)%>
+				</div>
+			</li>
+
+			<% end %>
 		</ul>
 	</div>
 	<div class="modal-footer">

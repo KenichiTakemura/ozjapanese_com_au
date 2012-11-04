@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
   
   def after_sign_in_path_for(resource)
     logger.info("after_sign_in_path_for request.referer: #{request.referer}")
+    if debug?
+      sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
+      if (request.referer == sign_in_url)
+        super
+      end
+    end
     if (request.referer =~ /terms/)
       root_path
     else

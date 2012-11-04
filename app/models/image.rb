@@ -1,6 +1,7 @@
 class Image < Attachable
   attr_accessible :write_at, :something, :link_to_url, :source_url
-
+  attr_accessible :avatar
+  
   has_attached_file :avatar,
   :styles => lambda { |a|
    if a.instance.thumbnailable?
@@ -22,8 +23,8 @@ class Image < Attachable
   # https://github.com/thoughtbot/paperclip
   validates_attachment_size :avatar, :less_than => MAX_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
-  validates_presence_of :write_at, :message
-  validates_presence_of :original_size, :message => I18n.t('failed_to_create')
+  validates_presence_of :write_at
+  validates_presence_of :original_size, :message => I18n.t('upload.failed_to_upload')
   validates_format_of :link_to_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid"), :if => Proc.new { |image| !image.link_to_url.empty? }
   validates_format_of :source_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid"), :if => Proc.new { |image| !image.source_url.empty? }
 
@@ -88,6 +89,14 @@ class Image < Attachable
   
   def link
     self.link_to_url
+  end
+  
+  def filename
+    avatar_file_name
+  end
+  
+  def filesize
+    avatar_file_size
   end
 
 end
