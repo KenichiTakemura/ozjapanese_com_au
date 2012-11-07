@@ -26,18 +26,21 @@ class OzPostsController < OzController
         ContactMailer.send_new_post_to_admin(@heading, @post).deliver
         flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
-          format.html { redirect_to "#{Ozlink.heading_link(@heading, nil)}" }
-          format.json { render :json => @post, :status => :created }
+          #format.html { redirect_to "#{Ozlink.heading_link(@heading, "")}" }
+          #format.json { render :json => @post, :status => :created }
+          format.js
         end
       else
         flash[:warning] = I18n.t("failed_to_create")
         @post.errors.full_messages.each do |msg|
           logger.warn("@post.errors: #{msg}")
         end
-        @post.build_content if @post.content.nil?
+        #@post.build_content if @post.content.nil?
+        #@image = Image.new(:write_at => @post.write_at)
         respond_to do |format|
-          format.html { render :template => "ozs/write" }
-          format.json { render :json => @post.errors, :status => :unprocessable_entity }
+          #format.html { render :template => "ozs/write" }
+          format.js
+          #format.json { render :json => @post.errors, :status => :unprocessable_entity }
         end
       end
     end

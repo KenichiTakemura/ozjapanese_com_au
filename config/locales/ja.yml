@@ -242,6 +242,7 @@ ja:
     no_information: "現在投稿はありません。:("
     write_something: "何か書いてください。"
     create: "投稿する"
+    creating: "投稿中です・・・"
     author: "投稿者"
     content: "投稿内容"
     please_use_other_browsers: "Internet Explorer 以外のブラウザをご使用いただくと、もっと簡単に投稿できます。"
@@ -249,15 +250,17 @@ ja:
     why_valid_until: "現在の有効期限は%{days}日です。"
     post_fb_feed: "Facebookでみんなに知らせよう！"
     write_new: "投稿する"
-    comment_new: "OzJapaneseにコメントを投稿する"
+    comment_new: "コメントを投稿する"
     comment_facebook_new: "Facebookにも同時にコメントを投稿する;)"
-    post_facebook_new: "Facebookにも投稿をシャウトする。"
+    post_facebook_new: "Facebookにも同時に投稿する。"
     view_all_comment: "コメントを全て表示"
     more: "さらに表示"
     older: "以前の投稿"
     newer: "最近の投稿"
     be_the_first: "まだ投稿はありません。最初の投稿をしよう！"
     put_new_lines: "長くならないように、適度に改行を入れてください。。"
+    from_ozjapanese: "OzJapaneseで投稿しました。"
+    posting_facebook: "Facebookへ投稿中です・・・"
     hot:
       post: "新着投稿"
       comment: "新着コメント"
@@ -397,6 +400,7 @@ ja:
     desc3: "現在、検討中です。"
   auth:
     signin: "ログイン"
+    signout: "ログアウト"
     signin_with: "FacebookまたはGoogleのアカウントでログインできます。"
     remember_me: "ログイン情報を記憶する"
     view_profile: "プロフィールを見る"
@@ -416,6 +420,7 @@ ja:
   uzatt: "うざっ"
   logo: "ここにロゴをアップロードできます。"
   comment_from_ozjapanese: "OzJapaneseでコメントを投稿しました。"
+  
   successfully_created: "投稿が追加されました。"
   under_development: "現在、開発中です。"
   devise:

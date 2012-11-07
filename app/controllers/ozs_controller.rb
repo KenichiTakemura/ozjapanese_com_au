@@ -35,6 +35,7 @@ class OzsController < OzController
   
   def write
     @post = _model(@heading).new
+    session["flyer_return_to"] = request.original_url
     @post.write_at = Common.current_time.to_i
     @post.build_content
     @post.valid_until = PostDef.post_expiry
@@ -42,6 +43,10 @@ class OzsController < OzController
     breadcrumb :write, @heading
     logger.debug("write image #{@image}")
     @post
+  end
+  
+  def cancel
+    redirect_to Ozlink.heading_link(@heading,"")
   end
   
   # non-Ajax Request

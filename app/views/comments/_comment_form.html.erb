@@ -32,7 +32,6 @@
             var picture= '#{Ozlink.logo}';
 			FB.api('/me/feed', 'post', { message: body, picture: picture, link: link, name: name, caption: caption, description: description}, function(response) {
 				if (!response \|\| response.error) {
-					console.log(response)
     				document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook.failed"))}';
   				} else {
     				document.getElementById('msg_#{token}').innerHTML = '#{show_notice(t("facebook.shouted"))}';

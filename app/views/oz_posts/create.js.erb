@@ -1,0 +1,13 @@
+$('#post_submit').attr("value",'<%=t("post.create")%>');
+$('#post_status').html('');
+<% if @post.errors.present? %>
+$('#post_errors').html('<%= escape_javascript(form_error_messages!(@post)) %>');
+$('#post_errors').focus();
+$('#post_submit').attr("disabled", false);
+<% else %>
+if($('\#post_to_facebook').attr("checked") == "checked") {
+	$('#post_facebook_script').html("<%= escape_javascript(render 'oz_posts/post_facebook') %>");
+} else {
+	$('body').html("<%= escape_javascript(render 'oz_posts/goindex') %>");
+}
+<% end %>

@@ -29,14 +29,7 @@
 		<p class="text-success">
 			<strong> <%= t("post.category") %> : <%= t(@post.class) %></strong>
 		</p>
-		<%= form_error_messages!(@post) %>
-		<% if browser == Browser::MSIE %>
-		<p class="text-info">
-			<strong> <%= t("post.please_use_other_browsers") %> </strong>
-		</p>
-		<% end %>
-
-		<%= form_for(@post) do |f| %>
+		<%= form_for(@post, :remote => true) do |f| %>
 		<div class="pull-right">
 			<span class="label label-info"><%= t("post.author") %></span>&nbsp;<i class="icon-user"></i><%= current_flyer.flyer_name %>
 		</div>
@@ -52,15 +45,32 @@
 		<% end %>
 		<br>
 		<% if current_flyer && current_flyer.facebook_flyer? %>
-		<p class="muted">
+		<p class="text-info">
 			<label class="checkbox">
-			<input type="checkbox" value="" id="post_to_facebook" disabled>
+			<input type="checkbox" value="" id="post_to_facebook">
 			<%=t("post.post_facebook_new")%>
 		</label>
 		<% end %>
 		</p>
-		<%= f.submit t("post.create"), :class => "btn btn-primary" %>
-		<%= link_to(t("post.cancel"), root_path, :class => "btn") %>
+		<div id="post_errors"></div>
+		<%= f.submit t("post.create"), :class => "btn btn-primary", :id => "post_submit" %>
+		<%= link_to(t("post.cancel"), Ozlink.heading_link(@heading,"cancel"), :class => "btn") %>
+		<div id="post_status"></div>
+		<div id="post_facebook_script"></div>
+		<div id="post_facebook_status"></div>
+		<%= _script(%Q|
+			$('\#post_submit').click(function(){
+				$(this).attr("value",'#{t("post.creating")}');
+				$(this).attr("css",'diabled');
+				$(this).attr("disabled", true);
+				$('\#post_status').html('#{image_tag("ajax-loader.gif")}');
+				if($('\#post_to_facebook').attr("checked") == "checked") {
+					$('\#post_facebook_status').html('#{image_tag("ajax-loader.gif")}');
+				}
+			})
+		
+		|)%>
+		<%= _script_document_ready(%Q|$('#post_submit').attr("disabled", false);|)%>
 		<% end %>
 		<!-- image upload -->
 		<%= render :partial => "ozs/upload/image"%>

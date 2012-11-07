@@ -18,7 +18,7 @@ OzjapaneseComAu::Application.routes.draw do
   devise_for :flyers, :controllers => { :omniauth_callbacks => "flyers/omniauth_callbacks" }
   #devise_scope :flyers do
   #  get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
-  #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_flyer_session
   #end
   
   resources :ozs, :only => ['index'] do
@@ -26,6 +26,7 @@ OzjapaneseComAu::Application.routes.draw do
       get :older
       get :newer
       get :write
+      get :cancel
       post :viewed
       get :link_view
       post :carousel_viewed

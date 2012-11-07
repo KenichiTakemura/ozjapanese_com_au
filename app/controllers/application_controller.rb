@@ -14,15 +14,24 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     logger.info("after_sign_in_path_for request.referer: #{request.referer}")
     if debug?
-      sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
-      if (request.referer == sign_in_url)
-        super
+      sign_in_url = ""
+      if resource.ozjapanese_flyer?
+        sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
       end
-    end
-    if (request.referer =~ /terms/)
-      root_path
+      if (request.referer == sign_in_url)
+        logger.debug("sign_in_url: redirect_to root")
+        root_path
+      elsif (request.referer =~ /terms/) 
+        root_path
+      else
+        request.env['omniauth.origin'] || request.referer || stored_location_for(resource) || root_path
+      end
     else
-      request.env['omniauth.origin'] || request.referer || stored_location_for(resource) || root_path
+     if (request.referer =~ /terms/) 
+        root_path
+      else
+       request.env['omniauth.origin'] || request.referer || stored_location_for(resource) || root_path
+      end
     end
   end
   

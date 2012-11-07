@@ -144,6 +144,10 @@ class Flyer < ActiveRecord::Base
   def google_flyer?
     self.provider.eql?(PROVIDERS[:google])
   end
+  
+  def ozjapanese_flyer?
+    self.provider.eql?(PROVIDERS[:ozjapanese])
+  end
 
   def agreed?
     self.agreed_on > Terms.terms_date

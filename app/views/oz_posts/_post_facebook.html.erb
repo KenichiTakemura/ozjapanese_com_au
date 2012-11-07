@@ -1,0 +1,21 @@
+<%= _script_document_ready(%Q|
+
+	var body = '#{@post.subject}'
+	var link = '#{root_url}#{Ozlink.heading_link(@heading,"link_view", {:d => @post.id})}"';
+	var name = '#{t("post.from_ozjapanese")}';
+	var caption = '#{t("facebook.caption")}';
+    var description = '#{t("facebook.desc")}';
+    var picture= '#{Ozlink.logo}';
+    $('\#post_facebook_status').html('#{t("post.posting_facebook")}#{image_tag("ajax-loader.gif")}');
+	FB.api('/me/feed', 'post', { message: body, picture: picture, link: link, name: name, caption: caption, description: description}, function(response) {
+		if (!response \|\| response.error) {
+			$('#post_facebook_status').html('');
+    		document.getElementById('post_facebook_status').innerHTML = '#{show_notice(t("facebook.failed"))}';
+    		setTimeout(function(){$('body').html("#{escape_javascript(render 'oz_posts/goindex')}");},1000);
+  		} else {
+  			$('#post_facebook_status').html('');
+    		document.getElementById('post_facebook_status').innerHTML = '#{show_notice(t("facebook.shouted"))}';
+			setTimeout(function(){$('body').html("#{escape_javascript(render 'oz_posts/goindex')}");},1000);
+  		}
+	});
+|)%>
